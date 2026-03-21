@@ -42,94 +42,101 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Premium CSS ───────────────────────────────────────────────────────────────
+# ── Clinical White CSS ────────────────────────────────────────────────────────
 st.markdown("""
 <style>
   /* ── Google Fonts ── */
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
   /* ── CSS Variables ── */
   :root {
-    --navy:            #0F1E35;
-    --navy-mid:        #1B2A4A;
-    --navy-light:      #243558;
-    --clinical:        #4A90D9;
-    --clinical-bright: #5BA3E8;
-    --clinical-pale:   #A8CDEF;
-    --accent:          #00C9A7;
-    --urgent:          #FF4757;
-    --warn:            #FFA502;
-    --success:         #2ED573;
-    --white:           #FFFFFF;
-    --gray-100:        #F4F7FB;
-    --gray-200:        #E8EDF5;
-    --gray-300:        #CBD5E1;
-    --gray-500:        #7A8BA8;
-    --gray-700:        #3D4F6E;
-    --card-bg:         #1A2B47;
-    --card-border:     #253D63;
-    --radius:          14px;
+    --bg:              #FFFFFF;
+    --bg-subtle:       #F8FAFB;
+    --bg-sidebar:      #F1F5F9;
+    --border:          #E2E8F0;
+    --border-light:    #EEF2F7;
+    --clinical:        #0066CC;
+    --clinical-hover:  #0055AA;
+    --clinical-pale:   #EBF4FF;
+    --success:         #00875A;
+    --success-pale:    #E3F9F0;
+    --urgent:          #DC2626;
+    --urgent-pale:     #FEF2F2;
+    --warn:            #F59E0B;
+    --warn-pale:       #FFFBEB;
+    --teal:            #0891B2;
+    --teal-pale:       #ECFEFF;
+    --violet:          #7C3AED;
+    --violet-pale:     #F5F3FF;
+    --text-primary:    #1A202C;
+    --text-secondary:  #64748B;
+    --text-muted:      #94A3B8;
+    --shadow-xs:       0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-sm:       0 2px 8px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-md:       0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+    --radius:          12px;
     --radius-sm:       8px;
-    --shadow-card:     0 4px 24px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18);
-    --shadow-glow:     0 0 32px rgba(74,144,217,0.18);
-    --transition:      all 0.22s cubic-bezier(0.4,0,0.2,1);
+    --radius-xs:       6px;
+    --transition:      all 0.2s cubic-bezier(0.4,0,0.2,1);
   }
 
   /* ── Base typography ── */
   html, body, [class*="css"] {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-    color: #CBD5E1;
+    font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    color: var(--text-primary);
+    background: var(--bg);
   }
 
   /* ── App background ── */
   .stApp {
-    background: linear-gradient(160deg, #0A1628 0%, #0F1E35 40%, #0D1B30 100%);
+    background: #FFFFFF;
     min-height: 100vh;
   }
 
   /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #0F1E35; }
-  ::-webkit-scrollbar-thumb { background: #2D4470; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #4A90D9; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: #F1F5F9; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #0066CC; }
 
   /* ── Sidebar ── */
   [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0C1829 0%, #111E35 100%) !important;
-    border-right: 1px solid #1E3054 !important;
+    background: #F1F5F9 !important;
+    border-right: 1px solid #E2E8F0 !important;
   }
-  [data-testid="stSidebar"] * { color: #CBD5E1 !important; }
+  [data-testid="stSidebar"] * { color: var(--text-primary) !important; }
   [data-testid="stSidebar"] h1,
   [data-testid="stSidebar"] h2,
-  [data-testid="stSidebar"] h3 { color: #E8EDF5 !important; }
+  [data-testid="stSidebar"] h3 { color: var(--text-primary) !important; }
   [data-testid="stSidebar"] .stTextInput input,
   [data-testid="stSidebar"] .stNumberInput input {
-    background: #1A2B47 !important;
-    border: 1px solid #253D63 !important;
-    border-radius: 8px !important;
-    color: #E8EDF5 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-primary) !important;
     padding: 8px 12px !important;
-    font-family: 'DM Sans', sans-serif !important;
+    font-family: 'Sora', sans-serif !important;
     transition: var(--transition);
+    box-shadow: var(--shadow-xs) !important;
   }
   [data-testid="stSidebar"] .stTextInput input:focus,
   [data-testid="stSidebar"] .stNumberInput input:focus {
-    border-color: #4A90D9 !important;
-    box-shadow: 0 0 0 3px rgba(74,144,217,0.18) !important;
+    border-color: #0066CC !important;
+    box-shadow: 0 0 0 3px rgba(0,102,204,0.12) !important;
     outline: none !important;
   }
   [data-testid="stSidebar"] label {
-    color: #7A8BA8 !important;
-    font-size: 0.78rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.04em !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.74rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
   }
   [data-testid="stSidebar"] .stCheckbox label {
     text-transform: none !important;
-    font-size: 0.88rem !important;
+    font-size: 0.86rem !important;
     letter-spacing: normal !important;
-    color: #A8B8CC !important;
+    color: var(--text-primary) !important;
   }
 
   /* ── Main content ── */
@@ -140,30 +147,30 @@ st.markdown("""
 
   /* ── Tabs ── */
   .stTabs [data-baseweb="tab-list"] {
-    background: rgba(15,30,53,0.85) !important;
-    border-bottom: 1px solid #1E3054 !important;
+    background: #FFFFFF !important;
+    border-bottom: 1px solid #E2E8F0 !important;
     padding: 0 2rem !important;
     gap: 0 !important;
-    backdrop-filter: blur(10px);
   }
   .stTabs [data-baseweb="tab"] {
     background: transparent !important;
     border: none !important;
     border-bottom: 2px solid transparent !important;
-    color: #7A8BA8 !important;
-    font-family: 'DM Sans', sans-serif !important;
-    font-size: 0.88rem !important;
+    color: var(--text-secondary) !important;
+    font-family: 'Sora', sans-serif !important;
+    font-size: 0.85rem !important;
     font-weight: 500 !important;
     padding: 0.85rem 1.5rem !important;
     margin: 0 !important;
     transition: var(--transition);
   }
   .stTabs [aria-selected="true"] {
-    color: #4A90D9 !important;
-    border-bottom-color: #4A90D9 !important;
+    color: #0066CC !important;
+    border-bottom-color: #0066CC !important;
     background: transparent !important;
+    font-weight: 600 !important;
   }
-  .stTabs [data-baseweb="tab"]:hover { color: #CBD5E1 !important; }
+  .stTabs [data-baseweb="tab"]:hover { color: var(--text-primary) !important; }
   .stTabs [data-baseweb="tab-panel"] {
     background: transparent !important;
     padding: 2rem !important;
@@ -171,109 +178,107 @@ st.markdown("""
 
   /* ── Buttons ── */
   .stButton > button {
-    background: linear-gradient(135deg, #4A90D9, #2B6CB0) !important;
+    background: #0066CC !important;
     color: white !important;
     border: none !important;
     border-radius: var(--radius-sm) !important;
     padding: 0.6rem 1.4rem !important;
-    font-family: 'DM Sans', sans-serif !important;
+    font-family: 'Sora', sans-serif !important;
     font-weight: 600 !important;
-    font-size: 0.88rem !important;
-    letter-spacing: 0.02em !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.01em !important;
     transition: var(--transition) !important;
-    box-shadow: 0 2px 12px rgba(74,144,217,0.35) !important;
+    box-shadow: 0 1px 4px rgba(0,102,204,0.25) !important;
   }
   .stButton > button:hover {
-    background: linear-gradient(135deg, #5BA3E8, #3A7CC5) !important;
-    box-shadow: 0 4px 20px rgba(74,144,217,0.5) !important;
+    background: #0055AA !important;
+    box-shadow: 0 4px 12px rgba(0,102,204,0.3) !important;
     transform: translateY(-1px) !important;
   }
   .stButton > button:active { transform: translateY(0) !important; }
 
   /* ── Download buttons ── */
   .stDownloadButton > button {
-    background: rgba(0,201,167,0.1) !important;
-    color: #00C9A7 !important;
-    border: 1px solid rgba(0,201,167,0.3) !important;
+    background: #FFFFFF !important;
+    color: #00875A !important;
+    border: 1px solid #00875A !important;
     border-radius: var(--radius-sm) !important;
-    font-family: 'DM Sans', sans-serif !important;
+    font-family: 'Sora', sans-serif !important;
     font-weight: 600 !important;
-    font-size: 0.85rem !important;
+    font-size: 0.83rem !important;
     transition: var(--transition) !important;
   }
   .stDownloadButton > button:hover {
-    background: rgba(0,201,167,0.2) !important;
-    border-color: rgba(0,201,167,0.6) !important;
-    box-shadow: 0 2px 14px rgba(0,201,167,0.25) !important;
+    background: #E3F9F0 !important;
+    box-shadow: 0 2px 8px rgba(0,135,90,0.15) !important;
   }
 
   /* ── File uploader ── */
   [data-testid="stFileUploader"] {
-    background: rgba(26,43,71,0.6) !important;
-    border: 2px dashed #253D63 !important;
+    background: #F8FAFB !important;
+    border: 2px dashed #CBD5E1 !important;
     border-radius: var(--radius) !important;
     padding: 1.5rem !important;
     transition: var(--transition) !important;
   }
   [data-testid="stFileUploader"]:hover {
-    border-color: #4A90D9 !important;
-    background: rgba(74,144,217,0.06) !important;
-    box-shadow: var(--shadow-glow) !important;
+    border-color: #0066CC !important;
+    background: #EBF4FF !important;
   }
 
   /* ── Metrics (native) ── */
   [data-testid="stMetric"] {
-    background: var(--card-bg) !important;
-    border: 1px solid var(--card-border) !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
     border-radius: var(--radius) !important;
     padding: 1.2rem 1.4rem !important;
-    box-shadow: var(--shadow-card) !important;
+    box-shadow: var(--shadow-sm) !important;
   }
   [data-testid="stMetricLabel"] {
-    color: #7A8BA8 !important;
-    font-size: 0.75rem !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.74rem !important;
     font-weight: 600 !important;
     letter-spacing: 0.06em !important;
     text-transform: uppercase !important;
   }
   [data-testid="stMetricValue"] {
-    color: #E8EDF5 !important;
+    color: var(--text-primary) !important;
     font-size: 1.5rem !important;
     font-weight: 700 !important;
   }
 
   /* ── Progress bar ── */
   .stProgress > div > div {
-    background: linear-gradient(90deg, #4A90D9, #00C9A7) !important;
+    background: linear-gradient(90deg, #0066CC, #00875A) !important;
     border-radius: 4px !important;
   }
   .stProgress > div {
-    background: #1A2B47 !important;
+    background: #E2E8F0 !important;
     border-radius: 4px !important;
   }
 
   /* ── Expander ── */
   .streamlit-expanderHeader {
-    background: var(--card-bg) !important;
-    border: 1px solid var(--card-border) !important;
+    background: #F8FAFB !important;
+    border: 1px solid #E2E8F0 !important;
     border-radius: var(--radius-sm) !important;
-    color: #CBD5E1 !important;
-    font-family: 'DM Sans', sans-serif !important;
+    color: var(--text-primary) !important;
+    font-family: 'Sora', sans-serif !important;
     font-weight: 600 !important;
   }
   .streamlit-expanderContent {
-    background: rgba(26,43,71,0.5) !important;
-    border: 1px solid #1E3054 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
     border-top: none !important;
     border-radius: 0 0 var(--radius-sm) var(--radius-sm) !important;
   }
 
   /* ── Code block ── */
   .stCodeBlock, pre, code {
-    background: #0A1628 !important;
-    border: 1px solid #1E3054 !important;
+    background: #F8FAFB !important;
+    border: 1px solid #E2E8F0 !important;
     border-radius: var(--radius-sm) !important;
-    color: #A8CDEF !important;
+    color: #1A202C !important;
     font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
     font-size: 0.79rem !important;
   }
@@ -281,35 +286,36 @@ st.markdown("""
   /* ── Divider ── */
   hr {
     border: none !important;
-    border-top: 1px solid #1E3054 !important;
+    border-top: 1px solid #E2E8F0 !important;
     margin: 1.5rem 0 !important;
   }
 
   /* ── JSON ── */
   [data-testid="stJson"] {
-    background: #0A1628 !important;
+    background: #F8FAFB !important;
     border-radius: var(--radius-sm) !important;
-    border: 1px solid #1E3054 !important;
+    border: 1px solid #E2E8F0 !important;
   }
 
   /* ── Caption ── */
   .stCaption, [data-testid="stCaptionContainer"] {
-    color: #7A8BA8 !important;
-    font-size: 0.78rem !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.76rem !important;
   }
 
   /* ── Text input / textarea ── */
   .stTextInput input, .stTextArea textarea {
-    background: #1A2B47 !important;
-    border: 1px solid #253D63 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
     border-radius: var(--radius-sm) !important;
-    color: #E8EDF5 !important;
-    font-family: 'DM Sans', sans-serif !important;
+    color: var(--text-primary) !important;
+    font-family: 'Sora', sans-serif !important;
     transition: var(--transition);
+    box-shadow: var(--shadow-xs);
   }
   .stTextInput input:focus, .stTextArea textarea:focus {
-    border-color: #4A90D9 !important;
-    box-shadow: 0 0 0 3px rgba(74,144,217,0.15) !important;
+    border-color: #0066CC !important;
+    box-shadow: 0 0 0 3px rgba(0,102,204,0.12) !important;
   }
 
   /* ══════════════════════════════════════════
@@ -318,8 +324,9 @@ st.markdown("""
 
   /* Hero */
   .hero-section {
-    background: linear-gradient(135deg, #0C1829 0%, #1B2A4A 45%, #1A3052 100%);
-    border-bottom: 1px solid #1E3054;
+    background: #FFFFFF;
+    border-top: 4px solid #0066CC;
+    border-bottom: 1px solid #E2E8F0;
     padding: 2.5rem 2rem 2rem;
     position: relative;
     overflow: hidden;
@@ -327,143 +334,128 @@ st.markdown("""
   .hero-section::before {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 320px; height: 320px;
-    background: radial-gradient(circle, rgba(74,144,217,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-section::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 30%;
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(0,201,167,0.07) 0%, transparent 70%);
+    top: 0; right: 0;
+    width: 420px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, #EBF4FF 100%);
     pointer-events: none;
   }
   .hero-title {
-    font-family: 'DM Serif Display', Georgia, serif !important;
-    font-size: 2.4rem !important;
-    font-weight: 400 !important;
-    color: #F0F4F8 !important;
-    letter-spacing: -0.02em !important;
-    line-height: 1.15 !important;
+    font-family: 'Lora', Georgia, serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 600 !important;
+    color: #1A202C !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.2 !important;
     margin: 0 0 0.5rem 0 !important;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
   }
   .hero-subtitle {
-    font-size: 1rem;
-    color: #7A8BA8;
+    font-size: 0.95rem;
+    color: #64748B;
     font-weight: 400;
     letter-spacing: 0.01em;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.6rem;
   }
-  .hero-subtitle span { color: #4A90D9; font-weight: 500; }
-  .stats-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  .hero-subtitle span { color: #0066CC; font-weight: 500; }
+  .stats-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
   .stat-chip {
-    background: rgba(74,144,217,0.1);
-    border: 1px solid rgba(74,144,217,0.25);
+    background: #EBF4FF;
+    border: 1px solid #BFDBFE;
     border-radius: 20px;
-    padding: 0.35rem 0.85rem;
-    font-size: 0.78rem;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #A8CDEF;
-    letter-spacing: 0.04em;
-    backdrop-filter: blur(8px);
+    color: #0066CC;
+    letter-spacing: 0.03em;
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.3rem;
   }
   .stat-chip.accent {
-    background: rgba(0,201,167,0.1);
-    border-color: rgba(0,201,167,0.25);
-    color: #00C9A7;
+    background: #E3F9F0;
+    border-color: #A7F3D0;
+    color: #00875A;
   }
   .stat-chip.warn {
-    background: rgba(255,165,2,0.1);
-    border-color: rgba(255,165,2,0.25);
-    color: #FFA502;
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
   }
 
-  /* Glass card */
+  /* Clinical card (replaces glass-card) */
   .glass-card {
-    background: rgba(26,43,71,0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid #253D63;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: var(--radius);
     padding: 1.4rem;
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
   }
   .glass-card:hover {
-    border-color: #3A5A8A;
-    box-shadow: var(--shadow-card), 0 0 24px rgba(74,144,217,0.08);
+    border-color: #CBD5E1;
+    box-shadow: var(--shadow-md);
   }
   .glass-card.urgent {
-    border-color: rgba(255,71,87,0.4);
-    background: rgba(255,71,87,0.06);
+    border-left: 4px solid #DC2626;
+    background: #FEF2F2;
+    border-color: #FECACA;
   }
   .glass-card.warn-card {
-    border-color: rgba(255,165,2,0.3);
-    background: rgba(255,165,2,0.05);
+    border-left: 4px solid #F59E0B;
+    background: #FFFBEB;
+    border-color: #FDE68A;
   }
   .glass-card.success {
-    border-color: rgba(46,213,115,0.3);
-    background: rgba(46,213,115,0.05);
+    border-left: 4px solid #00875A;
+    background: #E3F9F0;
+    border-color: #A7F3D0;
   }
 
   /* Metric card (custom) */
   .metric-card {
-    background: linear-gradient(145deg, #1A2B47, #162440);
-    border: 1px solid #253D63;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: var(--radius);
     padding: 1.4rem 1.5rem;
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
     transition: var(--transition);
     height: 100%;
+    border-left-width: 4px;
   }
-  .metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .metric-card.blue::before  { background: linear-gradient(90deg, #4A90D9, #2B6CB0); }
-  .metric-card.green::before { background: linear-gradient(90deg, #2ED573, #00A86B); }
-  .metric-card.amber::before { background: linear-gradient(90deg, #FFA502, #E67E22); }
-  .metric-card.red::before   { background: linear-gradient(90deg, #FF4757, #C0392B); }
-  .metric-card.teal::before  { background: linear-gradient(90deg, #00C9A7, #009B7D); }
+  .metric-card.blue  { border-left-color: #0066CC; }
+  .metric-card.green { border-left-color: #00875A; }
+  .metric-card.amber { border-left-color: #F59E0B; }
+  .metric-card.red   { border-left-color: #DC2626; }
+  .metric-card.teal  { border-left-color: #0891B2; }
   .metric-card:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-card), 0 8px 32px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-md);
   }
   .metric-card-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: #7A8BA8;
+    color: #64748B;
     margin-bottom: 0.5rem;
   }
   .metric-card-value {
-    font-size: 1.55rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #F0F4F8;
+    color: #1A202C;
     line-height: 1.15;
   }
   .metric-card-sub {
-    font-size: 0.76rem;
-    color: #7A8BA8;
+    font-size: 0.74rem;
+    color: #64748B;
     margin-top: 0.3rem;
   }
   .metric-card-icon {
     position: absolute;
     top: 1.2rem; right: 1.2rem;
     font-size: 1.3rem;
-    opacity: 0.3;
+    opacity: 0.18;
   }
 
   /* Disease badge */
@@ -471,9 +463,9 @@ st.markdown("""
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    padding: 0.28rem 0.75rem;
+    padding: 0.25rem 0.7rem;
     border-radius: 20px;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -488,16 +480,16 @@ st.markdown("""
   }
   .section-header-icon {
     width: 26px; height: 26px;
-    background: rgba(74,144,217,0.15);
-    border-radius: 6px;
+    background: #EBF4FF;
+    border-radius: var(--radius-xs);
     display: flex; align-items: center; justify-content: center;
     font-size: 0.85rem;
     flex-shrink: 0;
   }
   .section-header-text {
-    font-size: 0.82rem;
+    font-size: 0.79rem;
     font-weight: 700;
-    color: #E8EDF5;
+    color: #1A202C;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -506,107 +498,114 @@ st.markdown("""
   .timeline-item {
     display: flex;
     gap: 0.75rem;
-    margin-bottom: 0.6rem;
-    padding: 0.75rem 1rem;
-    background: rgba(26,43,71,0.5);
-    border-left: 3px solid #4A90D9;
+    margin-bottom: 0.5rem;
+    padding: 0.7rem 1rem;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-left: 3px solid #0066CC;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    font-size: 0.85rem;
-    color: #A8B8CC;
+    font-size: 0.83rem;
+    color: #1A202C;
     line-height: 1.55;
     transition: var(--transition);
+    box-shadow: var(--shadow-xs);
   }
-  .timeline-item:hover { background: rgba(74,144,217,0.08); }
-  .timeline-item.urgent  { border-left-color: #FF4757; }
-  .timeline-item.warn    { border-left-color: #FFA502; }
-  .timeline-item.success { border-left-color: #2ED573; }
+  .timeline-item:hover { background: #F8FAFB; transform: translateX(2px); }
+  .timeline-item.urgent  { border-left-color: #DC2626; background: #FEF2F2; }
+  .timeline-item.warn    { border-left-color: #F59E0B; background: #FFFBEB; }
+  .timeline-item.success { border-left-color: #00875A; background: #E3F9F0; }
   .timeline-dot {
-    width: 8px; height: 8px;
+    width: 7px; height: 7px;
     border-radius: 50%;
-    background: #4A90D9;
+    background: #0066CC;
     flex-shrink: 0;
-    margin-top: 5px;
+    margin-top: 6px;
   }
 
   /* Sidebar elements */
   .sidebar-logo {
-    background: linear-gradient(135deg, rgba(74,144,217,0.12), rgba(0,201,167,0.07));
-    border: 1px solid rgba(74,144,217,0.2);
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: var(--radius);
     padding: 1rem 1.2rem;
     margin-bottom: 1rem;
     text-align: center;
+    box-shadow: var(--shadow-xs);
   }
   .sidebar-logo-icon { font-size: 2rem; margin-bottom: 0.3rem; display: block; }
   .sidebar-logo-title {
-    font-family: 'DM Serif Display', Georgia, serif;
-    font-size: 1.15rem;
-    color: #E8EDF5;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    color: #1A202C;
     letter-spacing: -0.01em;
+    font-weight: 600;
   }
   .sidebar-logo-version {
-    font-size: 0.7rem;
-    color: #4A90D9;
+    font-size: 0.68rem;
+    color: #0066CC;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     margin-top: 0.2rem;
   }
   .sidebar-disclaimer {
-    background: rgba(255,165,2,0.06);
-    border: 1px solid rgba(255,165,2,0.18);
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
     border-radius: var(--radius-sm);
     padding: 0.85rem;
-    font-size: 0.75rem;
-    color: #A8956A;
-    line-height: 1.5;
+    font-size: 0.74rem;
+    color: #78350F;
+    line-height: 1.55;
     margin-top: 0.5rem;
   }
-  .sidebar-disclaimer strong { color: #FFA502; }
+  .sidebar-disclaimer strong { color: #92400E; }
 
   /* Disease info card */
   .disease-info-card {
-    background: linear-gradient(145deg, #1A2B47, #162440);
-    border: 1px solid #253D63;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: var(--radius);
     padding: 1.2rem;
     height: 100%;
     transition: var(--transition);
     margin-bottom: 0.75rem;
+    box-shadow: var(--shadow-xs);
   }
   .disease-info-card:hover {
-    border-color: #4A90D9;
-    box-shadow: 0 4px 20px rgba(74,144,217,0.1);
+    border-color: #0066CC;
+    box-shadow: var(--shadow-md);
     transform: translateY(-1px);
   }
-  .disease-info-icon  { font-size: 1.4rem; margin-bottom: 0.45rem; }
-  .disease-info-name  { font-weight: 700; color: #E8EDF5; font-size: 0.88rem; margin-bottom: 0.2rem; }
-  .disease-info-icd   { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.45rem; }
-  .disease-info-desc  { font-size: 0.77rem; color: #7A8BA8; line-height: 1.5; }
+  .disease-info-icon  { font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .disease-info-name  { font-weight: 700; color: #1A202C; font-size: 0.87rem; margin-bottom: 0.2rem; }
+  .disease-info-icd   { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+  .disease-info-desc  { font-size: 0.76rem; color: #64748B; line-height: 1.5; }
 
   /* Batch summary */
   .batch-summary-card {
-    background: linear-gradient(145deg, #1A2B47, #162440);
-    border: 1px solid #253D63;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: var(--radius);
     padding: 1.2rem;
     text-align: center;
     transition: var(--transition);
+    box-shadow: var(--shadow-xs);
+    border-left-width: 4px;
   }
-  .batch-summary-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+  .batch-summary-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .batch-num {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #F0F4F8;
+    color: #1A202C;
     line-height: 1;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Sora', sans-serif;
   }
   .batch-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: #7A8BA8;
+    color: #64748B;
     margin-top: 0.3rem;
   }
 
@@ -615,14 +614,14 @@ st.markdown("""
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: rgba(0,201,167,0.1);
-    border: 1px solid rgba(0,201,167,0.25);
+    background: #E3F9F0;
+    border: 1px solid #A7F3D0;
     border-radius: var(--radius-sm);
-    padding: 0.4rem 0.85rem;
-    font-size: 0.76rem;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    color: #00C9A7;
-    letter-spacing: 0.05em;
+    color: #00875A;
+    letter-spacing: 0.04em;
   }
 
   /* Chat UI */
@@ -638,26 +637,26 @@ st.markdown("""
     max-width: 80%;
     padding: 0.75rem 1rem;
     border-radius: 16px;
-    font-size: 0.86rem;
+    font-size: 0.85rem;
     line-height: 1.55;
   }
   .chat-bubble.user {
-    background: linear-gradient(135deg, #2B6CB0, #4A90D9);
+    background: #0066CC;
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
-    box-shadow: 0 2px 12px rgba(74,144,217,0.3);
+    box-shadow: 0 2px 8px rgba(0,102,204,0.2);
   }
   .chat-bubble.assistant {
-    background: #1A2B47;
-    color: #CBD5E1;
+    background: #F8FAFB;
+    color: #1A202C;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
-    border: 1px solid #253D63;
+    border: 1px solid #E2E8F0;
   }
   .chat-meta {
-    font-size: 0.7rem;
-    color: #4A6B8A;
+    font-size: 0.68rem;
+    color: #94A3B8;
     margin-top: 0.2rem;
   }
   .chat-meta.user { text-align: right; margin-right: 0.5rem; }
@@ -665,32 +664,32 @@ st.markdown("""
 
   /* Footer */
   .footer-bar {
-    background: linear-gradient(90deg, #0C1829, #111E35, #0C1829);
-    border-top: 1px solid #1E3054;
+    background: #F8FAFB;
+    border-top: 1px solid #E2E8F0;
     padding: 1rem 2rem;
     text-align: center;
-    font-size: 0.74rem;
-    color: #4A6B8A;
-    letter-spacing: 0.04em;
+    font-size: 0.72rem;
+    color: #64748B;
+    letter-spacing: 0.03em;
     margin-top: 2rem;
   }
-  .footer-sep { color: #1E3054; margin: 0 0.5rem; }
+  .footer-sep { color: #CBD5E1; margin: 0 0.5rem; }
 
   /* ══ Animations ══ */
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(18px); }
+    from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-12px); }
+    from { opacity: 0; transform: translateY(-8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes fadeInLeft {
-    from { opacity: 0; transform: translateX(-20px); }
+    from { opacity: 0; transform: translateX(-10px); }
     to   { opacity: 1; transform: translateX(0); }
   }
   @keyframes fadeInRight {
-    from { opacity: 0; transform: translateX(20px); }
+    from { opacity: 0; transform: translateX(10px); }
     to   { opacity: 1; transform: translateX(0); }
   }
   @keyframes fadeIn {
@@ -698,173 +697,120 @@ st.markdown("""
     to   { opacity: 1; }
   }
   @keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.92); }
+    from { opacity: 0; transform: scale(0.96); }
     to   { opacity: 1; transform: scale(1); }
   }
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255,71,87,0.4); }
-    50%       { box-shadow: 0 0 0 10px rgba(255,71,87,0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.25); }
+    50%       { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
   }
   @keyframes shimmer {
     0%   { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
-  @keyframes borderGlow {
-    0%, 100% { border-color: rgba(74,144,217,0.2); }
-    50%       { border-color: rgba(74,144,217,0.5); }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-6px); }
-  }
-  @keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes typewriter {
-    from { width: 0; }
-    to   { width: 100%; }
+  @keyframes borderPulse {
+    0%, 100% { border-color: #E2E8F0; }
+    50%       { border-color: #BFDBFE; }
   }
 
   /* Staggered fade-in-up */
-  .anim-1 { animation: fadeInUp 0.55s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-2 { animation: fadeInUp 0.55s 0.1s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-3 { animation: fadeInUp 0.55s 0.2s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-4 { animation: fadeInUp 0.55s 0.3s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-fade { animation: fadeIn 0.5s ease both; }
-  .anim-scale { animation: scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-left { animation: fadeInLeft 0.5s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-right { animation: fadeInRight 0.5s cubic-bezier(0.22,1,0.36,1) both; }
-  .anim-slide { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-1 { animation: fadeInUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-2 { animation: fadeInUp 0.45s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-3 { animation: fadeInUp 0.45s 0.16s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-4 { animation: fadeInUp 0.45s 0.24s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-fade { animation: fadeIn 0.4s ease both; }
+  .anim-scale { animation: scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-left { animation: fadeInLeft 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-right { animation: fadeInRight 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-slide { animation: slideUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
   .urgent-pulse { animation: pulseGlow 2s ease-in-out infinite; }
-
-  /* Hero gradient animation */
-  .hero-section {
-    background: linear-gradient(135deg, #0C1829 0%, #1B2A4A 45%, #1A3052 100%);
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
-    border-bottom: 1px solid #1E3054;
-    padding: 2.5rem 2rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Floating orbs in hero */
-  .hero-section::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 320px; height: 320px;
-    background: radial-gradient(circle, rgba(74,144,217,0.14) 0%, transparent 70%);
-    pointer-events: none;
-    animation: float 6s ease-in-out infinite;
-  }
-  .hero-section::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 30%;
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(0,201,167,0.08) 0%, transparent 70%);
-    pointer-events: none;
-    animation: float 8s ease-in-out 1s infinite;
-  }
 
   /* Hero title animation */
   .hero-title {
-    animation: fadeInDown 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    animation: fadeInDown 0.55s cubic-bezier(0.22,1,0.36,1) both;
   }
   .hero-subtitle {
-    animation: fadeIn 0.8s 0.2s ease both;
+    animation: fadeIn 0.6s 0.15s ease both;
   }
   .stats-row {
-    animation: fadeInUp 0.6s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    animation: fadeInUp 0.5s 0.3s cubic-bezier(0.22,1,0.36,1) both;
   }
 
   /* Stat chips hover */
   .stat-chip {
-    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+    transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
     cursor: default;
   }
   .stat-chip:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(74,144,217,0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,102,204,0.15);
   }
 
-  /* Glass card hover lift */
+  /* Clinical card hover */
   .glass-card {
-    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-  }
-  .glass-card:hover {
-    transform: translateY(-2px);
-    border-color: #3A5A8A;
-    box-shadow: var(--shadow-card), 0 8px 32px rgba(74,144,217,0.1);
-  }
-
-  /* Disease info cards stagger + hover */
-  .disease-info-card {
-    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-    animation: scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
-  }
-  .disease-info-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    border-color: #4A90D9;
-    box-shadow: 0 8px 28px rgba(74,144,217,0.15);
-  }
-
-  /* Timeline items stagger */
-  .timeline-item {
-    animation: fadeInLeft 0.4s cubic-bezier(0.22,1,0.36,1) both;
     transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
   }
-  .timeline-item:hover {
-    transform: translateX(4px);
-    background: rgba(74,144,217,0.08);
+  .glass-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Disease info cards hover */
+  .disease-info-card {
+    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+    animation: scaleIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .disease-info-card:hover {
+    transform: translateY(-3px);
+    border-color: #0066CC;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Timeline items */
+  .timeline-item {
+    animation: fadeInLeft 0.35s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
   }
 
   /* Batch summary cards */
   .batch-summary-card {
-    animation: scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
-    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+    animation: scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
   }
   .batch-summary-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
   }
 
   /* Chat bubbles */
   .chat-bubble {
-    animation: fadeInUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
-    transition: all 0.2s ease;
+    animation: fadeInUp 0.3s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.18s ease;
   }
-  .chat-bubble.user:hover { transform: translateX(-3px); }
-  .chat-bubble.assistant:hover { transform: translateX(3px); }
+  .chat-bubble.user:hover { transform: translateX(-2px); }
+  .chat-bubble.assistant:hover { transform: translateX(2px); }
 
-  /* Sidebar logo float */
+  /* Sidebar logo */
   .sidebar-logo {
-    animation: fadeIn 0.6s ease both;
-    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease both;
+    transition: all 0.25s ease;
   }
   .sidebar-logo:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 20px rgba(74,144,217,0.15);
-  }
-  .sidebar-logo-icon {
-    animation: float 4s ease-in-out infinite;
+    box-shadow: var(--shadow-sm);
   }
 
   /* Compliance badges */
   .compliance-badge {
-    animation: fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both;
-    transition: all 0.25s ease;
+    animation: fadeInUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.2s ease;
   }
   .compliance-badge:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,201,167,0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,135,90,0.15);
   }
 
   /* Button shimmer effect */
@@ -872,7 +818,7 @@ st.markdown("""
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
     border-radius: inherit;
@@ -880,20 +826,14 @@ st.markdown("""
   }
   .stButton > button { position: relative; overflow: hidden; }
 
-  /* Footer subtle animation */
+  /* Footer */
   .footer-bar {
-    animation: fadeIn 0.8s 0.5s ease both;
+    animation: fadeIn 0.7s 0.4s ease both;
   }
 
-  /* Scrollbar glow on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4A90D9;
-    box-shadow: 0 0 8px rgba(74,144,217,0.4);
-  }
-
-  /* File uploader border animation */
+  /* File uploader border pulse */
   [data-testid="stFileUploader"] {
-    animation: borderGlow 3s ease-in-out infinite;
+    animation: borderPulse 3s ease-in-out infinite;
   }
 </style>
 """, unsafe_allow_html=True)
@@ -902,11 +842,11 @@ import plotly.graph_objects as go
 
 # ── Design tokens ─────────────────────────────────────────────────────────────
 DISEASE_COLORS = {
-    "normal":               "#2ED573",
-    "diabetic_retinopathy": "#FF4757",
-    "glaucoma":             "#FFA502",
-    "amd":                  "#A78BFA",
-    "cataracts":            "#4A90D9",
+    "normal":               "#00875A",
+    "diabetic_retinopathy": "#DC2626",
+    "glaucoma":             "#F59E0B",
+    "amd":                  "#7C3AED",
+    "cataracts":            "#0066CC",
 }
 DISEASE_ICONS = {
     "normal":               "✓",
@@ -916,19 +856,19 @@ DISEASE_ICONS = {
     "cataracts":            "◎",
 }
 SEVERITY_COLORS = {
-    "none":               "#2ED573",
-    "mild":               "#B8E04A",
-    "moderate":           "#FFA502",
-    "severe":             "#FF6B35",
-    "proliferative":      "#FF4757",
-    "advanced":           "#C0392B",
-    "vision_threatening": "#641E16",
+    "none":               "#00875A",
+    "mild":               "#65A30D",
+    "moderate":           "#F59E0B",
+    "severe":             "#EA580C",
+    "proliferative":      "#DC2626",
+    "advanced":           "#991B1B",
+    "vision_threatening": "#7F1D1D",
 }
 RISK_COLORS = {
-    "low":      "#2ED573",
-    "moderate": "#FFA502",
-    "high":     "#FF6B35",
-    "critical": "#FF4757",
+    "low":      "#00875A",
+    "moderate": "#F59E0B",
+    "high":     "#EA580C",
+    "critical": "#DC2626",
 }
 
 
@@ -948,7 +888,7 @@ def load_components():
 _BASE_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="DM Sans, -apple-system, sans-serif", color="#7A8BA8"),
+    font=dict(family="Sora, -apple-system, sans-serif", color="#64748B"),
     margin=dict(l=0, r=0, t=30, b=0),
 )
 
@@ -956,12 +896,12 @@ _BASE_LAYOUT = dict(
 def make_donut_chart(probs: dict[str, float]) -> go.Figure:
     labels = [k.replace("_", " ").title() for k in probs]
     values = list(probs.values())
-    colors = [DISEASE_COLORS.get(k, "#4A90D9") for k in probs]
+    colors = [DISEASE_COLORS.get(k, "#0066CC") for k in probs]
     fig = go.Figure(go.Pie(
         labels=labels, values=values, hole=0.62,
-        marker=dict(colors=colors, line=dict(color="#0F1E35", width=2)),
+        marker=dict(colors=colors, line=dict(color="#FFFFFF", width=2)),
         textinfo="label+percent",
-        textfont=dict(size=10, color="#CBD5E1"),
+        textfont=dict(size=10, color="#1A202C"),
         hovertemplate="<b>%{label}</b><br>%{percent}<extra></extra>",
         sort=True,
     ))
@@ -969,29 +909,29 @@ def make_donut_chart(probs: dict[str, float]) -> go.Figure:
         **_BASE_LAYOUT, showlegend=False, height=260,
         annotations=[dict(
             text="Classes", x=0.5, y=0.5,
-            font_size=11, font_color="#4A6B8A", showarrow=False,
+            font_size=11, font_color="#64748B", showarrow=False,
         )],
     )
     return fig
 
 
 def make_gauge_chart(score: float, risk_level: str) -> go.Figure:
-    color = RISK_COLORS.get(risk_level, "#4A90D9")
+    color = RISK_COLORS.get(risk_level, "#0066CC")
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=round(score * 100, 1),
-        number=dict(suffix="%", font=dict(size=24, color="#F0F4F8")),
+        number=dict(suffix="%", font=dict(size=24, color="#1A202C")),
         gauge=dict(
-            axis=dict(range=[0, 100], tickwidth=1, tickcolor="#253D63",
-                      tickfont=dict(color="#4A6B8A", size=9), nticks=5),
+            axis=dict(range=[0, 100], tickwidth=1, tickcolor="#E2E8F0",
+                      tickfont=dict(color="#94A3B8", size=9), nticks=5),
             bar=dict(color=color, thickness=0.65),
-            bgcolor="#0F1E35",
+            bgcolor="#F8FAFB",
             borderwidth=0,
             steps=[
-                dict(range=[0, 25],   color="#0F2915"),
-                dict(range=[25, 55],  color="#1F1A0A"),
-                dict(range=[55, 80],  color="#211308"),
-                dict(range=[80, 100], color="#1F0808"),
+                dict(range=[0, 25],   color="#E3F9F0"),
+                dict(range=[25, 55],  color="#FFFBEB"),
+                dict(range=[55, 80],  color="#FEF3C7"),
+                dict(range=[80, 100], color="#FEE2E2"),
             ],
             threshold=dict(line=dict(color=color, width=2), thickness=0.8, value=score * 100),
         ),
@@ -1005,17 +945,17 @@ def make_disease_pie(data: list[dict]) -> go.Figure:
     counts = Counter(d["Disease"] for d in data)
     labels = list(counts.keys())
     vals   = list(counts.values())
-    colors = [DISEASE_COLORS.get(k.lower().replace(" ", "_"), "#4A90D9") for k in labels]
+    colors = [DISEASE_COLORS.get(k.lower().replace(" ", "_"), "#0066CC") for k in labels]
     fig = go.Figure(go.Pie(
         labels=labels, values=vals, hole=0.5,
-        marker=dict(colors=colors, line=dict(color="#0F1E35", width=2)),
+        marker=dict(colors=colors, line=dict(color="#FFFFFF", width=2)),
         textinfo="label+percent",
-        textfont=dict(size=10, color="#CBD5E1"),
+        textfont=dict(size=10, color="#1A202C"),
         hovertemplate="<b>%{label}</b><br>%{value} cases (%{percent})<extra></extra>",
     ))
     fig.update_layout(
         **_BASE_LAYOUT, showlegend=False, height=260,
-        title=dict(text="Disease Distribution", font=dict(size=12, color="#7A8BA8"), x=0),
+        title=dict(text="Disease Distribution", font=dict(size=12, color="#64748B"), x=0),
     )
     return fig
 
@@ -1026,19 +966,19 @@ def make_severity_bar(data: list[dict]) -> go.Figure:
     counts = Counter(d["Severity"] for d in data)
     labels = [s.title() for s in order if s in counts]
     vals   = [counts[s] for s in order if s in counts]
-    colors = [SEVERITY_COLORS.get(s, "#4A90D9") for s in order if s in counts]
+    colors = [SEVERITY_COLORS.get(s, "#0066CC") for s in order if s in counts]
     fig = go.Figure(go.Bar(
         x=labels, y=vals,
-        marker=dict(color=colors, line=dict(color="#0F1E35", width=1.5)),
+        marker=dict(color=colors, line=dict(color="#FFFFFF", width=1.5)),
         text=vals, textposition="outside",
-        textfont=dict(color="#CBD5E1", size=11),
+        textfont=dict(color="#1A202C", size=11),
         hovertemplate="<b>%{x}</b>: %{y}<extra></extra>",
     ))
     fig.update_layout(
         **_BASE_LAYOUT, height=260,
-        title=dict(text="Severity Distribution", font=dict(size=12, color="#7A8BA8"), x=0),
-        xaxis=dict(showgrid=False, tickfont=dict(color="#7A8BA8", size=10), linecolor="#1E3054"),
-        yaxis=dict(showgrid=True, gridcolor="#1E3054", tickfont=dict(color="#7A8BA8", size=10), zeroline=False),
+        title=dict(text="Severity Distribution", font=dict(size=12, color="#64748B"), x=0),
+        xaxis=dict(showgrid=False, tickfont=dict(color="#64748B", size=10), linecolor="#E2E8F0"),
+        yaxis=dict(showgrid=True, gridcolor="#E2E8F0", tickfont=dict(color="#64748B", size=10), zeroline=False),
     )
     return fig
 
@@ -1058,12 +998,12 @@ def disease_badge(label: str, color: str) -> str:
     display = label.replace("_", " ").title()
     return (
         f'<span class="disease-badge" '
-        f'style="background:{color}22;border:1px solid {color}55;color:{color};">'
+        f'style="background:{color}18;border:1px solid {color}44;color:{color};">'
         f'{icon} {display}</span>'
     )
 
 
-def timeline_item(text: str, kind: str = "", dot_color: str = "#4A90D9") -> str:
+def timeline_item(text: str, kind: str = "", dot_color: str = "#0066CC") -> str:
     return (
         f'<div class="timeline-item {kind}">'
         f'<div class="timeline-dot" style="background:{dot_color};"></div>'
@@ -1147,28 +1087,21 @@ def main() -> None:
     # ── Hero ──────────────────────────────────────────────────────────────────
     st.markdown("""
     <div class="hero-section">
-      <div style="display:flex;align-items:flex-start;gap:2.5rem;flex-wrap:wrap;">
-        <div style="flex:1;min-width:260px;">
-          <h1 class="hero-title">Retinal Disease<br>Intelligence</h1>
-          <p class="hero-subtitle">
-            Automated fundus analysis &mdash;
-            <span>Diabetic Retinopathy</span> &middot;
-            <span>Glaucoma</span> &middot;
-            <span>AMD</span> &middot;
-            <span>Cataracts</span>
-          </p>
-          <div class="stats-row">
-            <span class="stat-chip">🔬 5 Disease Classes</span>
-            <span class="stat-chip">📊 ETDRS Grading</span>
-            <span class="stat-chip accent">🏥 ICD-10 Coded</span>
-            <span class="stat-chip accent">⚡ FHIR R4</span>
-            <span class="stat-chip warn">🔒 HIPAA Aware</span>
-          </div>
-        </div>
-        <div style="flex-shrink:0;opacity:0.88;border-radius:10px;overflow:hidden;border:1px solid #253D63;">
-          <img src="https://media.giphy.com/media/l0HlNQ03J5JxX2rza/giphy.gif"
-               style="width:155px;height:116px;object-fit:cover;display:block;"
-               onerror="this.style.display='none'" alt="Retinal scan" />
+      <div style="flex:1;min-width:260px;">
+        <h1 class="hero-title">Retinal Disease<br>Intelligence</h1>
+        <p class="hero-subtitle">
+          Automated fundus analysis &mdash;
+          <span>Diabetic Retinopathy</span> &middot;
+          <span>Glaucoma</span> &middot;
+          <span>AMD</span> &middot;
+          <span>Cataracts</span>
+        </p>
+        <div class="stats-row">
+          <span class="stat-chip">🔬 5 Disease Classes</span>
+          <span class="stat-chip">📊 ETDRS Grading</span>
+          <span class="stat-chip accent">🏥 ICD-10 Coded</span>
+          <span class="stat-chip accent">⚡ FHIR R4</span>
+          <span class="stat-chip warn">🔒 HIPAA Aware</span>
         </div>
       </div>
     </div>
@@ -1191,8 +1124,8 @@ def main() -> None:
         with up_col:
             st.markdown(section_header("📤", "Upload Fundus Image"), unsafe_allow_html=True)
             st.markdown(
-                '<div style="text-align:center;font-size:1.8rem;opacity:0.5;margin-bottom:0.3rem;">🏥</div>'
-                '<div style="text-align:center;font-size:0.78rem;color:#4A6B8A;margin-bottom:0.6rem;">'
+                '<div style="text-align:center;font-size:1.8rem;opacity:0.4;margin-bottom:0.3rem;">🏥</div>'
+                '<div style="text-align:center;font-size:0.76rem;color:#64748B;margin-bottom:0.6rem;">'
                 'JPEG · PNG · TIFF · BMP &nbsp;|&nbsp; Ideally ≥ 800×800 px</div>',
                 unsafe_allow_html=True,
             )
@@ -1238,10 +1171,10 @@ def main() -> None:
                          style="display:flex;align-items:center;gap:0.8rem;margin:1rem 0;">
                       <span style="font-size:1.4rem;flex-shrink:0;">🚨</span>
                       <div>
-                        <div style="color:#FF4757;font-weight:700;font-size:0.88rem;letter-spacing:0.05em;">
+                        <div style="color:#DC2626;font-weight:700;font-size:0.88rem;letter-spacing:0.05em;">
                           URGENT CLINICAL REVIEW REQUIRED
                         </div>
-                        <div style="color:#A8796A;font-size:0.78rem;margin-top:0.15rem;">
+                        <div style="color:#991B1B;font-size:0.78rem;margin-top:0.15rem;">
                           This finding warrants immediate ophthalmologist review. Do not delay referral.
                         </div>
                       </div>
@@ -1254,9 +1187,9 @@ def main() -> None:
                 st.markdown(section_header("📋", "Analysis Results"), unsafe_allow_html=True)
                 mc1, mc2, mc3 = st.columns(3, gap="medium")
 
-                diag_color = DISEASE_COLORS.get(r_class.predicted_label.value, "#4A90D9")
-                sev_color  = SEVERITY_COLORS.get(r_sev.severity.value, "#4A90D9")
-                risk_color = RISK_COLORS.get(r_risk.risk_level.value, "#4A90D9")
+                diag_color = DISEASE_COLORS.get(r_class.predicted_label.value, "#0066CC")
+                sev_color  = SEVERITY_COLORS.get(r_sev.severity.value, "#0066CC")
+                risk_color = RISK_COLORS.get(r_risk.risk_level.value, "#0066CC")
                 diag_icon  = DISEASE_ICONS.get(r_class.predicted_label.value, "•")
                 etdrs_note = f" · ETDRS {r_sev.etdrs_level}" if r_sev.etdrs_level else ""
 
@@ -1281,7 +1214,7 @@ def main() -> None:
                       <div class="metric-card-label">Severity Grade</div>
                       <div class="metric-card-value">{r_sev.severity.value.title()}</div>
                       <div class="metric-card-sub">Score: {r_sev.severity_score:.2f}{etdrs_note}</div>
-                      <div style="margin-top:0.65rem;background:#0F1E35;border-radius:4px;height:6px;overflow:hidden;">
+                      <div style="margin-top:0.65rem;background:#E2E8F0;border-radius:4px;height:6px;overflow:hidden;">
                         <div style="width:{int(r_sev.severity_score*100)}%;height:100%;
                              background:{sev_color};border-radius:4px;"></div>
                       </div>
@@ -1300,7 +1233,7 @@ def main() -> None:
                       </div>
                       <div style="margin-top:0.65rem;">
                         <span class="disease-badge"
-                              style="background:{risk_color}22;border:1px solid {risk_color}55;color:{risk_color};">
+                              style="background:{risk_color}18;border:1px solid {risk_color}44;color:{risk_color};">
                           {r_risk.risk_level.value.upper()}
                         </span>
                       </div>
@@ -1350,22 +1283,22 @@ def main() -> None:
                     st.markdown('<div class="glass-card">', unsafe_allow_html=True)
                     st.markdown('<div class="metric-card-label" style="margin-bottom:0.6rem;">IMAGE QUALITY</div>', unsafe_allow_html=True)
                     q = r_prep.quality_score
-                    q_color = "#2ED573" if q >= 0.7 else "#FFA502" if q >= 0.4 else "#FF4757"
+                    q_color = "#00875A" if q >= 0.7 else "#F59E0B" if q >= 0.4 else "#DC2626"
                     st.markdown(f"""
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
-                      <span style="font-size:0.78rem;color:#7A8BA8;font-weight:600;letter-spacing:0.04em;">QUALITY SCORE</span>
+                      <span style="font-size:0.76rem;color:#64748B;font-weight:600;letter-spacing:0.04em;">QUALITY SCORE</span>
                       <span style="font-size:1.1rem;font-weight:700;color:{q_color};">{q:.0%}</span>
                     </div>
-                    <div style="background:#0F1E35;border-radius:6px;height:10px;overflow:hidden;margin-bottom:0.8rem;">
+                    <div style="background:#E2E8F0;border-radius:6px;height:10px;overflow:hidden;margin-bottom:0.8rem;">
                       <div style="width:{int(q*100)}%;height:100%;
-                           background:linear-gradient(90deg,{q_color}88,{q_color});border-radius:6px;"></div>
+                           background:{q_color};border-radius:6px;"></div>
                     </div>
                     """, unsafe_allow_html=True)
                     if r_prep.quality_flags:
                         for flag in r_prep.quality_flags:
-                            st.markdown(timeline_item(flag, "warn", "#FFA502"), unsafe_allow_html=True)
+                            st.markdown(timeline_item(flag, "warn", "#F59E0B"), unsafe_allow_html=True)
                     else:
-                        st.markdown(timeline_item("No quality issues detected", "success", "#2ED573"), unsafe_allow_html=True)
+                        st.markdown(timeline_item("No quality issues detected", "success", "#00875A"), unsafe_allow_html=True)
                     st.markdown('</div>', unsafe_allow_html=True)
 
                 st.divider()
@@ -1375,7 +1308,7 @@ def main() -> None:
                 findings_class = "urgent" if r_class.requires_urgent_review else ""
                 st.markdown(f"""
                 <div class="glass-card {findings_class}">
-                  <div style="font-size:0.83rem;color:#A8B8CC;line-height:1.7;">
+                  <div style="font-size:0.83rem;color:#1A202C;line-height:1.7;">
                     {r_sev.clinical_description}
                   </div>
                 </div>
@@ -1395,7 +1328,7 @@ def main() -> None:
                     "emergency (same day)":  "urgent",
                 }
                 u_kind  = urgency_kind_map.get(r_sev.follow_up_urgency, "")
-                u_color = {"urgent":"#FF4757","warn":"#FFA502","success":"#2ED573"}.get(u_kind, "#4A90D9")
+                u_color = {"urgent":"#DC2626","warn":"#F59E0B","success":"#00875A"}.get(u_kind, "#0066CC")
                 st.markdown(timeline_item(f"<strong>Follow-up:</strong> {r_sev.follow_up_urgency}", u_kind, u_color), unsafe_allow_html=True)
 
                 for rec in r_risk.recommendations:
@@ -1405,7 +1338,7 @@ def main() -> None:
                     st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
                     st.markdown(section_header("⚠", "Contributing Risk Factors"), unsafe_allow_html=True)
                     for factor in r_risk.contributing_factors:
-                        st.markdown(timeline_item(factor, "warn", "#FFA502"), unsafe_allow_html=True)
+                        st.markdown(timeline_item(factor, "warn", "#F59E0B"), unsafe_allow_html=True)
 
                 st.divider()
 
@@ -1432,7 +1365,7 @@ def main() -> None:
         st.markdown(section_header("📊", "Batch Fundus Image Processing"), unsafe_allow_html=True)
         st.markdown("""
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <div style="font-size:0.83rem;color:#7A8BA8;line-height:1.6;">
+          <div style="font-size:0.83rem;color:#64748B;line-height:1.6;">
             Upload multiple fundus images for simultaneous screening.
             Results include disease and severity breakdowns, urgent flags, and CSV export.
           </div>
@@ -1508,9 +1441,9 @@ def main() -> None:
 
                 for row in results_list:
                     res        = row["_res"]
-                    risk_col   = RISK_COLORS.get(row["Risk"], "#4A90D9")
-                    sev_col    = SEVERITY_COLORS.get(row["Severity"], "#4A90D9")
-                    diag_col   = DISEASE_COLORS.get(res["classification"].predicted_label.value, "#4A90D9")
+                    risk_col   = RISK_COLORS.get(row["Risk"], "#0066CC")
+                    sev_col    = SEVERITY_COLORS.get(row["Severity"], "#0066CC")
+                    diag_col   = DISEASE_COLORS.get(res["classification"].predicted_label.value, "#0066CC")
                     label_pfx  = "🚨 " if row["Urgent"] else "📄 "
 
                     with st.expander(f"{label_pfx}{row['File']} — {row['Disease']}"):
@@ -1519,11 +1452,11 @@ def main() -> None:
                             (ec1, "Disease",    row["Disease"],           diag_col),
                             (ec2, "Severity",   row["Severity"].title(),  sev_col),
                             (ec3, "Risk Level", row["Risk"].title(),      risk_col),
-                            (ec4, "Confidence", row["Confidence"],        "#CBD5E1"),
+                            (ec4, "Confidence", row["Confidence"],        "#1A202C"),
                         ]:
                             with ec:
                                 st.markdown(f"""
-                                <div style="font-size:0.7rem;color:#7A8BA8;font-weight:600;
+                                <div style="font-size:0.7rem;color:#64748B;font-weight:600;
                                      letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem;">
                                   {heading}
                                 </div>
@@ -1532,7 +1465,7 @@ def main() -> None:
                         if row["Urgent"]:
                             st.markdown("""
                             <div class="timeline-item urgent" style="margin-top:0.75rem;">
-                              <div class="timeline-dot" style="background:#FF4757;"></div>
+                              <div class="timeline-dot" style="background:#DC2626;"></div>
                               <span>Urgent ophthalmology review required</span>
                             </div>
                             """, unsafe_allow_html=True)
@@ -1564,8 +1497,8 @@ def main() -> None:
         st.markdown("""
         <div class="glass-card warn-card" style="margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;">
           <span style="font-size:1.2rem;flex-shrink:0;">⚠️</span>
-          <div style="font-size:0.79rem;color:#A8956A;line-height:1.5;">
-            <strong style="color:#FFA502;">Research Use Only.</strong>
+          <div style="font-size:0.79rem;color:#78350F;line-height:1.5;">
+            <strong style="color:#92400E;">Research Use Only.</strong>
             This assistant provides general ophthalmology information only. It is not a substitute
             for professional medical advice, diagnosis, or treatment.
           </div>
@@ -1580,16 +1513,16 @@ def main() -> None:
               <div class="metric-card-label" style="margin-bottom:0.8rem;">SESSION INFO</div>
               <div style="display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:#7A8BA8;">Model</span>
-                  <span style="color:#CBD5E1;font-weight:600;">Retina-GPT v1</span>
+                  <span style="color:#64748B;">Model</span>
+                  <span style="color:#1A202C;font-weight:600;">Retina-GPT v1</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:#7A8BA8;">Domain</span>
-                  <span style="color:#CBD5E1;font-weight:600;">Ophthalmology</span>
+                  <span style="color:#64748B;">Domain</span>
+                  <span style="color:#1A202C;font-weight:600;">Ophthalmology</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:#7A8BA8;">Status</span>
-                  <span style="color:#2ED573;font-weight:600;">● Demo Mode</span>
+                  <span style="color:#64748B;">Status</span>
+                  <span style="color:#00875A;font-weight:600;">● Demo Mode</span>
                 </div>
               </div>
             </div>
@@ -1630,7 +1563,7 @@ def main() -> None:
             chat_html = '<div class="chat-container">'
             if not st.session_state.chat_history:
                 chat_html += (
-                    '<div style="text-align:center;color:#4A6B8A;font-size:0.83rem;padding:2.5rem 1rem;">'
+                    '<div style="text-align:center;color:#94A3B8;font-size:0.83rem;padding:2.5rem 1rem;">'
                     'Ask a question about retinal diseases, screening protocols,<br>or treatment guidelines.'
                     '</div>'
                 )
@@ -1693,7 +1626,7 @@ def main() -> None:
           <span class="compliance-badge">⚡ FHIR R4</span>
           <span class="compliance-badge">📋 ICD-10-CM</span>
           <span class="compliance-badge">🔬 ETDRS Grading</span>
-          <span class="compliance-badge" style="background:rgba(74,144,217,0.1);border-color:rgba(74,144,217,0.25);color:#4A90D9;">
+          <span class="compliance-badge" style="background:#EBF4FF;border-color:#BFDBFE;color:#0066CC;">
             🤖 ResNet18
           </span>
         </div>
@@ -1703,17 +1636,17 @@ def main() -> None:
         st.markdown(section_header("🏥", "Supported Disease Classes"), unsafe_allow_html=True)
 
         diseases = [
-            {"icon": "✅", "name": "Normal", "icd": "Z01.01", "color": "#2ED573",
+            {"icon": "✅", "name": "Normal", "icd": "Z01.01", "color": "#00875A",
              "desc": "No retinal pathology. Healthy optic disc and macula. Routine annual screening."},
-            {"icon": "🩸", "name": "Diabetic Retinopathy", "icd": "E11.319", "color": "#FF4757",
+            {"icon": "🩸", "name": "Diabetic Retinopathy", "icd": "E11.319", "color": "#DC2626",
              "desc": "Microvascular complications of diabetes. ETDRS grading: mild NPDR → PDR."},
-            {"icon": "👁", "name": "Glaucoma", "icd": "H40.10X0", "color": "#FFA502",
+            {"icon": "👁", "name": "Glaucoma", "icd": "H40.10X0", "color": "#F59E0B",
              "desc": "Optic neuropathy with characteristic disc cupping. CDR analysis and RNFL assessment."},
-            {"icon": "🟡", "name": "Age-related Macular Degeneration", "icd": "H35.30", "color": "#A78BFA",
+            {"icon": "🟡", "name": "Age-related Macular Degeneration", "icd": "H35.30", "color": "#7C3AED",
              "desc": "Drusen deposits and RPE changes in macula. Anti-VEGF for wet AMD."},
-            {"icon": "💧", "name": "Cataracts", "icd": "H26.9", "color": "#4A90D9",
+            {"icon": "💧", "name": "Cataracts", "icd": "H26.9", "color": "#0066CC",
              "desc": "Lens opacity causing visual impairment. Incipient to dense grades."},
-            {"icon": "🔬", "name": "Model Architecture", "icd": "ResNet18", "color": "#00C9A7",
+            {"icon": "🔬", "name": "Model Architecture", "icd": "ResNet18", "color": "#0891B2",
              "desc": "Transfer learning on fundus datasets. Demo heuristic + PyTorch production mode. Grad-CAM attention maps."},
         ]
 
@@ -1724,7 +1657,7 @@ def main() -> None:
             cols_row = row1_cols if idx < 3 else row2_cols
             with cols_row[idx % 3]:
                 st.markdown(f"""
-                <div class="disease-info-card" style="border-top:3px solid {d['color']}55;">
+                <div class="disease-info-card" style="border-top:3px solid {d['color']};">
                   <div class="disease-info-icon">{d['icon']}</div>
                   <div class="disease-info-name">{d['name']}</div>
                   <div class="disease-info-icd" style="color:{d['color']};">{d['icd']}</div>
@@ -1752,8 +1685,8 @@ def main() -> None:
                 <div class="timeline-item" style="margin-bottom:0.45rem;">
                   <span style="flex-shrink:0;font-size:1rem;">{icon}</span>
                   <div>
-                    <div style="font-weight:600;color:#CBD5E1;font-size:0.82rem;">{title}</div>
-                    <div style="font-size:0.76rem;color:#7A8BA8;margin-top:0.08rem;">{desc}</div>
+                    <div style="font-weight:600;color:#1A202C;font-size:0.82rem;">{title}</div>
+                    <div style="font-size:0.76rem;color:#64748B;margin-top:0.08rem;">{desc}</div>
                   </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -1769,7 +1702,7 @@ def main() -> None:
     # ── Footer ────────────────────────────────────────────────────────────────
     st.markdown("""
     <div class="footer-bar">
-      Powered by <strong style="color:#7A8BA8;">Retina-Scan-AI v1.0</strong>
+      Powered by <strong style="color:#1A202C;">Retina-Scan-AI v1.0</strong>
       <span class="footer-sep">·</span>
       Clinical Research Tool
       <span class="footer-sep">·</span>
@@ -1777,7 +1710,7 @@ def main() -> None:
       <span class="footer-sep">·</span>
       HIPAA Aware
       <span class="footer-sep">·</span>
-      <span style="color:#253D63;">© 2024 Retina-Scan-AI Research</span>
+      <span style="color:#94A3B8;">© 2024 Retina-Scan-AI Research</span>
     </div>
     """, unsafe_allow_html=True)
 
