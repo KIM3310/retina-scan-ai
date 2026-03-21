@@ -676,24 +676,225 @@ st.markdown("""
   }
   .footer-sep { color: #1E3054; margin: 0 0.5rem; }
 
-  /* Animations */
+  /* ══ Animations ══ */
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
   @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
   }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   @keyframes pulseGlow {
     0%, 100% { box-shadow: 0 0 0 0 rgba(255,71,87,0.4); }
-    50%       { box-shadow: 0 0 0 8px rgba(255,71,87,0); }
+    50%       { box-shadow: 0 0 0 10px rgba(255,71,87,0); }
   }
-  .anim-1 { animation: fadeInUp 0.45s ease both; }
-  .anim-2 { animation: fadeInUp 0.45s 0.08s ease both; }
-  .anim-3 { animation: fadeInUp 0.45s 0.16s ease both; }
-  .anim-fade { animation: fadeIn 0.4s ease both; }
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes borderGlow {
+    0%, 100% { border-color: rgba(74,144,217,0.2); }
+    50%       { border-color: rgba(74,144,217,0.5); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes typewriter {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+
+  /* Staggered fade-in-up */
+  .anim-1 { animation: fadeInUp 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-2 { animation: fadeInUp 0.55s 0.1s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-3 { animation: fadeInUp 0.55s 0.2s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-4 { animation: fadeInUp 0.55s 0.3s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-fade { animation: fadeIn 0.5s ease both; }
+  .anim-scale { animation: scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-left { animation: fadeInLeft 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-right { animation: fadeInRight 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-slide { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) both; }
   .urgent-pulse { animation: pulseGlow 2s ease-in-out infinite; }
+
+  /* Hero gradient animation */
+  .hero-section {
+    background: linear-gradient(135deg, #0C1829 0%, #1B2A4A 45%, #1A3052 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    border-bottom: 1px solid #1E3054;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Floating orbs in hero */
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(74,144,217,0.14) 0%, transparent 70%);
+    pointer-events: none;
+    animation: float 6s ease-in-out infinite;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(0,201,167,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: float 8s ease-in-out 1s infinite;
+  }
+
+  /* Hero title animation */
+  .hero-title {
+    animation: fadeInDown 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .hero-subtitle {
+    animation: fadeIn 0.8s 0.2s ease both;
+  }
+  .stats-row {
+    animation: fadeInUp 0.6s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  /* Stat chips hover */
+  .stat-chip {
+    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+    cursor: default;
+  }
+  .stat-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(74,144,217,0.2);
+  }
+
+  /* Glass card hover lift */
+  .glass-card {
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .glass-card:hover {
+    transform: translateY(-2px);
+    border-color: #3A5A8A;
+    box-shadow: var(--shadow-card), 0 8px 32px rgba(74,144,217,0.1);
+  }
+
+  /* Disease info cards stagger + hover */
+  .disease-info-card {
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+    animation: scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .disease-info-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: #4A90D9;
+    box-shadow: 0 8px 28px rgba(74,144,217,0.15);
+  }
+
+  /* Timeline items stagger */
+  .timeline-item {
+    animation: fadeInLeft 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+  }
+  .timeline-item:hover {
+    transform: translateX(4px);
+    background: rgba(74,144,217,0.08);
+  }
+
+  /* Batch summary cards */
+  .batch-summary-card {
+    animation: scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .batch-summary-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  /* Chat bubbles */
+  .chat-bubble {
+    animation: fadeInUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.2s ease;
+  }
+  .chat-bubble.user:hover { transform: translateX(-3px); }
+  .chat-bubble.assistant:hover { transform: translateX(3px); }
+
+  /* Sidebar logo float */
+  .sidebar-logo {
+    animation: fadeIn 0.6s ease both;
+    transition: all 0.3s ease;
+  }
+  .sidebar-logo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(74,144,217,0.15);
+  }
+  .sidebar-logo-icon {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Compliance badges */
+  .compliance-badge {
+    animation: fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    transition: all 0.25s ease;
+  }
+  .compliance-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,201,167,0.2);
+  }
+
+  /* Button shimmer effect */
+  .stButton > button::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .stButton > button { position: relative; overflow: hidden; }
+
+  /* Footer subtle animation */
+  .footer-bar {
+    animation: fadeIn 0.8s 0.5s ease both;
+  }
+
+  /* Scrollbar glow on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4A90D9;
+    box-shadow: 0 0 8px rgba(74,144,217,0.4);
+  }
+
+  /* File uploader border animation */
+  [data-testid="stFileUploader"] {
+    animation: borderGlow 3s ease-in-out infinite;
+  }
 </style>
 """, unsafe_allow_html=True)
 
