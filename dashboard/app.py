@@ -147,7 +147,7 @@ def main() -> None:
 
     # ── Sidebar ───────────────────────────────────────────────────────────────
     with st.sidebar:
-        st.image("https://img.icons8.com/color/96/000000/retina-scan.png", width=80)
+        st.markdown("# 👁")
         st.title("Retina-Scan-AI")
         st.caption("v1.0 · Clinical Screening Tool")
         st.divider()
