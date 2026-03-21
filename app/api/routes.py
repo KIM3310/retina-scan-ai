@@ -7,6 +7,9 @@ Endpoints:
 - GET  /diseases         — List supported diseases
 - GET  /model/info       — Model architecture information
 - GET  /metrics          — Population health screening metrics
+- POST /chat             — Chat with clinical AI assistant about a scan result
+- POST /agent/screen     — Run screening agent on batch of images
+- GET  /agent/status     — Get screening agent status
 
 FHIR: Pass ?format=fhir to /analyze for FHIR R4 DiagnosticReport output.
 """
@@ -505,3 +508,194 @@ def _parse_laterality(value: str) -> Laterality:
         "bilateral": Laterality.BOTH,
     }
     return mapping.get(value.lower().strip(), Laterality.UNSPECIFIED)
+
+
+# ── Clinical AI Chatbot ───────────────────────────────────────────────────────
+
+# In-memory chat sessions (use Redis in production for persistence)
+_chat_sessions: dict[str, object] = {}
+
+
+class ChatRequest(BaseModel):
+    """Request body for POST /chat."""
+
+    session_id: str | None = None
+    message: str
+    classification: str = "unknown"
+    severity: str = "unknown"
+    risk_score: float | str = 0.0
+    risk_level: str = "unknown"
+
+
+class ChatResponse(BaseModel):
+    """Response from POST /chat."""
+
+    session_id: str
+    reply: str
+    disclaimer: str
+
+
+@router.post("/chat", response_model=ChatResponse, tags=["ai-assistant"])
+async def chat_with_assistant(body: ChatRequest) -> ChatResponse:
+    """Chat with the clinical AI assistant about a retinal scan result.
+
+    Maintains multi-turn conversation history per session_id.
+    Requires OPENAI_API_KEY environment variable to be set.
+
+    DISCLAIMER: This is an AI-assisted tool. All findings must be confirmed
+    by a qualified ophthalmologist.
+    """
+    from app.chatbot.assistant import ClinicalAssistant  # noqa: PLC0415
+
+    try:
+        assistant = ClinicalAssistant()
+    except OSError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    # Retrieve or create session
+    session_id = body.session_id or str(uuid.uuid4())
+    if session_id in _chat_sessions:
+        session = _chat_sessions[session_id]
+    else:
+        session = assistant.create_session(
+            classification=body.classification,
+            severity=body.severity,
+            risk_score=body.risk_score,
+            risk_level=body.risk_level,
+            session_id=session_id,
+        )
+        _chat_sessions[session_id] = session
+
+    try:
+        reply = assistant.chat(session, body.message)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    return ChatResponse(
+        session_id=session_id,
+        reply=reply,
+        disclaimer=assistant.get_disclaimer(),
+    )
+
+
+# ── Screening Workflow Agent ──────────────────────────────────────────────────
+
+# Singleton agent (stateless between runs; status tracked per-process)
+_screening_agent: object | None = None
+
+
+def _get_screening_agent() -> object:
+    """Get or create the screening agent singleton."""
+    global _screening_agent  # noqa: PLW0603
+    if _screening_agent is None:
+        from app.agent.orchestrator import ScreeningAgent  # noqa: PLC0415
+        try:
+            _screening_agent = ScreeningAgent()
+        except OSError as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+    return _screening_agent
+
+
+@router.post("/agent/screen", tags=["ai-agent"])
+async def run_screening_agent(
+    request: Request,
+    files: Annotated[list[UploadFile], File(description="Batch of retinal fundus images")],
+    laterality: Annotated[str, Form(description="Eye laterality applied to all images")] = "unspecified",
+) -> dict:
+    """Run the AI screening agent on a batch of retinal images.
+
+    Orchestrates the full screening workflow:
+    - Preprocesses and classifies each image
+    - Prioritizes patients by risk level (critical first)
+    - Flags urgent cases requiring immediate referral
+    - Suggests re-scans for low-quality images
+    - Generates a natural language summary via OpenAI
+
+    Requires OPENAI_API_KEY environment variable to be set.
+    Maximum batch size: 50 images.
+
+    DISCLAIMER: This is an AI-assisted tool. All findings must be confirmed
+    by a qualified ophthalmologist.
+    """
+    if len(files) > 50:
+        raise HTTPException(
+            status_code=400,
+            detail="Batch size exceeds maximum of 50 images.",
+        )
+
+    from app.agent.orchestrator import PatientRecord, ScreeningAgent  # noqa: PLC0415
+
+    components = getattr(request.state, "components", {})
+
+    try:
+        agent = ScreeningAgent(components=components)
+    except OSError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    records = []
+    for upload_file in files:
+        try:
+            _validate_image_upload(upload_file)
+            _, image = await _read_image(upload_file)
+            records.append(PatientRecord(
+                image=image,
+                patient_ref=str(uuid.uuid4()),
+                laterality=laterality,
+            ))
+        except HTTPException:
+            # Skip invalid images — they'll be counted as failed
+            records.append(PatientRecord(
+                image=Image.new("RGB", (256, 256), color=(128, 128, 128)),
+                patient_ref="invalid_image",
+            ))
+
+    session = agent.run_screening(records)
+
+    # Serialize results
+    results_out = []
+    for r in session.results:
+        results_out.append({
+            "patient_ref": r.patient_ref,
+            "study_id": r.study_id,
+            "status": r.status,
+            "classification": r.classification,
+            "severity": r.severity,
+            "risk": r.risk,
+            "flagged_urgent": r.flagged_urgent,
+            "needs_rescan": r.needs_rescan,
+            "action_items": r.action_items,
+            "error": r.error,
+        })
+
+    return {
+        "session_id": session.session_id,
+        "status": session.status.value,
+        "total_patients": session.total_patients,
+        "succeeded": session.succeeded,
+        "failed": session.failed,
+        "urgent_cases": session.urgent_cases,
+        "summary": session.summary,
+        "action_items": session.action_items,
+        "results": results_out,
+        "disclaimer": session.disclaimer,
+    }
+
+
+@router.get("/agent/status", tags=["ai-agent"])
+async def agent_status() -> dict:
+    """Get the current status of the screening agent.
+
+    Returns agent readiness and disclaimer information.
+    Requires OPENAI_API_KEY environment variable to be set.
+    """
+    import os  # noqa: PLC0415
+
+    from app.agent.orchestrator import DISCLAIMER  # noqa: PLC0415
+
+    api_key_set = bool(os.environ.get("OPENAI_API_KEY"))
+    return {
+        "agent": "screening_agent",
+        "api_key_configured": api_key_set,
+        "status": "ready" if api_key_set else "unavailable",
+        "disclaimer": DISCLAIMER,
+    }
