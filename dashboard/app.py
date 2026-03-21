@@ -1710,7 +1710,7 @@ def main() -> None:
       <span class="footer-sep">·</span>
       HIPAA Aware
       <span class="footer-sep">·</span>
-      <span style="color:#94A3B8;">© 2024 Retina-Scan-AI Research</span>
+      <span style="color:#94A3B8;">© 2026 Retina-Scan-AI Research</span>
     </div>
     """, unsafe_allow_html=True)
 
