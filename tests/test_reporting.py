@@ -91,7 +91,7 @@ class TestReportStructure:
 
     def test_report_version(self, generator, grader, scorer):
         report = make_full_report(generator, grader, scorer, DiseaseLabel.NORMAL)
-        assert report.report_version == "1.0"
+        assert report.report_version == "2.0"
 
     def test_report_has_findings_summary(self, generator, grader, scorer):
         report = make_full_report(generator, grader, scorer, DiseaseLabel.DIABETIC_RETINOPATHY)

@@ -4,20 +4,56 @@ Generates structured, clinician-readable reports using medical terminology
 consistent with ophthalmology clinical practice guidelines.
 
 HIPAA-aware: no PII stored in reports; study_id is an opaque reference.
+
+Features:
+- Laterality tracking (OD = right eye, OS = left eye, OU = both)
+- ICD-10 codes with laterality modifiers
+- Follow-up scheduling suggestions based on severity
+- FHIR-compatible report format option
+- PDF-ready structured output
 """
 
 from __future__ import annotations
 
 import logging
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
+from enum import Enum
 
 from app.models.classifier import ClassificationResult, DiseaseLabel
 from app.models.risk_scoring import RiskScore
 from app.models.severity import SeverityLevel, SeverityResult
 
 logger = logging.getLogger(__name__)
+
+
+class Laterality(str, Enum):
+    """Eye laterality for clinical documentation."""
+
+    RIGHT = "OD"   # Oculus Dexter (right eye)
+    LEFT = "OS"    # Oculus Sinister (left eye)
+    BOTH = "OU"    # Oculus Uterque (both eyes)
+    UNSPECIFIED = "unspecified"
+
+
+# ICD-10 laterality modifiers (appended to base codes where applicable)
+ICD10_LATERALITY_SUFFIXES: dict[Laterality, str] = {
+    Laterality.RIGHT: "1",   # right eye
+    Laterality.LEFT: "2",    # left eye
+    Laterality.BOTH: "3",    # bilateral
+    Laterality.UNSPECIFIED: "",
+}
+
+# Follow-up scheduling language by severity
+FOLLOW_UP_SCHEDULE: dict[str, str] = {
+    "routine": "Annual screening recommended per standard guidelines.",
+    "routine (12 months)": "Follow-up ophthalmic examination in 12 months.",
+    "soon (3 months)": "Ophthalmology referral within 3 months.",
+    "urgent (4 weeks)": "Urgent ophthalmology appointment within 4 weeks.",
+    "emergency (1 week)": "Emergency ophthalmology referral within 1 week.",
+    "emergency (same day)": "Same-day emergency ophthalmology evaluation required.",
+}
 
 
 @dataclass
@@ -35,38 +71,136 @@ class ClinicalReport:
     recommendations: list[str]
     image_quality: dict | None
     disclaimer: str
-    report_version: str = "1.0"
+    report_version: str = "2.0"
+    laterality: str = Laterality.UNSPECIFIED.value
+    follow_up_schedule: str = field(default="")
+    icd10_with_laterality: str = field(default="")
 
     def to_dict(self) -> dict:
+        """Serialize to dictionary for API responses."""
         return {
             "report_id": self.report_id,
             "study_id": self.study_id,
             "generated_at": self.generated_at,
             "report_version": self.report_version,
+            "laterality": self.laterality,
             "classification": self.classification,
             "severity": self.severity,
             "risk": self.risk,
             "findings_summary": self.findings_summary,
             "clinical_impression": self.clinical_impression,
             "recommendations": self.recommendations,
+            "follow_up_schedule": self.follow_up_schedule,
+            "icd10_with_laterality": self.icd10_with_laterality,
             "image_quality": self.image_quality,
             "disclaimer": self.disclaimer,
         }
 
+    def to_fhir(self) -> dict:
+        """Render report as a FHIR R4-compatible DiagnosticReport resource.
+
+        Returns a FHIR DiagnosticReport JSON structure suitable for EHR
+        integration via HL7 FHIR R4 APIs.
+        """
+        icd10 = self.icd10_with_laterality or self.classification.get("icd10_code", "")
+        disease = self.classification.get("display_name", "Unknown")
+        severity = self.severity.get("severity", "unknown")
+        confidence = self.classification.get("confidence", 0.0)
+
+        return {
+            "resourceType": "DiagnosticReport",
+            "id": self.report_id,
+            "meta": {
+                "versionId": self.report_version,
+                "lastUpdated": self.generated_at,
+                "profile": ["http://hl7.org/fhir/StructureDefinition/DiagnosticReport"],
+            },
+            "status": "final",
+            "category": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                            "code": "OPH",
+                            "display": "Ophthalmology",
+                        }
+                    ]
+                }
+            ],
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "28619-4",
+                        "display": "Ophthalmology Retinal study",
+                    }
+                ],
+                "text": "Automated Retinal Fundus Analysis",
+            },
+            "subject": {
+                "identifier": {
+                    "system": "urn:retina-scan-ai:study",
+                    "value": self.study_id,
+                }
+            },
+            "effectiveDateTime": self.generated_at,
+            "issued": self.generated_at,
+            "conclusion": self.clinical_impression,
+            "conclusionCode": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                            "code": icd10,
+                            "display": disease,
+                        }
+                    ]
+                }
+            ],
+            "extension": [
+                {
+                    "url": "https://retina-scan-ai/fhir/StructureDefinition/ai-confidence",
+                    "valueDecimal": round(confidence, 4),
+                },
+                {
+                    "url": "https://retina-scan-ai/fhir/StructureDefinition/severity",
+                    "valueString": severity,
+                },
+                {
+                    "url": "https://retina-scan-ai/fhir/StructureDefinition/laterality",
+                    "valueString": self.laterality,
+                },
+                {
+                    "url": "https://retina-scan-ai/fhir/StructureDefinition/risk-level",
+                    "valueString": self.risk.get("risk_level", "unknown"),
+                },
+            ],
+            "presentedForm": [
+                {
+                    "contentType": "text/plain",
+                    "title": f"Retinal Screening Report {self.report_id[:8]}",
+                    "data": self.to_text(),
+                }
+            ],
+        }
+
     def to_text(self) -> str:
         """Render report as plain-text clinical document."""
+        lat_display = self.laterality if self.laterality != Laterality.UNSPECIFIED.value else "Not specified"
         lines = [
             "=" * 70,
             "AUTOMATED RETINAL SCREENING REPORT",
             f"Report ID: {self.report_id}",
             f"Study ID:  {self.study_id}",
             f"Generated: {self.generated_at}",
+            f"Version:   {self.report_version}",
             "=" * 70,
             "",
             "CLASSIFICATION",
             "-" * 40,
             f"Diagnosis:   {self.classification.get('display_name', 'N/A')}",
-            f"ICD-10:      {self.classification.get('icd10_code', 'N/A')}",
+            f"ICD-10:      {self.icd10_with_laterality or self.classification.get('icd10_code', 'N/A')}",
+            f"Laterality:  {lat_display}",
             f"Confidence:  {self.classification.get('confidence', 0):.1%}",
             f"Urgent:      {'YES' if self.classification.get('requires_urgent_review') else 'No'}",
             "",
@@ -103,6 +237,14 @@ class ClinicalReport:
             lines.append("\nContributing Risk Factors:")
             for f in factors:
                 lines.append(f"  • {f}")
+
+        if self.follow_up_schedule:
+            lines += [
+                "",
+                "FOLLOW-UP SCHEDULING",
+                "-" * 40,
+                self.follow_up_schedule,
+            ]
 
         lines += [
             "",
@@ -318,6 +460,7 @@ class ClinicalReportGenerator:
         severity: SeverityResult,
         risk: RiskScore,
         image_quality: dict | None = None,
+        laterality: Laterality = Laterality.UNSPECIFIED,
     ) -> ClinicalReport:
         """Generate a complete clinical report.
 
@@ -327,6 +470,7 @@ class ClinicalReportGenerator:
             severity: Severity grading result.
             risk: Patient risk score.
             image_quality: Optional image quality metadata from preprocessor.
+            laterality: Eye laterality (OD/OS/OU/unspecified).
 
         Returns:
             ClinicalReport with full narrative and structured data.
@@ -344,6 +488,19 @@ class ClinicalReportGenerator:
         if classification.predicted_label != DiseaseLabel.NORMAL:
             impression += f" {severity.clinical_description}"
 
+        # Build laterality-qualified ICD-10 code
+        base_icd10 = classification.icd10_code
+        lat_suffix = ICD10_LATERALITY_SUFFIXES.get(laterality, "")
+        # Append laterality suffix only for codes that support it (non-Z codes)
+        if lat_suffix and not base_icd10.startswith("Z"):
+            icd10_with_laterality = base_icd10 + lat_suffix
+        else:
+            icd10_with_laterality = base_icd10
+
+        # Build follow-up scheduling text
+        urgency = severity.follow_up_urgency
+        follow_up = FOLLOW_UP_SCHEDULE.get(urgency, f"Follow-up as clinically indicated ({urgency}).")
+
         report = ClinicalReport(
             report_id=report_id,
             study_id=study_id,
@@ -356,6 +513,9 @@ class ClinicalReportGenerator:
             recommendations=risk.recommendations,
             image_quality=image_quality,
             disclaimer=DISCLAIMER,
+            laterality=laterality.value,
+            follow_up_schedule=follow_up,
+            icd10_with_laterality=icd10_with_laterality,
         )
 
         logger.info(
@@ -366,6 +526,7 @@ class ClinicalReportGenerator:
                 "disease": classification.predicted_label.value,
                 "severity": severity.severity.value,
                 "risk_level": risk.risk_level.value,
+                "laterality": laterality.value,
             },
         )
 

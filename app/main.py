@@ -53,7 +53,7 @@ _app_state: dict = {}
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Initialize and teardown application resources."""
-    logger.info("Retina-Scan-AI starting up", version="0.1.0")
+    logger.info("Retina-Scan-AI starting up", version="2.0.0")
 
     # Initialize all components (demo mode — no model file required)
     _app_state["classifier"] = RetinalClassifier(demo_mode=True)
@@ -124,6 +124,10 @@ def create_app() -> FastAPI:
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         response.headers["Cache-Control"] = "no-store"
+
+        # Rate limiting informational headers (enforce at gateway/reverse proxy)
+        response.headers["X-RateLimit-Limit"] = "100"
+        response.headers["X-RateLimit-Window"] = "60"
 
         return response
 
