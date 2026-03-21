@@ -8,13 +8,13 @@ HIPAA-aware: no PII stored; all patient identifiers are de-identified.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 from app.models.classifier import ClassificationResult, DiseaseLabel
 from app.models.severity import SeverityLevel, SeverityResult
 
 
-class RiskLevel(str, Enum):
+class RiskLevel(StrEnum):
     """Overall patient risk stratification."""
 
     LOW = "low"

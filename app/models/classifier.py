@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class DiseaseLabel(str, Enum):
+class DiseaseLabel(StrEnum):
     """Retinal disease classification labels."""
 
     NORMAL = "normal"
@@ -443,10 +443,7 @@ class RetinalClassifier:
 
         # Normalize to [0, 1]
         hmax = heatmap.max()
-        if hmax > 0:
-            heatmap = heatmap / hmax
-        else:
-            heatmap = np.zeros_like(heatmap, dtype=np.float32)
+        heatmap = heatmap / hmax if hmax > 0 else np.zeros_like(heatmap, dtype=np.float32)
 
         # Smooth for visual coherence
         heatmap = cv2.GaussianBlur(heatmap.astype(np.float32), (11, 11), 0)

@@ -7,12 +7,12 @@ severity grading for Glaucoma, AMD, and Cataracts.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 from app.models.classifier import ClassificationResult, DiseaseLabel
 
 
-class SeverityLevel(str, Enum):
+class SeverityLevel(StrEnum):
     """Universal severity levels for retinal disease grading."""
 
     NONE = "none"

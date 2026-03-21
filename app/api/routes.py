@@ -137,8 +137,8 @@ async def _read_image(file: UploadFile) -> tuple[bytes, Image.Image]:
 
     try:
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-    except Exception:
-        raise HTTPException(status_code=422, detail="Cannot decode image. Ensure file is a valid image.")
+    except Exception as exc:
+        raise HTTPException(status_code=422, detail="Cannot decode image. Ensure file is a valid image.") from exc
 
     return image_bytes, image
 

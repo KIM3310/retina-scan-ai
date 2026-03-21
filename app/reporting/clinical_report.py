@@ -19,7 +19,7 @@ import logging
 import uuid
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 
 from app.models.classifier import ClassificationResult, DiseaseLabel
 from app.models.risk_scoring import RiskScore
@@ -28,7 +28,7 @@ from app.models.severity import SeverityLevel, SeverityResult
 logger = logging.getLogger(__name__)
 
 
-class Laterality(str, Enum):
+class Laterality(StrEnum):
     """Eye laterality for clinical documentation."""
 
     RIGHT = "OD"   # Oculus Dexter (right eye)

@@ -147,7 +147,7 @@ def make_amd_fundus(size: tuple[int, int] = IMG_SIZE) -> Image.Image:
 
     # Dense drusen deposits — bright yellow (high R, high G, low B)
     cy, cx = h // 2, w // 2
-    for i in range(60):
+    for _i in range(60):
         dy = rng.integers(-h // 3, h // 3)
         dx = rng.integers(-w // 3, w // 3)
         cy2, cx2 = cy + dy, cx + dx
