@@ -2,3 +2,7 @@
 __pycache__/
 *.egg-info/
 .omc/
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/

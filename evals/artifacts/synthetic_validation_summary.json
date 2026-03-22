@@ -1,0 +1,127 @@
+{
+  "artifact_version": "2026-03-21-medical-ai-ops",
+  "evaluation_tier": "engineering_synthetic",
+  "status": "portfolio_validation_only",
+  "clinical_validation": "not_performed",
+  "model": {
+    "architecture": "ResNet18",
+    "num_classes": 5,
+    "input_size": [
+      224,
+      224
+    ],
+    "mode": "demo_heuristic",
+    "labels": [
+      "normal",
+      "diabetic_retinopathy",
+      "glaucoma",
+      "amd",
+      "cataracts"
+    ],
+    "ensemble_mode": false,
+    "attention_maps_enabled": true,
+    "calibration_temperature": 1.5
+  },
+  "dataset": {
+    "name": "synthetic_retinal_demo_suite",
+    "total_cases": 15,
+    "variants_per_class": 3,
+    "description": "Programmatically generated retinal demo images used for offline engineering validation of the demo_heuristic runtime."
+  },
+  "summary": {
+    "correct_predictions": 15,
+    "total_cases": 15,
+    "accuracy": 1.0,
+    "low_quality_cases": 0,
+    "low_quality_rate": 0.0
+  },
+  "per_class": [
+    {
+      "label": "normal",
+      "display_name": "Normal",
+      "cases": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "avg_confidence": 0.4866
+    },
+    {
+      "label": "diabetic_retinopathy",
+      "display_name": "Diabetic Retinopathy",
+      "cases": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "avg_confidence": 0.8893
+    },
+    {
+      "label": "glaucoma",
+      "display_name": "Glaucoma",
+      "cases": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "avg_confidence": 0.8707
+    },
+    {
+      "label": "amd",
+      "display_name": "Age-related Macular Degeneration",
+      "cases": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "avg_confidence": 0.9317
+    },
+    {
+      "label": "cataracts",
+      "display_name": "Cataracts",
+      "cases": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "avg_confidence": 0.9317
+    }
+  ],
+  "confusion_matrix": {
+    "normal": {
+      "normal": 3,
+      "diabetic_retinopathy": 0,
+      "glaucoma": 0,
+      "amd": 0,
+      "cataracts": 0
+    },
+    "diabetic_retinopathy": {
+      "normal": 0,
+      "diabetic_retinopathy": 3,
+      "glaucoma": 0,
+      "amd": 0,
+      "cataracts": 0
+    },
+    "glaucoma": {
+      "normal": 0,
+      "diabetic_retinopathy": 0,
+      "glaucoma": 3,
+      "amd": 0,
+      "cataracts": 0
+    },
+    "amd": {
+      "normal": 0,
+      "diabetic_retinopathy": 0,
+      "glaucoma": 0,
+      "amd": 3,
+      "cataracts": 0
+    },
+    "cataracts": {
+      "normal": 0,
+      "diabetic_retinopathy": 0,
+      "glaucoma": 0,
+      "amd": 0,
+      "cataracts": 3
+    }
+  },
+  "limitations": [
+    "Uses synthetic images only; results are not representative of clinical performance.",
+    "Current runtime default is demo_heuristic rather than a trained, locked clinical model.",
+    "No sensitivity, specificity, AUROC, external validation, or subgroup analysis claims are made here."
+  ],
+  "recommended_next_steps": [
+    "Evaluate trained weights on a representative held-out retinal dataset.",
+    "Add dataset lineage, threshold studies, and subgroup checks before any real-world deployment discussion.",
+    "Keep engineering validation clearly separated from regulatory or clinical validation language."
+  ]
+}

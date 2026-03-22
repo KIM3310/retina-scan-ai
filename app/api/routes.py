@@ -7,6 +7,9 @@ Endpoints:
 - GET  /diseases         — List supported diseases
 - GET  /model/info       — Model architecture information
 - GET  /metrics          — Population health screening metrics
+- GET  /ops/validation-summary — Synthetic engineering-validation artifact
+- GET  /ops/monitoring   — Runtime monitoring snapshot
+- GET  /ops/release-readiness — Portfolio-safe readiness gates
 - POST /chat             — Chat with clinical AI assistant about a scan result
 - POST /agent/screen     — Run screening agent on batch of images
 - GET  /agent/status     — Get screening agent status
@@ -29,6 +32,7 @@ from pydantic import BaseModel
 from app.models.classifier import DiseaseLabel, RetinalClassifier
 from app.models.risk_scoring import ClinicalMetadata, RiskScorer
 from app.models.severity import SeverityGrader
+from app.monitoring.runtime import RuntimeMonitor
 from app.preprocessing.pipeline import RetinalPreprocessor
 from app.reporting.clinical_report import ClinicalReportGenerator, Laterality
 
@@ -51,6 +55,7 @@ _screening_metrics: dict = {
     "urgent_referrals": 0,
     "start_time": time.time(),
 }
+_runtime_monitor = RuntimeMonitor()
 
 
 class AnalysisResponse(BaseModel):
@@ -124,7 +129,7 @@ def _validate_image_upload(file: UploadFile) -> None:
         raise HTTPException(
             status_code=415,
             detail=f"Unsupported image format: {file.content_type}. "
-                   f"Supported: {', '.join(ALLOWED_CONTENT_TYPES)}",
+            f"Supported: {', '.join(ALLOWED_CONTENT_TYPES)}",
         )
 
 
@@ -135,13 +140,15 @@ async def _read_image(file: UploadFile) -> tuple[bytes, Image.Image]:
     if len(image_bytes) > MAX_IMAGE_BYTES:
         raise HTTPException(
             status_code=413,
-            detail=f"Image too large. Maximum size: {MAX_IMAGE_BYTES // (1024*1024)} MB",
+            detail=f"Image too large. Maximum size: {MAX_IMAGE_BYTES // (1024 * 1024)} MB",
         )
 
     try:
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     except Exception as exc:
-        raise HTTPException(status_code=422, detail="Cannot decode image. Ensure file is a valid image.") from exc
+        raise HTTPException(
+            status_code=422, detail="Cannot decode image. Ensure file is a valid image."
+        ) from exc
 
     return image_bytes, image
 
@@ -179,6 +186,8 @@ def _run_full_pipeline(
         Dict with classification, severity, risk, report, preprocessing keys.
     """
     import numpy as np
+
+    started_at = time.monotonic()
 
     preprocessor: RetinalPreprocessor = components["preprocessor"]
     classifier: RetinalClassifier = components["classifier"]
@@ -223,6 +232,13 @@ def _run_full_pipeline(
     if classification.requires_urgent_review:
         _screening_metrics["urgent_referrals"] += 1
 
+    elapsed_ms = (time.monotonic() - started_at) * 1000
+    _runtime_monitor.record_inference(
+        preprocessing=prep_result.to_dict(),
+        model_info=classifier.get_model_architecture_summary(),
+        elapsed_ms=elapsed_ms,
+    )
+
     return {
         "classification": classification.to_dict(),
         "severity": severity.to_dict(),
@@ -243,7 +259,9 @@ async def analyze_fundus(
     diabetes_duration: Annotated[int | None, Form(description="Diabetes duration in years")] = None,
     hba1c: Annotated[float | None, Form(description="HbA1c percentage")] = None,
     has_hypertension: Annotated[bool, Form()] = False,
-    laterality: Annotated[str, Form(description="Eye laterality: OD, OS, OU, or unspecified")] = "unspecified",
+    laterality: Annotated[
+        str, Form(description="Eye laterality: OD, OS, OU, or unspecified")
+    ] = "unspecified",
     format: Annotated[str, Form(description="Response format: json (default) or fhir")] = "json",
 ) -> AnalysisResponse:
     """Full retinal analysis pipeline.
@@ -309,7 +327,9 @@ async def analyze_fundus(
 async def analyze_fundus_batch(
     request: Request,
     files: Annotated[list[UploadFile], File(description="List of retinal fundus images")],
-    laterality: Annotated[str, Form(description="Eye laterality applied to all images")] = "unspecified",
+    laterality: Annotated[
+        str, Form(description="Eye laterality applied to all images")
+    ] = "unspecified",
 ) -> BatchAnalysisResponse:
     """Batch screening endpoint for population health workflows.
 
@@ -348,31 +368,37 @@ async def analyze_fundus_batch(
                 laterality=lat,
             )
 
-            results.append(BatchAnalysisItem(
-                study_id=study_id,
-                status="success",
-                classification=pipeline_result["classification"],
-                severity=pipeline_result["severity"],
-                risk=pipeline_result["risk"],
-                report=pipeline_result["report"],
-                preprocessing=pipeline_result["preprocessing"],
-            ))
+            results.append(
+                BatchAnalysisItem(
+                    study_id=study_id,
+                    status="success",
+                    classification=pipeline_result["classification"],
+                    severity=pipeline_result["severity"],
+                    risk=pipeline_result["risk"],
+                    report=pipeline_result["report"],
+                    preprocessing=pipeline_result["preprocessing"],
+                )
+            )
             succeeded += 1
 
         except HTTPException as exc:
-            results.append(BatchAnalysisItem(
-                study_id=study_id,
-                status="error",
-                error=exc.detail,
-            ))
+            results.append(
+                BatchAnalysisItem(
+                    study_id=study_id,
+                    status="error",
+                    error=exc.detail,
+                )
+            )
             failed += 1
         except Exception as exc:
             logger.error("Batch item processing failed: %s", exc)
-            results.append(BatchAnalysisItem(
-                study_id=study_id,
-                status="error",
-                error="Internal processing error.",
-            ))
+            results.append(
+                BatchAnalysisItem(
+                    study_id=study_id,
+                    status="error",
+                    error="Internal processing error.",
+                )
+            )
             failed += 1
 
     logger.info(
@@ -492,8 +518,37 @@ async def screening_metrics() -> dict:
         ),
         "disease_distribution": distribution,
         "uptime_seconds": round(uptime_seconds, 1),
-        "screens_per_hour": round((total / uptime_seconds * 3600) if uptime_seconds > 0 else 0.0, 2),
+        "screens_per_hour": round(
+            (total / uptime_seconds * 3600) if uptime_seconds > 0 else 0.0, 2
+        ),
     }
+
+
+@router.get("/ops/validation-summary", tags=["ops"])
+async def ops_validation_summary() -> dict:
+    """Return the bundled engineering-validation summary.
+
+    This repository ships synthetic/offline evaluation artifacts to support
+    engineering review. The response must not be interpreted as clinical
+    validation.
+    """
+    return _runtime_monitor.get_validation_summary()
+
+
+@router.get("/ops/monitoring", tags=["ops"])
+async def ops_monitoring() -> dict:
+    """Return compact runtime monitoring information for portfolio review."""
+    return _runtime_monitor.get_monitoring_snapshot()
+
+
+@router.get("/ops/release-readiness", tags=["ops"])
+async def ops_release_readiness() -> dict:
+    """Return portfolio-safe release readiness gates.
+
+    The status here is intentionally framed as portfolio review readiness,
+    not regulatory or clinical readiness.
+    """
+    return _runtime_monitor.get_release_readiness()
 
 
 def _parse_laterality(value: str) -> Laterality:
@@ -589,6 +644,7 @@ def _get_screening_agent() -> object:
     global _screening_agent  # noqa: PLW0603
     if _screening_agent is None:
         from app.agent.orchestrator import ScreeningAgent  # noqa: PLC0415
+
         try:
             _screening_agent = ScreeningAgent()
         except OSError as exc:
@@ -600,7 +656,9 @@ def _get_screening_agent() -> object:
 async def run_screening_agent(
     request: Request,
     files: Annotated[list[UploadFile], File(description="Batch of retinal fundus images")],
-    laterality: Annotated[str, Form(description="Eye laterality applied to all images")] = "unspecified",
+    laterality: Annotated[
+        str, Form(description="Eye laterality applied to all images")
+    ] = "unspecified",
 ) -> dict:
     """Run the AI screening agent on a batch of retinal images.
 
@@ -637,35 +695,41 @@ async def run_screening_agent(
         try:
             _validate_image_upload(upload_file)
             _, image = await _read_image(upload_file)
-            records.append(PatientRecord(
-                image=image,
-                patient_ref=str(uuid.uuid4()),
-                laterality=laterality,
-            ))
+            records.append(
+                PatientRecord(
+                    image=image,
+                    patient_ref=str(uuid.uuid4()),
+                    laterality=laterality,
+                )
+            )
         except HTTPException:
             # Skip invalid images — they'll be counted as failed
-            records.append(PatientRecord(
-                image=Image.new("RGB", (256, 256), color=(128, 128, 128)),
-                patient_ref="invalid_image",
-            ))
+            records.append(
+                PatientRecord(
+                    image=Image.new("RGB", (256, 256), color=(128, 128, 128)),
+                    patient_ref="invalid_image",
+                )
+            )
 
     session = agent.run_screening(records)
 
     # Serialize results
     results_out = []
     for r in session.results:
-        results_out.append({
-            "patient_ref": r.patient_ref,
-            "study_id": r.study_id,
-            "status": r.status,
-            "classification": r.classification,
-            "severity": r.severity,
-            "risk": r.risk,
-            "flagged_urgent": r.flagged_urgent,
-            "needs_rescan": r.needs_rescan,
-            "action_items": r.action_items,
-            "error": r.error,
-        })
+        results_out.append(
+            {
+                "patient_ref": r.patient_ref,
+                "study_id": r.study_id,
+                "status": r.status,
+                "classification": r.classification,
+                "severity": r.severity,
+                "risk": r.risk,
+                "flagged_urgent": r.flagged_urgent,
+                "needs_rescan": r.needs_rescan,
+                "action_items": r.action_items,
+                "error": r.error,
+            }
+        )
 
     return {
         "session_id": session.session_id,

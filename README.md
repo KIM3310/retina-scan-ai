@@ -2,15 +2,22 @@
 
 **Automated retinal disease detection system for clinical screening**
 
-A production-quality computer vision system for detecting and grading retinal diseases from fundus photographs, designed for integration into ophthalmology clinical workflows.
+A production-style computer vision system for detecting and grading retinal diseases from fundus photographs, designed to demonstrate how ophthalmology AI workflows can be packaged into reviewable backend, reporting, and operational surfaces.
 
 ---
 
 ## Overview
 
-Retina-Scan-AI is a CNN-based retinal screening platform built with healthcare AI best practices. It classifies fundus images across five categories, grades disease severity using ETDRS-aligned criteria, computes patient risk scores, and generates structured clinical reports — all through a FastAPI backend and Streamlit clinician dashboard.
+Retina-Scan-AI is a CNN-based retinal screening platform built with healthcare AI engineering practices. It classifies fundus images across five categories, grades disease severity using ETDRS-aligned criteria, computes patient risk scores, and generates structured clinical reports — all through a FastAPI backend and Streamlit clinician dashboard.
 
-This project was developed to demonstrate applied AI engineering in the medical imaging domain, with specific relevance to **Johnson & Johnson Vision**'s mission of advancing eye care technology through innovation in diagnostics and clinical decision support.
+This repository now also includes lightweight **medical AI operations / validation / MLOps** surfaces:
+
+- synthetic engineering-validation artifacts
+- runtime monitoring for latency and image-quality drift signals
+- portfolio-safe release readiness gates
+- model card, risk register, and validation plan docs
+
+> **Important:** the evaluation artifacts in this repo are for **engineering review only**. They are **not clinical validation claims** and should not be interpreted as regulatory or diagnostic evidence.
 
 ---
 
@@ -32,6 +39,8 @@ This project was developed to demonstrate applied AI engineering in the medical 
 retina-scan-ai/
 ├── app/
 │   ├── main.py                    # FastAPI application with HIPAA audit logging
+│   ├── monitoring/
+│   │   └── runtime.py             # Runtime monitoring + release-readiness helpers
 │   ├── models/
 │   │   ├── classifier.py          # ResNet18-based disease classifier (demo + production modes)
 │   │   ├── severity.py            # ETDRS-aligned severity grading
@@ -44,7 +53,17 @@ retina-scan-ai/
 │       └── routes.py              # REST API endpoints
 ├── dashboard/
 │   └── app.py                     # Streamlit clinician review dashboard
-└── tests/                         # 100+ pytest tests
+├── docs/
+│   ├── model-card.md              # Intended use, limitations, safeguards
+│   ├── validation-plan.md         # Engineering validation ladder + gaps
+│   ├── risk-register.md           # Medical-AI-specific risk framing
+│   └── deployment.md              # Production-style deployment notes
+├── evals/
+│   ├── generate_validation_artifacts.py  # Synthetic engineering-validation builder
+│   └── artifacts/                 # Generated JSON/Markdown validation summaries
+├── .github/workflows/
+│   └── ci.yml                     # Lint + compile + tests + artifact generation
+└── tests/                         # pytest suite including ops/validation surfaces
 ```
 
 ### Model Architecture
@@ -74,6 +93,9 @@ retina-scan-ai/
 | GET | `/api/v1/model/info` | Model architecture metadata |
 | POST | `/api/v1/classify` | Classification only |
 | POST | `/api/v1/analyze` | Full pipeline (classify + grade + risk + report) |
+| GET | `/api/v1/ops/validation-summary` | Synthetic engineering-validation artifact |
+| GET | `/api/v1/ops/monitoring` | Runtime monitoring snapshot |
+| GET | `/api/v1/ops/release-readiness` | Portfolio-safe readiness gates |
 
 ### Example: Full Analysis
 
@@ -121,6 +143,15 @@ make run-dashboard
 
 # Lint check
 make lint
+
+# Generate engineering-validation artifacts
+make eval
+
+# Runtime smoke
+make smoke
+
+# Full verification
+make verify
 ```
 
 ---
@@ -144,6 +175,38 @@ Test suite includes 100+ tests covering:
 - FastAPI endpoints (all routes, error handling, security headers)
 - Production quality (HIPAA compliance, data integrity, end-to-end pipeline)
 
+## Engineering validation & MLOps surfaces
+
+This repository includes a lightweight operations layer intended for **medical AI engineering review**:
+
+- `GET /api/v1/ops/validation-summary`
+  - exposes the bundled synthetic/offline evaluation artifact
+- `GET /api/v1/ops/monitoring`
+  - summarizes runtime latency, image quality signals, and documentation presence
+- `GET /api/v1/ops/release-readiness`
+  - reports **portfolio review readiness**, not clinical or regulatory readiness
+- `docs/model-card.md`
+  - intended use, out-of-scope boundaries, and limitations
+- `docs/validation-plan.md`
+  - what has and has not been validated
+- `evals/generate_validation_artifacts.py`
+  - regenerates JSON / Markdown engineering-validation artifacts
+
+### Validation framing
+
+- **Current tier:** engineering / synthetic validation
+- **Not claimed:** sensitivity, specificity, AUROC, external validation, prospective study results
+- **Current runtime default:** `demo_heuristic`
+
+This framing is deliberate so the repository stays useful for healthcare AI engineering discussion without overstating medical evidence.
+
+### Reviewer fast path
+
+1. `GET /health` — verify service boot and proof routes
+2. `GET /api/v1/ops/validation-summary` — inspect the bundled engineering artifact
+3. `GET /api/v1/ops/monitoring` — confirm runtime / image-quality snapshot
+4. `GET /api/v1/ops/release-readiness` — read the portfolio-safe release gate
+
 ---
 
 ## Severity Grading: Diabetic Retinopathy
@@ -159,15 +222,15 @@ Aligned with the **ETDRS (Early Treatment Diabetic Retinopathy Study)** severity
 
 ---
 
-## J&J Vision Alignment
+## Healthcare AI engineering alignment
 
-This project is directly relevant to Johnson & Johnson Vision's mission in several ways:
+This project is relevant to healthcare / MedTech AI engineering roles because it demonstrates:
 
-- **VERITAS platform alignment**: Demonstrates the kind of AI-assisted diagnostic tools J&J Vision deploys in clinical practice
-- **Diabetic retinopathy screening**: DR is a leading cause of blindness and a core focus area for J&J Vision's retinal imaging programs
-- **Clinical workflow integration**: FastAPI backend + Streamlit dashboard mirrors the architecture needed for real-world EHR integration
-- **HIPAA-aware engineering**: Healthcare AI requires privacy-by-design; this codebase demonstrates that discipline from day one
-- **Explainability**: Severity grading with ETDRS levels and structured clinical narratives supports clinician trust and regulatory review
+- **Ophthalmology workflow modeling**: fundus-image classification, severity grading, risk scoring, and structured reporting
+- **Operational framing**: runtime monitoring, synthetic validation artifacts, and release-readiness gates
+- **Privacy-aware backend design**: opaque identifiers, audit-style logs, and security headers
+- **Clinical communication surfaces**: structured reports, explainability metadata, and explicit disclaimers
+- **Interview-ready engineering maturity**: CI, tests, documentation, and a clear statement of what is **not** clinically validated
 
 ---
 
@@ -182,6 +245,7 @@ This project is directly relevant to Johnson & Johnson Vision's mission in sever
 - **structlog** — Structured JSON audit logging
 - **pytest** — 100+ tests with fixtures and parametrize
 - **ruff** — Linting and formatting
+- **GitHub Actions** — CI verification
 
 ---
 

@@ -54,6 +54,10 @@ class TestSystemEndpoints:
         resp = client.get("/")
         assert resp.json()["name"] == "Retina-Scan-AI"
 
+    def test_root_exposes_release_readiness_link(self, client):
+        resp = client.get("/")
+        assert resp.json()["ops_release_readiness"] == "/api/v1/ops/release-readiness"
+
     def test_health_returns_200(self, client):
         resp = client.get("/health")
         assert resp.status_code == 200
@@ -67,6 +71,13 @@ class TestSystemEndpoints:
         components = resp.json()["components"]
         for v in components.values():
             assert v == "ready"
+
+    def test_health_exposes_ops_proof_routes(self, client):
+        resp = client.get("/health")
+        proof_routes = resp.json()["proof_routes"]
+        assert proof_routes["validation_summary"] == "/api/v1/ops/validation-summary"
+        assert proof_routes["monitoring"] == "/api/v1/ops/monitoring"
+        assert proof_routes["release_readiness"] == "/api/v1/ops/release-readiness"
 
     def test_security_headers_present(self, client):
         resp = client.get("/health")

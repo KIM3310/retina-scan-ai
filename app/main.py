@@ -140,7 +140,14 @@ def create_app() -> FastAPI:
             "components": {
                 "classifier": "ready" if "classifier" in _app_state else "not_initialized",
                 "preprocessor": "ready" if "preprocessor" in _app_state else "not_initialized",
-                "report_generator": "ready" if "report_generator" in _app_state else "not_initialized",
+                "report_generator": "ready"
+                if "report_generator" in _app_state
+                else "not_initialized",
+            },
+            "proof_routes": {
+                "validation_summary": "/api/v1/ops/validation-summary",
+                "monitoring": "/api/v1/ops/monitoring",
+                "release_readiness": "/api/v1/ops/release-readiness",
             },
         }
 
@@ -153,6 +160,9 @@ def create_app() -> FastAPI:
             "description": "Retinal disease detection AI for clinical screening",
             "docs": "/docs",
             "health": "/health",
+            "ops_validation": "/api/v1/ops/validation-summary",
+            "ops_monitoring": "/api/v1/ops/monitoring",
+            "ops_release_readiness": "/api/v1/ops/release-readiness",
         }
 
     @app.exception_handler(Exception)
