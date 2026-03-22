@@ -149,6 +149,13 @@ def create_app() -> FastAPI:
                 "monitoring": "/api/v1/ops/monitoring",
                 "release_readiness": "/api/v1/ops/release-readiness",
             },
+            "reviewer_fast_path": [
+                "/health",
+                "/api/v1/ops/validation-summary",
+                "/api/v1/ops/monitoring",
+                "/api/v1/ops/release-readiness",
+                "/docs",
+            ],
         }
 
     @app.get("/", tags=["system"])
@@ -163,6 +170,12 @@ def create_app() -> FastAPI:
             "ops_validation": "/api/v1/ops/validation-summary",
             "ops_monitoring": "/api/v1/ops/monitoring",
             "ops_release_readiness": "/api/v1/ops/release-readiness",
+            "reviewer_fast_path": [
+                "/health",
+                "/api/v1/ops/validation-summary",
+                "/api/v1/ops/monitoring",
+                "/api/v1/ops/release-readiness",
+            ],
         }
 
     @app.exception_handler(Exception)

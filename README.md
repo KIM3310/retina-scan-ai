@@ -207,6 +207,8 @@ This framing is deliberate so the repository stays useful for healthcare AI engi
 3. `GET /api/v1/ops/monitoring` — confirm runtime / image-quality snapshot
 4. `GET /api/v1/ops/release-readiness` — read the portfolio-safe release gate
 
+The same path is now exposed directly from `/` and `/health`, so a reviewer can discover the strongest proof route without reading the repo first.
+
 ---
 
 ## Severity Grading: Diabetic Retinopathy

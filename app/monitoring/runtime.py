@@ -130,6 +130,12 @@ class RuntimeMonitor:
         return {
             "intended_use": "engineering review and portfolio demonstration",
             "clinical_validation": "not_claimed",
+            "reviewer_fast_path": [
+                "/health",
+                "/api/v1/ops/validation-summary",
+                "/api/v1/ops/monitoring",
+                "/api/v1/ops/release-readiness",
+            ],
             "runtime": {
                 "uptime_seconds": _round(uptime_seconds),
                 "total_inferences": self.total_inferences,
@@ -184,6 +190,12 @@ class RuntimeMonitor:
             "status": "portfolio_review_ready" if not blockers else "needs_attention",
             "intended_use": "portfolio review and engineering discussion",
             "clinical_validation": "not_claimed",
+            "reviewer_fast_path": [
+                "/health",
+                "/api/v1/ops/validation-summary",
+                "/api/v1/ops/monitoring",
+                "/api/v1/ops/release-readiness",
+            ],
             "checks": checks,
             "blockers": blockers,
             "next_actions": next_actions,

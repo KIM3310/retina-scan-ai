@@ -44,6 +44,7 @@ def test_ops_monitoring_endpoint_contains_runtime_and_artifacts() -> None:
     assert payload["clinical_validation"] == "not_claimed"
     assert "runtime" in payload
     assert "artifact_status" in payload
+    assert payload["reviewer_fast_path"][0] == "/health"
     assert payload["artifact_status"]["model_card"]["present"] is True
 
 
@@ -55,4 +56,5 @@ def test_ops_release_readiness_is_portfolio_framed() -> None:
     payload = response.json()
     assert payload["clinical_validation"] == "not_claimed"
     assert payload["status"] in {"portfolio_review_ready", "needs_attention"}
+    assert payload["reviewer_fast_path"][1] == "/api/v1/ops/validation-summary"
     assert "engineering_validation_artifact" in payload["checks"]

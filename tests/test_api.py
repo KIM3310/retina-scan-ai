@@ -58,6 +58,15 @@ class TestSystemEndpoints:
         resp = client.get("/")
         assert resp.json()["ops_release_readiness"] == "/api/v1/ops/release-readiness"
 
+    def test_root_exposes_reviewer_fast_path(self, client):
+        resp = client.get("/")
+        assert resp.json()["reviewer_fast_path"] == [
+            "/health",
+            "/api/v1/ops/validation-summary",
+            "/api/v1/ops/monitoring",
+            "/api/v1/ops/release-readiness",
+        ]
+
     def test_health_returns_200(self, client):
         resp = client.get("/health")
         assert resp.status_code == 200
@@ -78,6 +87,16 @@ class TestSystemEndpoints:
         assert proof_routes["validation_summary"] == "/api/v1/ops/validation-summary"
         assert proof_routes["monitoring"] == "/api/v1/ops/monitoring"
         assert proof_routes["release_readiness"] == "/api/v1/ops/release-readiness"
+
+    def test_health_exposes_reviewer_fast_path(self, client):
+        resp = client.get("/health")
+        assert resp.json()["reviewer_fast_path"] == [
+            "/health",
+            "/api/v1/ops/validation-summary",
+            "/api/v1/ops/monitoring",
+            "/api/v1/ops/release-readiness",
+            "/docs",
+        ]
 
     def test_security_headers_present(self, client):
         resp = client.get("/health")
