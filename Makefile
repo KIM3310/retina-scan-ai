@@ -47,6 +47,7 @@ smoke:
 		sleep 1; \
 	done; \
 	curl -fsS "http://127.0.0.1:$$PORT/health" >/dev/null; \
+	curl -fsS "http://127.0.0.1:$$PORT/api/v1/ops/resource-pack" >/dev/null; \
 	curl -fsS "http://127.0.0.1:$$PORT/api/v1/ops/monitoring" >/dev/null; \
 	curl -fsS "http://127.0.0.1:$$PORT/api/v1/ops/release-readiness" >/dev/null; \
 	echo "smoke ok: http://127.0.0.1:$$PORT"

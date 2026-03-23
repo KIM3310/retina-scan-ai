@@ -8,6 +8,7 @@ Endpoints:
 - GET  /model/info       — Model architecture information
 - GET  /metrics          — Population health screening metrics
 - GET  /ops/validation-summary — Synthetic engineering-validation artifact
+- GET  /ops/resource-pack — Built-in synthetic clinical review pack
 - GET  /ops/monitoring   — Runtime monitoring snapshot
 - GET  /ops/release-readiness — Portfolio-safe readiness gates
 - POST /chat             — Chat with clinical AI assistant about a scan result
@@ -533,6 +534,12 @@ async def ops_validation_summary() -> dict:
     validation.
     """
     return _runtime_monitor.get_validation_summary()
+
+
+@router.get("/ops/resource-pack", tags=["ops"])
+async def ops_resource_pack() -> dict:
+    """Return the built-in synthetic clinical review pack."""
+    return _runtime_monitor.get_resource_pack()
 
 
 @router.get("/ops/monitoring", tags=["ops"])

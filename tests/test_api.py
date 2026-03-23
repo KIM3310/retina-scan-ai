@@ -58,10 +58,15 @@ class TestSystemEndpoints:
         resp = client.get("/")
         assert resp.json()["ops_release_readiness"] == "/api/v1/ops/release-readiness"
 
+    def test_root_exposes_resource_pack_link(self, client):
+        resp = client.get("/")
+        assert resp.json()["ops_resource_pack"] == "/api/v1/ops/resource-pack"
+
     def test_root_exposes_reviewer_fast_path(self, client):
         resp = client.get("/")
         assert resp.json()["reviewer_fast_path"] == [
             "/health",
+            "/api/v1/ops/resource-pack",
             "/api/v1/ops/validation-summary",
             "/api/v1/ops/monitoring",
             "/api/v1/ops/release-readiness",
@@ -84,6 +89,7 @@ class TestSystemEndpoints:
     def test_health_exposes_ops_proof_routes(self, client):
         resp = client.get("/health")
         proof_routes = resp.json()["proof_routes"]
+        assert proof_routes["resource_pack"] == "/api/v1/ops/resource-pack"
         assert proof_routes["validation_summary"] == "/api/v1/ops/validation-summary"
         assert proof_routes["monitoring"] == "/api/v1/ops/monitoring"
         assert proof_routes["release_readiness"] == "/api/v1/ops/release-readiness"
@@ -92,6 +98,7 @@ class TestSystemEndpoints:
         resp = client.get("/health")
         assert resp.json()["reviewer_fast_path"] == [
             "/health",
+            "/api/v1/ops/resource-pack",
             "/api/v1/ops/validation-summary",
             "/api/v1/ops/monitoring",
             "/api/v1/ops/release-readiness",

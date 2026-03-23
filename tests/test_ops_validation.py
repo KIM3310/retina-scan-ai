@@ -35,6 +35,18 @@ def test_ops_validation_summary_endpoint_returns_200() -> None:
     assert payload["clinical_validation"] == "not_performed"
 
 
+def test_ops_resource_pack_endpoint_returns_built_in_review_data() -> None:
+    with TestClient(app) as client:
+        response = client.get("/api/v1/ops/resource-pack")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["resource_pack_id"] == "retina-scan-ai-resource-pack-v1"
+    assert payload["clinical_validation"] == "not_claimed"
+    assert payload["summary"]["clinical_case_count"] >= 5
+    assert payload["reviewer_fast_path"][1] == "/api/v1/ops/resource-pack"
+
+
 def test_ops_monitoring_endpoint_contains_runtime_and_artifacts() -> None:
     with TestClient(app) as client:
         response = client.get("/api/v1/ops/monitoring")
@@ -44,6 +56,7 @@ def test_ops_monitoring_endpoint_contains_runtime_and_artifacts() -> None:
     assert payload["clinical_validation"] == "not_claimed"
     assert "runtime" in payload
     assert "artifact_status" in payload
+    assert payload["resource_pack"]["clinical_case_count"] >= 5
     assert payload["reviewer_fast_path"][0] == "/health"
     assert payload["artifact_status"]["model_card"]["present"] is True
 
@@ -56,5 +69,6 @@ def test_ops_release_readiness_is_portfolio_framed() -> None:
     payload = response.json()
     assert payload["clinical_validation"] == "not_claimed"
     assert payload["status"] in {"portfolio_review_ready", "needs_attention"}
-    assert payload["reviewer_fast_path"][1] == "/api/v1/ops/validation-summary"
+    assert payload["reviewer_fast_path"][1] == "/api/v1/ops/resource-pack"
     assert "engineering_validation_artifact" in payload["checks"]
+    assert "resource_pack" in payload["checks"]

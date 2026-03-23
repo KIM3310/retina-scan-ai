@@ -11,6 +11,19 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from app.monitoring.resource_pack import (
+    data_files as resource_pack_files,
+)
+from app.monitoring.resource_pack import (
+    load_clinical_cases,
+    load_quality_scenarios,
+    load_release_checks,
+    resource_pack_summary,
+)
+from app.monitoring.resource_pack import (
+    load_validation_cases as load_resource_validation_cases,
+)
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DOCS_DIR = REPO_ROOT / "docs"
 EVALS_DIR = REPO_ROOT / "evals"
@@ -124,6 +137,30 @@ class RuntimeMonitor:
             "artifact_path": str(VALIDATION_SUMMARY_PATH.relative_to(REPO_ROOT)),
         }
 
+    def get_resource_pack(self) -> dict:
+        """Return the built-in synthetic review pack."""
+        return {
+            "resource_pack_id": "retina-scan-ai-resource-pack-v1",
+            "intended_use": "portfolio review and engineering discussion",
+            "clinical_validation": "not_claimed",
+            "reviewer_fast_path": [
+                "/health",
+                "/api/v1/ops/resource-pack",
+                "/api/v1/ops/validation-summary",
+                "/api/v1/ops/monitoring",
+                "/api/v1/ops/release-readiness",
+            ],
+            "summary": resource_pack_summary(),
+            "clinical_cases": list(load_clinical_cases()),
+            "quality_scenarios": list(load_quality_scenarios()),
+            "validation_cases": list(load_resource_validation_cases()),
+            "release_checks": list(load_release_checks()),
+            "files": {
+                key: str(path.relative_to(REPO_ROOT))
+                for key, path in resource_pack_files().items()
+            },
+        }
+
     def get_monitoring_snapshot(self) -> dict:
         """Return a compact operational snapshot for portfolio review."""
         uptime_seconds = time.time() - self.start_time
@@ -132,6 +169,7 @@ class RuntimeMonitor:
             "clinical_validation": "not_claimed",
             "reviewer_fast_path": [
                 "/health",
+                "/api/v1/ops/resource-pack",
                 "/api/v1/ops/validation-summary",
                 "/api/v1/ops/monitoring",
                 "/api/v1/ops/release-readiness",
@@ -160,6 +198,7 @@ class RuntimeMonitor:
                 "deployment_doc": _path_status(DEPLOYMENT_PATH),
                 "ci_workflow": _path_status(CI_WORKFLOW_PATH),
             },
+            "resource_pack": resource_pack_summary(),
         }
 
     def get_release_readiness(self) -> dict:
@@ -174,6 +213,7 @@ class RuntimeMonitor:
             "validation_plan": VALIDATION_PLAN_PATH.exists(),
             "deployment_doc": DEPLOYMENT_PATH.exists(),
             "ci_workflow": CI_WORKFLOW_PATH.exists(),
+            "resource_pack": all(path.exists() for path in resource_pack_files().values()),
         }
         blockers = [name for name, passed in checks.items() if not passed]
 
@@ -192,6 +232,7 @@ class RuntimeMonitor:
             "clinical_validation": "not_claimed",
             "reviewer_fast_path": [
                 "/health",
+                "/api/v1/ops/resource-pack",
                 "/api/v1/ops/validation-summary",
                 "/api/v1/ops/monitoring",
                 "/api/v1/ops/release-readiness",

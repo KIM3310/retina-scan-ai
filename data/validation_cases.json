@@ -1,0 +1,32 @@
+[
+  {
+    "case_id": "val-classify-normal",
+    "stage": "classification",
+    "goal": "Normal cases stay below urgent referral thresholds.",
+    "expected_artifact": "Synthetic validation summary tracks correct prediction and no urgent-review flag."
+  },
+  {
+    "case_id": "val-dr-severity",
+    "stage": "severity",
+    "goal": "Diabetic retinopathy grading explains ETDRS-aligned severity bands.",
+    "expected_artifact": "Clinical report preserves severity label and escalation recommendation."
+  },
+  {
+    "case_id": "val-quality-guard",
+    "stage": "preprocessing",
+    "goal": "Low-quality fundus inputs trigger image-quality warnings.",
+    "expected_artifact": "Monitoring snapshot increments low-quality counters and quality-flag counts."
+  },
+  {
+    "case_id": "val-risk-score",
+    "stage": "risk",
+    "goal": "Metadata can raise referral urgency without changing the underlying disease label.",
+    "expected_artifact": "Risk score and recommendations shift while keeping classifier output stable."
+  },
+  {
+    "case_id": "val-report-export",
+    "stage": "reporting",
+    "goal": "FHIR and JSON outputs keep the same study reference and structured findings.",
+    "expected_artifact": "Report export paths remain aligned with the main analysis pipeline."
+  }
+]

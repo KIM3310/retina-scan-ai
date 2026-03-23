@@ -145,12 +145,14 @@ def create_app() -> FastAPI:
                 else "not_initialized",
             },
             "proof_routes": {
+                "resource_pack": "/api/v1/ops/resource-pack",
                 "validation_summary": "/api/v1/ops/validation-summary",
                 "monitoring": "/api/v1/ops/monitoring",
                 "release_readiness": "/api/v1/ops/release-readiness",
             },
             "reviewer_fast_path": [
                 "/health",
+                "/api/v1/ops/resource-pack",
                 "/api/v1/ops/validation-summary",
                 "/api/v1/ops/monitoring",
                 "/api/v1/ops/release-readiness",
@@ -167,11 +169,13 @@ def create_app() -> FastAPI:
             "description": "Retinal disease detection AI for clinical screening",
             "docs": "/docs",
             "health": "/health",
+            "ops_resource_pack": "/api/v1/ops/resource-pack",
             "ops_validation": "/api/v1/ops/validation-summary",
             "ops_monitoring": "/api/v1/ops/monitoring",
             "ops_release_readiness": "/api/v1/ops/release-readiness",
             "reviewer_fast_path": [
                 "/health",
+                "/api/v1/ops/resource-pack",
                 "/api/v1/ops/validation-summary",
                 "/api/v1/ops/monitoring",
                 "/api/v1/ops/release-readiness",

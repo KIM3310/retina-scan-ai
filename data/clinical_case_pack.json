@@ -1,0 +1,47 @@
+[
+  {
+    "case_id": "RET-DR-001",
+    "study_id": "SYN-DR-001",
+    "suspected_condition": "diabetic_retinopathy",
+    "laterality": "OD",
+    "triage_signal": "urgent_referral",
+    "image_quality_band": "acceptable",
+    "review_focus": "Confirm hemorrhage-heavy pattern and explain why urgent review was triggered."
+  },
+  {
+    "case_id": "RET-GL-014",
+    "study_id": "SYN-GL-014",
+    "suspected_condition": "glaucoma",
+    "laterality": "OS",
+    "triage_signal": "specialist_follow_up",
+    "image_quality_band": "borderline",
+    "review_focus": "Check cup-disc findings and whether low contrast changes the referral wording."
+  },
+  {
+    "case_id": "RET-AMD-007",
+    "study_id": "SYN-AMD-007",
+    "suspected_condition": "amd",
+    "laterality": "OU",
+    "triage_signal": "routine_follow_up",
+    "image_quality_band": "good",
+    "review_focus": "Review drusen pattern, severity wording, and patient-facing monitoring advice."
+  },
+  {
+    "case_id": "RET-CAT-003",
+    "study_id": "SYN-CAT-003",
+    "suspected_condition": "cataracts",
+    "laterality": "OD",
+    "triage_signal": "non_urgent_follow_up",
+    "image_quality_band": "degraded",
+    "review_focus": "Separate image-quality degradation from cataract-driven opacity scoring."
+  },
+  {
+    "case_id": "RET-NORM-020",
+    "study_id": "SYN-NORM-020",
+    "suspected_condition": "normal",
+    "laterality": "OS",
+    "triage_signal": "watchful_monitoring",
+    "image_quality_band": "good",
+    "review_focus": "Confirm normal finding language remains conservative and avoids overclaiming."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "scenario_id": "underexposed-field",
+    "signal": "low_brightness",
+    "expected_quality_flags": ["underexposed"],
+    "operational_risk": "False negatives if lesion detail disappears in dim images."
+  },
+  {
+    "scenario_id": "blurred-optic-disc",
+    "signal": "reduced_sharpness",
+    "expected_quality_flags": ["blurred"],
+    "operational_risk": "Glaucoma severity explanations can become less reliable when cup boundaries soften."
+  },
+  {
+    "scenario_id": "cropped-periphery",
+    "signal": "partial_field_of_view",
+    "expected_quality_flags": ["limited_fov"],
+    "operational_risk": "Peripheral findings can be missed, so the report should preserve a limited-view note."
+  },
+  {
+    "scenario_id": "specular-glare",
+    "signal": "highlight_bloom",
+    "expected_quality_flags": ["glare"],
+    "operational_risk": "Bright artifacts can distort confidence and produce misleading reassurance."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "check_id": "artifact-available",
+    "gate": "validation_artifact",
+    "why_it_matters": "Reviewers need a bundled engineering artifact before trusting runtime claims.",
+    "evidence_route": "/api/v1/ops/validation-summary"
+  },
+  {
+    "check_id": "quality-signals",
+    "gate": "monitoring_snapshot",
+    "why_it_matters": "Image-quality drift and latency spikes should stay visible even in demo mode.",
+    "evidence_route": "/api/v1/ops/monitoring"
+  },
+  {
+    "check_id": "portfolio-language",
+    "gate": "non_clinical_positioning",
+    "why_it_matters": "The repo must not overstate medical or regulatory evidence.",
+    "evidence_route": "docs/model-card.md"
+  },
+  {
+    "check_id": "review-materials",
+    "gate": "resource_pack",
+    "why_it_matters": "Built-in synthetic cases keep demos reviewable without private medical data.",
+    "evidence_route": "/api/v1/ops/resource-pack"
+  }
+]

@@ -13,6 +13,7 @@ Retina-Scan-AI is a CNN-based retinal screening platform built with healthcare A
 This repository now also includes lightweight **medical AI operations / validation / MLOps** surfaces:
 
 - synthetic engineering-validation artifacts
+- built-in synthetic clinical review packs
 - runtime monitoring for latency and image-quality drift signals
 - portfolio-safe release readiness gates
 - model card, risk register, and validation plan docs
@@ -94,6 +95,7 @@ retina-scan-ai/
 | POST | `/api/v1/classify` | Classification only |
 | POST | `/api/v1/analyze` | Full pipeline (classify + grade + risk + report) |
 | GET | `/api/v1/ops/validation-summary` | Synthetic engineering-validation artifact |
+| GET | `/api/v1/ops/resource-pack` | Built-in synthetic clinical review pack |
 | GET | `/api/v1/ops/monitoring` | Runtime monitoring snapshot |
 | GET | `/api/v1/ops/release-readiness` | Portfolio-safe readiness gates |
 
@@ -181,6 +183,8 @@ This repository includes a lightweight operations layer intended for **medical A
 
 - `GET /api/v1/ops/validation-summary`
   - exposes the bundled synthetic/offline evaluation artifact
+- `GET /api/v1/ops/resource-pack`
+  - exposes the built-in synthetic case pack, quality scenarios, and release checks
 - `GET /api/v1/ops/monitoring`
   - summarizes runtime latency, image quality signals, and documentation presence
 - `GET /api/v1/ops/release-readiness`
@@ -203,11 +207,23 @@ This framing is deliberate so the repository stays useful for healthcare AI engi
 ### Reviewer fast path
 
 1. `GET /health` — verify service boot and proof routes
-2. `GET /api/v1/ops/validation-summary` — inspect the bundled engineering artifact
-3. `GET /api/v1/ops/monitoring` — confirm runtime / image-quality snapshot
-4. `GET /api/v1/ops/release-readiness` — read the portfolio-safe release gate
+2. `GET /api/v1/ops/resource-pack` — inspect the built-in synthetic case pack and release checks
+3. `GET /api/v1/ops/validation-summary` — inspect the bundled engineering artifact
+4. `GET /api/v1/ops/monitoring` — confirm runtime / image-quality snapshot
+5. `GET /api/v1/ops/release-readiness` — read the portfolio-safe release gate
 
 The same path is now exposed directly from `/` and `/health`, so a reviewer can discover the strongest proof route without reading the repo first.
+
+### Built-in synthetic review pack
+
+The repository now ships a checked-in synthetic resource pack so reviewers can inspect:
+
+- representative retinal case summaries
+- image-quality scenarios and expected flags
+- validation-case goals
+- release checks and evidence routes
+
+This keeps the repo reviewable without private medical data or external keys.
 
 ---
 
