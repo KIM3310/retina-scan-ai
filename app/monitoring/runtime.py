@@ -11,10 +11,9 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from app.monitoring.resource_pack import data_files as resource_pack_files
 from app.monitoring.resource_pack import (
-    data_files as resource_pack_files,
-)
-from app.monitoring.resource_pack import (
+    external_data_summary,
     load_clinical_cases,
     load_quality_scenarios,
     load_release_checks,
@@ -151,6 +150,7 @@ class RuntimeMonitor:
                 "/api/v1/ops/release-readiness",
             ],
             "summary": resource_pack_summary(),
+            "external_data": external_data_summary(),
             "clinical_cases": list(load_clinical_cases()),
             "quality_scenarios": list(load_quality_scenarios()),
             "validation_cases": list(load_resource_validation_cases()),
