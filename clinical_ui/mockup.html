@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Retina Scan AI — Clinician Triage View (Mockup)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-2: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #22d3ee;
+      --danger: #f87171;
+      --warning: #fbbf24;
+      --success: #34d399;
+      --border: #475569;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    header {
+      background: var(--surface);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .user-chip {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr 340px;
+      height: calc(100vh - 60px);
+    }
+    aside.worklist {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .worklist h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 16px 16px 8px;
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .worklist ul { list-style: none; margin: 0; padding: 0; }
+    .worklist li {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .worklist li.active { background: var(--surface-2); border-left: 3px solid var(--accent); padding-left: 13px; }
+    .worklist li:hover { background: var(--surface-2); }
+    .worklist .study-id { font-weight: 500; }
+    .worklist .study-meta { font-size: 12px; color: var(--muted); }
+    .priority-flag {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .priority-urgent { background: var(--danger); }
+    .priority-routine { background: var(--muted); }
+
+    main.viewer {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: var(--bg);
+    }
+    .study-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .study-header h2 { margin: 0; font-size: 16px; font-weight: 500; }
+    .patient-id { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+    .image-panel {
+      flex: 1;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      position: relative;
+    }
+    .image-panel .placeholder {
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 40px;
+    }
+    .gradcam-toggle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .gradcam-toggle:hover { background: var(--surface-2); }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
+    }
+    .toolbar button {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .toolbar button:hover { background: var(--surface-2); }
+    .toolbar .keyboard-hint { color: var(--muted); font-size: 11px; margin-left: 4px; }
+
+    aside.panel {
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .panel-section { padding: 16px; border-bottom: 1px solid var(--border); }
+    .panel-section h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .classes ul { list-style: none; margin: 0; padding: 0; }
+    .classes li { margin-bottom: 10px; }
+    .class-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 4px; }
+    .class-name { font-weight: 500; }
+    .class-confidence { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .bar { height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--accent); transition: width 0.2s ease; }
+    .bar-fill.top { background: var(--warning); }
+
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .actions button {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .actions button.agree { background: var(--success); color: #064e3b; border-color: var(--success); }
+    .actions button.disagree { background: var(--danger); color: #450a0a; border-color: var(--danger); }
+    .actions button.escalate { grid-column: 1 / -1; background: var(--accent); color: #082f49; border-color: var(--accent); }
+
+    textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .audit-trail { font-size: 12px; color: var(--muted); }
+    .audit-trail ul { list-style: none; margin: 0; padding: 0; }
+    .audit-trail li { margin-bottom: 6px; }
+    .audit-trail .timestamp { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .disclaimer {
+      background: #7f1d1d;
+      color: #fee2e2;
+      padding: 10px 20px;
+      font-size: 12px;
+      text-align: center;
+      border-bottom: 2px solid #991b1b;
+    }
+  </style>
+</head>
+<body>
+  <div class="disclaimer">
+    Research prototype. Not a medical device. Not for clinical use. Static mockup.
+  </div>
+
+  <header>
+    <h1>Retina Scan AI — Triage View</h1>
+    <div class="user-chip">
+      <span>Dr. Jane Doe</span>
+      <span>•</span>
+      <span>Radiologist</span>
+      <span>•</span>
+      <span style="color: var(--success);">MFA verified 2 min ago</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="worklist">
+      <h2>Work List (14 pending)</h2>
+      <ul>
+        <li class="active">
+          <span class="priority-flag priority-urgent"></span>
+          <div>
+            <div class="study-id">STU-2026-04412</div>
+            <div class="study-meta">F, 68 • DR high-confidence</div>
+          </div>
+        </li>
+        <li>
+          <span class="priority-flag priority-urgent"></span>
+          <div>
+            <div class="study-id">STU-2026-04411</div>
+            <div class="study-meta">M, 71 • AMD moderate</div>
+          </div>
+        </li>
+        <li>
+          <span class="priority-flag priority-routine"></span>
+          <div>
+            <div class="study-id">STU-2026-04410</div>
+            <div class="study-meta">F, 45 • Normal</div>
+          </div>
+        </li>
+        <li>
+          <span class="priority-flag priority-routine"></span>
+          <div>
+            <div class="study-id">STU-2026-04409</div>
+            <div class="study-meta">M, 52 • Glaucoma low-conf</div>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="viewer">
+      <div class="study-header">
+        <div>
+          <h2>Study STU-2026-04412 — Right Eye</h2>
+          <div class="patient-id">Patient: p_sha256_7f3a... • Captured 2026-04-17 09:02 • Topcon TRC-NW8</div>
+        </div>
+        <div style="font-size: 13px; color: var(--muted);">
+          Model version: v1.3.0+g4a7f2e1
+        </div>
+      </div>
+
+      <div class="image-panel">
+        <div class="placeholder">
+          [ Fundus image would render here via DICOM viewer ]<br /><br />
+          In production: Cornerstone.js / OHIF integrated with the hospital PACS.<br />
+          The Grad-CAM overlay would render on top when toggled.
+        </div>
+        <button class="gradcam-toggle">Toggle Grad-CAM [G]</button>
+      </div>
+
+      <div class="toolbar">
+        <button>Zoom +</button>
+        <button>Zoom −</button>
+        <button>Reset</button>
+        <button>Window / Level</button>
+        <button>Annotations</button>
+        <span class="keyboard-hint">Shortcuts: G (Grad-CAM), 1–5 (select class), D (disagree), R (request reader)</span>
+      </div>
+    </main>
+
+    <aside class="panel">
+      <div class="panel-section classes">
+        <h3>Model Predictions</h3>
+        <ul>
+          <li>
+            <div class="class-row"><span class="class-name">Diabetic Retinopathy</span><span class="class-confidence">0.87</span></div>
+            <div class="bar"><div class="bar-fill top" style="width: 87%;"></div></div>
+          </li>
+          <li>
+            <div class="class-row"><span class="class-name">Cataract</span><span class="class-confidence">0.04</span></div>
+            <div class="bar"><div class="bar-fill" style="width: 4%;"></div></div>
+          </li>
+          <li>
+            <div class="class-row"><span class="class-name">Glaucoma</span><span class="class-confidence">0.05</span></div>
+            <div class="bar"><div class="bar-fill" style="width: 5%;"></div></div>
+          </li>
+          <li>
+            <div class="class-row"><span class="class-name">AMD</span><span class="class-confidence">0.02</span></div>
+            <div class="bar"><div class="bar-fill" style="width: 2%;"></div></div>
+          </li>
+          <li>
+            <div class="class-row"><span class="class-name">Normal</span><span class="class-confidence">0.02</span></div>
+            <div class="bar"><div class="bar-fill" style="width: 2%;"></div></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-section">
+        <h3>Your Decision</h3>
+        <div class="actions">
+          <button class="agree">Agree (DR)</button>
+          <button class="disagree">Disagree</button>
+          <button class="escalate">Request Second Reader</button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Note</h3>
+        <textarea placeholder="Optional clinical note visible to next reader..."></textarea>
+      </div>
+
+      <div class="panel-section audit-trail">
+        <h3>Audit Trail (this study)</h3>
+        <ul>
+          <li><span class="timestamp">09:02:14</span> • DICOM C-STORE received</li>
+          <li><span class="timestamp">09:02:18</span> • Inference completed (183 ms)</li>
+          <li><span class="timestamp">09:14:32</span> • Dr. Jane Doe opened study</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

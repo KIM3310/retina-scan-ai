@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Retina Scan AI Validation Study Results",
+  "description": "Schema for the output of a validation study run. Every field is required unless marked otherwise. Fabricated example values are illustrative.",
+  "type": "object",
+  "required": [
+    "study_id",
+    "protocol_version",
+    "analysis_date",
+    "model_version",
+    "weights_sha256",
+    "cohort",
+    "primary_endpoint",
+    "secondary_endpoints",
+    "subgroup_analyses",
+    "protocol_deviations",
+    "reporting_checklist"
+  ],
+  "properties": {
+    "study_id": { "type": "string", "example": "RETINA-VAL-2026-001" },
+    "protocol_version": { "type": "string", "example": "0.3" },
+    "analysis_date": { "type": "string", "format": "date", "example": "2026-08-15" },
+    "model_version": { "type": "string", "example": "v1.3.0+g4a7f2e1" },
+    "weights_sha256": { "type": "string", "example": "5c8a...f91e" },
+    "cohort": {
+      "type": "object",
+      "required": ["sites", "enrolled_n", "gradeable_n", "disease_positive_n_by_class"],
+      "properties": {
+        "sites": { "type": "array", "items": { "type": "string" }, "example": ["SITE-A", "SITE-B", "SITE-C"] },
+        "enrolled_n": { "type": "integer", "example": 2150 },
+        "gradeable_n": { "type": "integer", "example": 2084 },
+        "ungradeable_n": { "type": "integer", "example": 66 },
+        "ungradeable_rate": { "type": "number", "example": 0.031 },
+        "disease_positive_n_by_class": {
+          "type": "object",
+          "example": { "DR": 412, "Glaucoma": 237, "Cataract": 298, "AMD": 181 }
+        },
+        "prevalence_by_class": {
+          "type": "object",
+          "example": { "DR": 0.198, "Glaucoma": 0.114, "Cataract": 0.143, "AMD": 0.087 }
+        }
+      }
+    },
+    "primary_endpoint": {
+      "type": "object",
+      "required": ["class", "operating_threshold", "sensitivity_point", "sensitivity_ci_95", "specificity_point", "specificity_ci_95", "passed"],
+      "properties": {
+        "class": { "type": "string", "example": "DR" },
+        "operating_threshold": { "type": "number", "example": 0.42 },
+        "sensitivity_point": { "type": "number", "example": 0.893 },
+        "sensitivity_ci_95": { "type": "array", "items": { "type": "number" }, "example": [0.861, 0.918] },
+        "specificity_point": { "type": "number", "example": 0.907 },
+        "specificity_ci_95": { "type": "array", "items": { "type": "number" }, "example": [0.889, 0.923] },
+        "passed": { "type": "boolean", "example": true },
+        "decision_rule": {
+          "type": "string",
+          "example": "Pass if sensitivity 95% CI lower bound >= 0.85 with specificity >= 0.90"
+        }
+      }
+    },
+    "secondary_endpoints": {
+      "type": "object",
+      "properties": {
+        "per_class_auc": {
+          "type": "object",
+          "example": {
+            "DR": { "point": 0.952, "ci_95": [0.937, 0.965] },
+            "Glaucoma": { "point": 0.914, "ci_95": [0.891, 0.933] },
+            "Cataract": { "point": 0.931, "ci_95": [0.913, 0.947] },
+            "AMD": { "point": 0.887, "ci_95": [0.851, 0.917] }
+          }
+        },
+        "per_class_sensitivity": {
+          "type": "object",
+          "example": {
+            "DR": { "point": 0.893, "ci_95": [0.861, 0.918] },
+            "Glaucoma": { "point": 0.854, "ci_95": [0.807, 0.893] },
+            "Cataract": { "point": 0.897, "ci_95": [0.858, 0.927] },
+            "AMD": { "point": 0.821, "ci_95": [0.761, 0.871] }
+          }
+        },
+        "per_class_specificity": {
+          "type": "object",
+          "example": {
+            "DR": { "point": 0.907, "ci_95": [0.889, 0.923] },
+            "Glaucoma": { "point": 0.921, "ci_95": [0.906, 0.935] },
+            "Cataract": { "point": 0.902, "ci_95": [0.884, 0.918] },
+            "AMD": { "point": 0.935, "ci_95": [0.923, 0.946] }
+          }
+        },
+        "panel_agreement_kappa": {
+          "type": "object",
+          "example": {
+            "DR": 0.844,
+            "Glaucoma": 0.792,
+            "Cataract": 0.861,
+            "AMD": 0.713
+          }
+        },
+        "false_positive_burden_minutes_per_100": { "type": "number", "example": 12.4 },
+        "inference_latency_p95_ms": { "type": "number", "example": 184 }
+      }
+    },
+    "subgroup_analyses": {
+      "type": "object",
+      "description": "Each subgroup category reports per-class sensitivity/specificity with CIs and p-value vs overall.",
+      "example": {
+        "by_age": {
+          "18-39": { "DR_sensitivity": 0.91, "p_vs_overall": 0.42 },
+          "40-59": { "DR_sensitivity": 0.90, "p_vs_overall": 0.71 },
+          "60-79": { "DR_sensitivity": 0.88, "p_vs_overall": 0.11 },
+          "80+": { "DR_sensitivity": 0.83, "p_vs_overall": 0.004 }
+        },
+        "by_sex": {
+          "male": { "DR_sensitivity": 0.89, "p_vs_overall": 0.88 },
+          "female": { "DR_sensitivity": 0.90, "p_vs_overall": 0.82 }
+        },
+        "by_ethnicity": {
+          "groupA": { "DR_sensitivity": 0.91 },
+          "groupB": { "DR_sensitivity": 0.87 },
+          "groupC": { "DR_sensitivity": 0.88 }
+        },
+        "by_camera": {
+          "Topcon": { "DR_sensitivity": 0.92 },
+          "Canon": { "DR_sensitivity": 0.88 },
+          "Zeiss": { "DR_sensitivity": 0.89 }
+        }
+      }
+    },
+    "fairness_flags": {
+      "type": "array",
+      "description": "Subgroups flagged for >10 pp sensitivity gap at p<0.01",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subgroup": { "type": "string" },
+          "class": { "type": "string" },
+          "gap_percentage_points": { "type": "number" },
+          "p_value": { "type": "number" }
+        }
+      },
+      "example": []
+    },
+    "protocol_deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "site_id": { "type": "string" },
+          "description": { "type": "string" },
+          "impact_on_analysis": { "type": "string" }
+        }
+      },
+      "example": []
+    },
+    "adverse_events": {
+      "type": "array",
+      "example": []
+    },
+    "reporting_checklist": {
+      "type": "object",
+      "description": "CONSORT-AI 2020 item-level completion checklist",
+      "example": {
+        "ai_intervention_described": true,
+        "target_users_described": true,
+        "input_data_requirements_described": true,
+        "output_explanation_method_described": true,
+        "performance_errors_disclosed": true
+      }
+    }
+  }
+}
