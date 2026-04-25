@@ -16,7 +16,7 @@ import torch.nn.functional as F
 from PIL import Image
 from torchvision import transforms
 
-from src.config import CLASS_LABELS, TrainConfig
+from src.config import CLASS_LABELS
 from src.model import build_model
 
 

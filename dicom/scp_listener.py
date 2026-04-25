@@ -21,13 +21,9 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from pynetdicom import AE, evt, debug_logger, StoragePresentationContexts  # type: ignore
-    from pynetdicom.sop_class import (  # type: ignore
-        OphthalmicPhotography8BitImageStorage,
-        OphthalmicPhotography16BitImageStorage,
-        VLPhotographicImageStorage,
-    )
+    from pynetdicom import AE, evt, debug_logger  # type: ignore
     from pydicom import dcmwrite  # type: ignore
+
     _PYNETDICOM_AVAILABLE = True
 except ImportError:  # pragma: no cover
     _PYNETDICOM_AVAILABLE = False

@@ -1,6 +1,5 @@
 """Tests for RetinalClassifier model architecture."""
 
-import pytest
 import torch
 
 from src.model import RetinalClassifier, build_model

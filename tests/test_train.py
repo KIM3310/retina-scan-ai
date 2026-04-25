@@ -1,6 +1,5 @@
 """Tests for training components."""
 
-import pytest
 
 from src.train import EarlyStopping
 

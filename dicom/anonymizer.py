@@ -26,7 +26,6 @@ import hashlib
 import hmac
 import logging
 import os
-import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any

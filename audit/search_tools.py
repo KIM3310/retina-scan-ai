@@ -18,7 +18,7 @@ import json
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Iterable
 
 
 def _parse_window(window: str) -> timedelta:
