@@ -2,6 +2,8 @@
 
 Retinal disease classification system using **ResNet18 transfer learning** with **Grad-CAM interpretability**. Classifies fundus images into 5 categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
 
+Technical review pack: [`docs/technical-review-pack.md`](docs/technical-review-pack.md)
+
 ## Architecture
 
 ```
