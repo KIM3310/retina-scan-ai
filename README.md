@@ -232,3 +232,11 @@ This service includes compliance and governance artifacts that align with typica
 | [weld-defect-vision](https://github.com/KIM3310/weld-defect-vision) | Sibling vision project — industrial defect detection with YOLOv8 |
 | [enterprise-llm-adoption-kit](https://github.com/KIM3310/enterprise-llm-adoption-kit) | Shared governance patterns (RBAC, audit, RAG) |
 | [AegisOps](https://github.com/KIM3310/AegisOps) | Operator handoff and incident analysis — clinical incident-response patterns |
+
+## Cloud + AI Architecture
+
+This repository includes a neutral cloud and AI engineering blueprint that maps the current proof surface to runtime boundaries, data contracts, model-risk controls, deployment posture, and validation hooks.
+
+- [Cloud + AI architecture blueprint](docs/cloud-ai-architecture.md)
+- [Machine-readable architecture manifest](architecture/blueprint.json)
+- Validation command: `python3 scripts/validate_architecture_blueprint.py`
