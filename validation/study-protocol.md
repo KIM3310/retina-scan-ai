@@ -3,7 +3,7 @@
 **Protocol ID**: RETINA-VAL-2026-001 (draft; not IRB-approved)
 **Version**: 0.3 (draft)
 **Sponsor**: Research Software (example)
-**Principal Investigator**: TBD
+**Principal Investigator**: Site clinical lead (assigned before activation)
 **Date**: 2026-04-17
 
 > **Status**: This is a template document for a validation study. It has not been IRB-reviewed or approved. Before conducting any clinical study based on this protocol, obtain IRB approval, sponsor agreement, and site contracts.

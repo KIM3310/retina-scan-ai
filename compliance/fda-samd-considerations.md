@@ -90,7 +90,7 @@ A 510(k) for an AI ophthalmology device typically contains the following. Column
 
 | Artifact | Required content | This repo |
 |----------|-----------------|-----------|
-| 510(k) Cover Letter | Administrative | Operational |
+| 510(k) Administrative Cover Sheet | Administrative | Operational |
 | Indications for Use | Patient population, setting, clinical decision supported | `governance/model-card.md` |
 | Device Description | Algorithm, architecture, inputs/outputs, hardware if any | `README.md`, `governance/model-card.md` |
 | Substantial Equivalence Discussion | Side-by-side comparison vs predicate | Not in repo — regulatory work |
