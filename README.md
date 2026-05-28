@@ -23,6 +23,10 @@ A medical-image research workflow that demonstrates validation thinking while cl
 - **Verification:** Run `pytest -v`; training and serving paths are intentionally separated from clinical claims.
 - **Commercial read:** Use it as a non-clinical validation and explainability template for health-tech ML review.
 
+## Commercialization Playbook
+
+- [Monetization and GTM playbook](docs/monetization-playbook.md) maps the repository to buyer segments, offer ladder, pricing hypotheses, proof gates, and risk boundaries.
+
 ## Architecture
 
 ```
