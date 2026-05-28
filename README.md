@@ -16,6 +16,13 @@ A medical-image research workflow that demonstrates validation thinking while cl
 | Safety boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory review. |
 | Fast proof | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
 
+## Reviewer Fast Path
+
+- **First minute:** Read the model card and risk notes before looking at predictions.
+- **Local demo:** Start the API with `uvicorn api.main:app --host 0.0.0.0 --port 8000`, then test `/predict` or `/gradcam`.
+- **Verification:** Run `pytest -v`; training and serving paths are intentionally separated from clinical claims.
+- **Commercial read:** Use it as a non-clinical validation and explainability template for health-tech ML review.
+
 ## Architecture
 
 ```
