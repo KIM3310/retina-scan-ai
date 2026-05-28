@@ -4,6 +4,18 @@ Retinal disease classification system using **ResNet18 transfer learning** with 
 
 Technical review pack: [`docs/technical-review-pack.md`](docs/technical-review-pack.md)
 
+## Product and Review Surface
+
+A medical-image research workflow that demonstrates validation thinking while clearly staying outside medical-device claims.
+
+| Lens | Definition |
+|---|---|
+| Buyer or user | Research groups, ML reviewers, health-tech prototype teams, and model-governance evaluators. |
+| Commercial route | Package as a research validation template, governance review artifact, or explainability demo for non-clinical evaluation. |
+| Review signal | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
+| Safety boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory review. |
+| Fast proof | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
+
 ## Architecture
 
 ```
