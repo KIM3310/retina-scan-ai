@@ -16,7 +16,7 @@ Use this page as the short path through the repository. It keeps the review grou
 ## Open First
 
 1. Start with the README fast path and architecture section.
-2. Open `docs/monetization-playbook.md` only when reviewing the product or service angle.
+2. Open `docs/service-launch-playbook.md` only when reviewing the product or service angle.
 3. Check the commands below before making claims about quality.
 4. Skim the CI workflows and fixture data before deeper implementation review.
 5. Read the boundaries section before presenting the project externally.
@@ -46,7 +46,7 @@ Use this page as the short path through the repository. It keeps the review grou
 
 ## Commercial Notes
 
-| Possible offer | Working price assumption |
+| Possible offer | Working scope assumption |
 |---|---|
 | Validation template | $3k-$10k validation study |
 | Explainability demo | $10k-$35k prototype review |
