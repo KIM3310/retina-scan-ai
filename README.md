@@ -1,5 +1,10 @@
 # Retina Scan AI
 
+## Live Demo
+
+- [Open the public GitHub Pages demo](https://kim3310.github.io/retina-scan-ai/)
+- Scope: credential-free, synthetic-data demo for reviewers and evaluators.
+
 Retinal disease classification system using **ResNet18 transfer learning** with **Grad-CAM interpretability**. Classifies fundus images into 5 categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
 
 Technical review pack: [`docs/technical-review-pack.md`](docs/technical-review-pack.md)
