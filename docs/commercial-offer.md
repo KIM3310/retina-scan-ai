@@ -12,7 +12,7 @@ This is the buyer-ready version of the repository. It turns the technical proof 
 | Buyer | Research groups, health-tech prototype teams, ML reviewers, and model governance teams. |
 | Pain wedge | Medical-image research workflow with Grad-CAM and explicit non-diagnostic boundaries. |
 | Front-door offer | Validation template |
-| Entry scope | $3k-$10k validation study |
+| Entry scope | Scope after buyer intake |
 | Proof before pitch | pytest passes |
 | Next buyer action | Review one proof artifact, then choose diagnostic, workshop, pilot, support, or revival path. |
 
@@ -20,9 +20,9 @@ This is the buyer-ready version of the repository. It turns the technical proof 
 
 | Offer | Scope assumption | Buyer-facing scope |
 |---|---|---|
-| Validation template | $3k-$10k validation study | Publish model-card walkthrough |
-| Explainability demo | $10k-$35k prototype review | Create validation checklist |
-| Model governance review artifact | $1k-$5k/month governance support | Offer explainability review |
+| Validation template | Scope after buyer intake | Publish model-card walkthrough |
+| Explainability demo | Scope after buyer intake | Create validation checklist |
+| Model governance review artifact | Scope after buyer intake | Offer explainability review |
 
 ## Close Path
 

@@ -48,9 +48,9 @@ Use this page as the short path through the repository. It keeps the review grou
 
 | Possible offer | Working scope assumption |
 |---|---|
-| Validation template | $3k-$10k validation study |
-| Explainability demo | $10k-$35k prototype review |
-| Model governance review artifact | $1k-$5k/month governance support |
+| Validation template | Scope after buyer intake |
+| Explainability demo | Scope after buyer intake |
+| Model governance review artifact | Scope after buyer intake |
 
 ## Boundaries
 

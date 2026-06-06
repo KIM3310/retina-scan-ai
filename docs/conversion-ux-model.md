@@ -49,9 +49,9 @@ This note specializes the repository for service launch. It combines product str
 
 ## Conversion Path
 
-- Risk-reversing entry: Validation template ($3k-$10k validation study) with one acceptance metric.
-- Pilot: Explainability demo ($10k-$35k prototype review) using buyer-approved data and named operators.
-- Recurring layer: Model governance review artifact ($1k-$5k/month governance support) for monitoring, governance, support, or managed review.
+- Risk-reversing entry: Validation template (scope after buyer intake) with one acceptance metric.
+- Pilot: Explainability demo (scope after buyer intake) using buyer-approved data and named operators.
+- Recurring layer: Model governance review artifact (scope after buyer intake) for monitoring, governance, support, or managed review.
 
 ## Scope Frame
 
