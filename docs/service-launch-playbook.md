@@ -14,6 +14,15 @@ This file is a commercial planning artifact, but it does not publish public fina
 2. **Scoped diagnostic** - review the buyer workflow, data boundary, integration needs, and acceptance criteria.
 3. **Implementation or operating support** - connect only the resources approved in [service architecture](service-architecture.md).
 
+## Revenue Channel
+
+- **Channel:** Research partner and validation pilot
+- **First commercial action:** Research validation partnership only; no clinical diagnosis, treatment, or patient-facing claims.
+- **Conversion path:** Research proof, technical write-up, demo walkthrough, and outreach to labs or healthcare innovation teams.
+- **Activation path:** Use approved research datasets, explicit non-diagnostic labeling, and reviewer-owned evaluation protocol.
+- **Retention path:** Validation reporting, workflow maintenance, and research collaboration support.
+- **Public boundary:** Do not publish projections, price promises, or buyer-specific contract assumptions in this repository.
+
 ## Acquisition Channels
 
 - Portfolio and GitHub proof links

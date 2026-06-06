@@ -1,6 +1,6 @@
 # Service Architecture - retina-scan-ai
 
-This document defines the deployment and resource plan for turning this repository into a buyer-reviewable service. It intentionally avoids public public financial assumptions, public financial guesses, or contract assumptions.
+This document defines the deployment and resource plan for turning this repository into a buyer-reviewable service. It intentionally avoids public financial assumptions, public financial guesses, or contract assumptions.
 
 ## Commercial Role
 
@@ -44,6 +44,15 @@ Visitor or operator
 - storage credentials
 - DATABASE_URL
 - model artifact token
+
+## Revenue Channel Architecture
+
+- **Primary channel:** Research partner and validation pilot
+- **Monetization route:** Research validation partnership only; no clinical diagnosis, treatment, or patient-facing claims.
+- **Acquisition motion:** Research proof, technical write-up, demo walkthrough, and outreach to labs or healthcare innovation teams.
+- **Activation path:** Use approved research datasets, explicit non-diagnostic labeling, and reviewer-owned evaluation protocol.
+- **Margin control:** Keep the workflow research-only, avoid unsupported clinical claims, and reuse evaluation/report templates.
+- **Public boundary:** Keep revenue, pricing, and contract assumptions in private planning; this repository publishes service structure, resource needs, and technical proof only.
 
 ## Cost and Risk Controls
 
