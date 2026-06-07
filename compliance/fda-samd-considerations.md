@@ -30,7 +30,7 @@ Several predicate devices exist for AI-based retinal screening and are the natur
 | Predicate device | Clearance / Authorisation | Indication | Relevance |
 |------------------|---------------------------|------------|-----------|
 | IDx-DR (LumineticsCore) | De Novo DEN180001 (2018) | Autonomous detection of more-than-mild diabetic retinopathy | First autonomous AI diagnostic; De Novo established the category |
-| EyeArt (Eyenuk) | 510(k) K200667 (2020), K223870 (2023) | DR detection | Active commercial predicate; 510(k) with IDx-DR as predicate |
+| EyeArt (Eyenuk) | 510(k) K200667 (2020), K223870 (2023) | DR detection | Active predicate; 510(k) with IDx-DR as predicate |
 | AEYE-DS (AEYE Health) | 510(k) K220137 (2022) | DR screening | Portable fundus camera workflow |
 | SELENA+ (EyRIS) | Pre-submission meetings, global clearances (Singapore, EU) | Multi-disease (DR, AMD, glaucoma) | Closest clinical analogue to multi-class output |
 
@@ -156,7 +156,7 @@ If cleared, a deployment must:
 
 ## 10. Timeline realism
 
-For planning purposes, a realistic commercial timeline for a first-of-its-kind multi-disease retinal AI:
+For planning purposes, a realistic release-readiness timeline for a first-of-its-kind multi-disease retinal AI:
 
 | Phase | Duration |
 |-------|----------|

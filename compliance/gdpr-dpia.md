@@ -182,7 +182,7 @@ GDPR Article 35(7) requires DPIA to contain at least:
 
 Suggested patient-facing text (to be localised):
 
-> "As part of your eye examination, a fundus photograph may be reviewed by a clinician with the assistance of a computer program that highlights image regions and suggests possible findings. The program is a decision-support tool — your clinician makes the final decision about your care. Your image is processed in a de-identified form; no commercial use or external sharing occurs without your specific consent. You may ask for your image to be read without computer assistance; this will not affect your care."
+> "As part of your eye examination, a fundus photograph may be reviewed by a clinician with the assistance of a computer program that highlights image regions and suggests possible findings. The program is a decision-support tool — your clinician makes the final decision about your care. Your image is processed in a de-identified form; no external sharing occurs without your specific consent. You may ask for your image to be read without computer assistance; this will not affect your care."
 
 ## 12. Cross-references
 

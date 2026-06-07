@@ -183,4 +183,4 @@ Post-Brexit, GB placing-on-market requires UKCA mark. MHRA has extended CE mark 
 
 ## 15. What this file is not
 
-This file is not a regulatory strategy, not a clinical evaluation plan, not a QMS procedure, and not legal advice. It describes the shape of the regulatory envelope so that engineering decisions in this repository align with the direction that any real commercialisation would take.
+This file is not a regulatory strategy, not a clinical evaluation plan, not a QMS procedure, and not legal advice. It describes the shape of the regulatory envelope so that engineering decisions in this repository align with the direction that any real release-readiness process would take.

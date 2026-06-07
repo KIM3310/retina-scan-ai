@@ -14,12 +14,12 @@ Retinal disease classification using ResNet18 transfer learning with Grad-CAM in
 
 This repository is packaged as a concrete system surface, not a loose code sample. The enterprise value is a narrow proof that can be inspected, run, tested, and converted into a reviewed implementation motion.
 
-## Buyer And Service Path
+## Audience And Service Path
 
 | Area | Position |
 | --- | --- |
 | Target reviewer | Health AI research and validation teams |
-| Service wedge | Research validation template, not clinical sales |
+| Service wedge | Research validation template, not clinical deployment |
 | Review signal | Risk notes, explainability, model cards, compliance caution |
 | Delivery shape | Fixed-scope pilot, integration sprint, and handoff-ready operating pack |
 | Expansion path | Add customer-specific adapters, policy controls, observability, and support SLAs after the pilot proves value |

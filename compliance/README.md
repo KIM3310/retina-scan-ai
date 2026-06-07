@@ -54,5 +54,5 @@ Standards and statutes referenced across this folder:
 ## Non-goals of this folder
 
 - It does not constitute a regulatory submission dossier.
-- It does not pre-determine the classification or pathway that a notified body or the FDA would assign to a commercial version.
+- It does not pre-determine the classification or pathway that a notified body or the FDA would assign to a released version.
 - It does not replace engagement with qualified regulatory counsel or a clinical evaluator.
