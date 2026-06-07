@@ -44,13 +44,13 @@ Use this page as the short path through the repository. It keeps the review grou
 - Model card/risk notes exist
 - API inference path is documented
 
-## Commercial Notes
+## Review Notes
 
 | Possible offer | Working scope assumption |
 |---|---|
-| Validation template | Scope after buyer intake |
-| Explainability demo | Scope after buyer intake |
-| Model governance review artifact | Scope after buyer intake |
+| Validation template | Scope after reviewer intake |
+| Explainability demo | Scope after reviewer intake |
+| Model governance review artifact | Scope after reviewer intake |
 
 ## Boundaries
 

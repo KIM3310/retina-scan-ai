@@ -15,8 +15,8 @@ A medical-image research workflow that demonstrates validation thinking while cl
 
 | Lens | Definition |
 |---|---|
-| Buyer or user | Research groups, ML reviewers, health-tech prototype teams, and model-governance evaluators. |
-| Commercial route | Package as a research validation template, governance review artifact, or explainability demo for non-clinical evaluation. |
+| Audience | Research groups, ML reviewers, health-tech prototype teams, and model-governance evaluators. |
+| Review path | Validate the demo, README, architecture notes, and quality gate before deeper workflow review. |
 | Review signal | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
 | Safety boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory review. |
 | Fast proof | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
@@ -26,20 +26,16 @@ A medical-image research workflow that demonstrates validation thinking while cl
 - **First minute:** Read the model card and risk notes before looking at predictions.
 - **Local demo:** Start the API with `uvicorn api.main:app --host 0.0.0.0 --port 8000`, then test `/predict` or `/gradcam`.
 - **Verification:** Run `pytest -v`; training and serving paths are intentionally separated from clinical claims.
-- **Commercial read:** Use it as a non-clinical validation and explainability template for health-tech ML review.
 
 ## Service Launch Playbook
 
-- [Service launch playbook](docs/service-launch-playbook.md) maps the repository to buyer segments, offer ladder, proof gates, proof gates, and risk boundaries.
+- [Service launch playbook](docs/service-launch-playbook.md) maps the repository to review audiences, offer ladder, proof gates, proof gates, and risk boundaries.
 
 ## Review Notes
 
 - [Review guide](docs/reviewer-evidence-map.md) summarizes the project angle, first files to inspect, verification commands, and known boundaries.
 - [Quality notes](docs/quality-gate.md) lists the local checks, CI surface, and release expectations for this repository.
-- [Service growth model](docs/service-growth-model.md) maps the project to an ethical service path, activation loop, scope logic, and growth experiments.
 - [Enterprise readiness notes](docs/enterprise-readiness.md) outlines security, data, operations, integration, and handoff expectations.
-- [Conversion UX model](docs/conversion-ux-model.md) maps the buyer path, behavioral design, UI/UX direction, scope frame, and ethical conversion guardrails.
-- [Commercial offer](docs/commercial-offer.md) packages the repository into a buyer-ready offer ladder, proof gate, outreach angle, and close path.
 
 ## Architecture
 
@@ -280,7 +276,7 @@ This repository includes a neutral cloud and AI engineering blueprint that maps 
 
 ## Enterprise Productization
 
-- [Product operating model](docs/product-operating-model.md) defines the buyer, paid wedge, trust boundary, operating checks, and service path for this repository.
+- [Product operating model](docs/product-operating-model.md) defines the reviewer, trust boundary, trust boundary, operating checks, and service path for this repository.
 
 ## Service Architecture
 
