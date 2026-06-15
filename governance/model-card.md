@@ -39,7 +39,7 @@ Decision support for the triage of retinal fundus photographs in an outpatient o
 
 ### Out-of-scope uses
 
-- **Not** intended for autonomous diagnosis; every output requires clinician review
+- **Not** intended for autonomous diagnosis; every output requires clinician architecture
 - **Not** intended for differential diagnosis beyond the five defined classes
 - **Not** intended for use on paediatric patients (training data was adults ≥ 18)
 - **Not** intended for use on non-mydriatic ultra-widefield imaging modalities without re-validation
@@ -156,10 +156,10 @@ See [`datasheet.md`](datasheet.md) for full datasheet.
 
 | Harm | Likelihood | Mitigation |
 |------|-----------|-----------|
-| False negative for sight-threatening disease → delayed treatment | Medium | Sensitivity-favouring operating point; mandatory clinician review; not used as sole gatekeeper |
-| False positive → unnecessary referral | Medium | Specificity-aware operating point; clinician review filters FP before patient notification |
+| False negative for sight-threatening disease → delayed treatment | Medium | Sensitivity-favouring operating point; mandatory clinician architecture; not used as sole gatekeeper |
+| False positive → unnecessary referral | Medium | Specificity-aware operating point; clinician architecture filters FP before patient notification |
 | Differential performance across subgroups → unequal care | Medium | Fairness evaluation; subgroup drift monitoring; deployment blocked for subgroups with known insufficient training representation |
-| Automation bias → clinician accepts a wrong AI answer | Medium | UI design mitigations; mandatory review on high-confidence class; disagreement workflow |
+| Automation bias → clinician accepts a wrong AI answer | Medium | UI design mitigations; mandatory architecture on high-confidence class; disagreement workflow |
 | Privacy exposure via fundus biometric | Low | Pseudonymisation; no external sharing; biometric disclosure in consent |
 | Model drift → degraded performance without detection | Medium | Drift monitoring programme |
 | Scope creep → model used outside intended use | Low–Medium | Model card, training, audit |
@@ -228,9 +228,9 @@ See [`bias-and-limitations.md`](bias-and-limitations.md) for the canonical list.
 
 ## Model Card Maintenance
 
-- Reviewed on every major model release
-- Reviewed annually
-- Reviewed on discovery of material new information
+- Updated on every major model release
+- Updated annually
+- Updated on discovery of material new information
 
 ## Contacts
 

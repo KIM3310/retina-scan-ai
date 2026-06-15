@@ -64,7 +64,7 @@ Explicitly deferred: ensembles improve AUC by 1-2 points at 3-5x inference cost.
 
 ## How this choice constrains future work
 
-- **Dataset growth triggers architecture review**: at 20K+ training images, the gap between ResNet18 and modern architectures widens enough to matter. Add to roadmap to re-evaluate.
+- **Dataset growth triggers architecture architecture**: at 20K+ training images, the gap between ResNet18 and modern architectures widens enough to matter. Add to roadmap to re-evaluate.
 - **Multi-scale features may require backbone swap**: if analysis of model errors shows small-lesion misses, that points to the backbone limitation, not just training data.
 - **Production deployment may prefer ONNX export**: ResNet18 has excellent ONNX coverage across runtimes; this is a secondary advantage.
 

@@ -28,7 +28,7 @@ Mapping to typical hospital staff categories:
 Cross-cutting roles (orthogonal to clinical role):
 
 - `billing_authorized` — may view billing-related metadata, not clinical imaging.
-- `quality_reviewer` — may participate in disagreement resolution workflows.
+- `quality_technical reader` — may participate in disagreement resolution workflows.
 
 ## Session flow
 
@@ -88,7 +88,7 @@ oidc:
 This is research code. Before production use:
 
 - [ ] Penetration test the OIDC flow, in particular token validation and replay protection.
-- [ ] Review against OWASP ASVS Level 2.
+- [ ] Architecture against OWASP ASVS Level 2.
 - [ ] Verify the role-permission matrix with the hospital compliance officer.
 - [ ] Configure the break-glass approval workflow per the hospital's policies.
 - [ ] Perform disaster-recovery test of the MFA verifier dependency.

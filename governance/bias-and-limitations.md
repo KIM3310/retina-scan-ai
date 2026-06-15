@@ -95,8 +95,8 @@ From internal testing; subject to expansion as deployments reveal more.
 | Failure mode | Observed trigger | Mitigation |
 |-------------|------------------|-----------|
 | Confident wrong on very dark / underexposed images | Low contrast input | Image quality gate |
-| Mis-classification of Normal with prominent drusen as AMD | Older subjects with benign drusen | Clinician review |
-| Cataract false positive on images with media opacity from non-cataract causes | Vitreous haze, corneal edema | Clinician review; note in UI |
+| Mis-classification of Normal with prominent drusen as AMD | Older subjects with benign drusen | Clinician architecture |
+| Cataract false positive on images with media opacity from non-cataract causes | Vitreous haze, corneal edema | Clinician architecture; note in UI |
 | Glaucoma under-detection on low-cup-disc eyes | Small disc, small cup | Specialist referral remains primary pathway |
 | Grad-CAM pointing to optic disc regardless of actual lesion location | DR images | Clinician education on Grad-CAM interpretation |
 | Out-of-distribution image (non-fundus, e.g. OCT, slit-lamp) producing confident prediction | Wrong modality uploaded | Input modality gate; OOD detector |
@@ -138,7 +138,7 @@ Possible feedback-loop risks if the model is used uncritically:
 
 The model's performance assumes the deployment environment:
 
-- Has a qualified clinician review step
+- Has a qualified clinician architecture step
 - Maintains image quality standards at least as good as the training set
 - Has a referral pathway for positive findings
 - Has a functioning audit and drift monitoring stack

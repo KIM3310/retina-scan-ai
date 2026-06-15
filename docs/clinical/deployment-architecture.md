@@ -279,7 +279,7 @@ For sites with limited central IT:
 - Outbound connection only for audit log shipping
 - Model updates via signed release bundle; no inbound connection required
 
-## 13. Review cadence
+## 13. Architecture cadence
 
 Architecture is reviewed:
 - At initial go-live

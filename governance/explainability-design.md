@@ -116,7 +116,7 @@ Given input image x:
 
 When the model is wrong, Grad-CAM still produces a map. We specifically **do not** present the heatmap as evidence of correctness. The UI text for a high-confidence prediction explicitly reminds the user:
 
-> "The heatmap indicates regions that influenced this prediction. A confident prediction may still be wrong; review the image for pathology the model may have missed."
+> "The heatmap indicates regions that influenced this prediction. A confident prediction may still be wrong; architecture the image for pathology the model may have missed."
 
 ## 9. Relationship to uncertainty
 
@@ -144,9 +144,9 @@ Patient-facing information about AI-assisted reading (per DPIA consent text) doe
 - Patients may seek to challenge a reading based on an overlay they cannot interpret
 - Communication should remain mediated by the clinician
 
-## 13. Review cadence
+## 13. Architecture cadence
 
-Explainability design is reviewed:
+Explainability design is maintained by:
 - On every major model release
 - If new literature identifies new failure modes for Grad-CAM
 - On site feedback that heatmaps are unhelpful or misleading

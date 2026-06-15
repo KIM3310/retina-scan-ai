@@ -1,6 +1,6 @@
 # Data Protection Impact Assessment (DPIA)
 
-> **Template filled with illustrative content for a reference deployment.** An actual DPIA under GDPR Article 35 must be prepared and signed off by a qualified DPO for a specific deployment context, with current legal basis review. The content below illustrates the structure and reasoning a DPIA would take.
+> **Template filled with illustrative content for a reference deployment.** An actual DPIA under GDPR Article 35 must be prepared and signed off by a qualified DPO for a specific deployment context, with current legal basis architecture. The content below illustrates the structure and reasoning a DPIA would take.
 
 ## Status
 
@@ -10,7 +10,7 @@
 | Version | 0.1 (template) |
 | Prepared by | Engineering + (placeholder DPO) |
 | Date | 2026-04 |
-| Review date | Annual + on material change |
+| Architecture date | Annual + on material change |
 | Controller | Deploying hospital / clinical network |
 | Processor | Retina Scan AI operator |
 | DPO consulted | [Yes/No — hospital DPO contact on file] |
@@ -38,7 +38,7 @@ Four or more criteria met → DPIA strongly required.
 
 ### 2.1 Nature
 
-Automated classification of retinal fundus photographs into five disease categories (Normal, DR, Glaucoma, Cataract, AMD), producing a class probability vector and a Grad-CAM visualisation highlighting image regions contributing to the prediction. Output is shown in the hospital PACS viewer alongside the original image for review by a clinician.
+Automated classification of retinal fundus photographs into five disease categories (Normal, DR, Glaucoma, Cataract, AMD), producing a class probability vector and a Grad-CAM visualisation highlighting image regions contributing to the prediction. Output is shown in the hospital PACS viewer alongside the original image for architecture by a clinician.
 
 ### 2.2 Scope
 
@@ -109,11 +109,11 @@ High-level risks assessed; detailed failure modes in `../risk/fmea.md`.
 | ID | Risk | Likelihood | Severity | Inherent risk | Mitigation | Residual |
 |----|------|-----------|----------|---------------|-----------|----------|
 | P1 | Re-identification from pseudonymised fundus image via biometric character | Low | High | Medium | Data stays in hospital boundary; no external publication; biometric character disclosed in consent | Low |
-| P2 | Unauthorised access to inference results | Low | High | Medium | RBAC, OIDC, audit logging, break-glass review | Low |
+| P2 | Unauthorised access to inference results | Low | High | Medium | RBAC, OIDC, audit logging, break-glass architecture | Low |
 | P3 | Audit log tampering | Low | High | Medium | WORM storage, SHA-256 hash chain, separation of duties | Low |
 | P4 | Model produces systematically biased output harming a subgroup | Medium | Medium | Medium | Fairness evaluation per subgroup, drift monitoring, bias disclosures in model card | Medium |
 | P5 | Clinician over-reliance on model output (automation bias) | Medium | High | High | UI design avoids anchoring; confidence shown as calibrated probability; disagreement workflow | Medium |
-| P6 | Model output used beyond intended purpose (scope creep) | Medium | Medium | Medium | Model card enumerates intended use; DPA restricts; annual re-review | Low |
+| P6 | Model output used beyond intended purpose (scope creep) | Medium | Medium | Medium | Model card enumerates intended use; DPA restricts; annual re-architecture | Low |
 | P7 | Adversarial image manipulation to flip classification | Low | Medium | Low | Input quality gating; conformal prediction flags out-of-distribution | Low |
 | P8 | Data leak during incident response | Low | High | Medium | Incident procedure requires pseudonymised-only data sharing with vendor | Low |
 | P9 | Cross-border transfer of personal data outside EEA | Low | Medium | Low | Default architecture avoids transfer; if unavoidable, SCCs + supplementary measures | Low |
@@ -139,9 +139,9 @@ Matched to risks above.
 
 - DPA / BAA in place before go-live
 - Training of clinicians on model use, limitations, and disagreement workflow
-- DPIA review annually and on material change
+- DPIA architecture annually and on material change
 - Incident response drill quarterly
-- Privacy Officer / DPO review of any new data source before onboarding
+- Privacy Officer / DPO architecture of any new data source before onboarding
 - Patient information leaflet updated with AI disclosure
 
 ### 7.3 Model-specific measures

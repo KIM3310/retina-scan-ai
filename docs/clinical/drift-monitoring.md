@@ -81,7 +81,7 @@ Each drift signal has a severity ladder. Severity maps to response.
 |----------|-----------|----------|
 | Informational | Within normal operating range | Logged only |
 | Warning | Approaching threshold | Email to on-call; daily digest |
-| Alert | Threshold crossed | Page on-call clinical-IT; review within 4 business hours |
+| Alert | Threshold crossed | Page on-call clinical-IT; architecture within 4 business hours |
 | Critical | Threshold exceeded in way that implies patient safety | Page clinical-lead; invoke incident response |
 
 ## 5. Subgroup monitoring
@@ -112,7 +112,7 @@ A drift dashboard surfaces, per site:
 - Traffic light summary (green/amber/red) per monitor
 - Trend chart (last 90 days) for each signal
 - Subgroup heatmap
-- Alerts in the last 30 days with status (new / reviewing / closed)
+- Alerts in the last 30 days with status (new / architectureing / closed)
 
 Quarterly PSUR (Periodic Safety Update Report) summarises drift findings for regulatory purposes.
 
@@ -139,7 +139,7 @@ Quarterly PSUR (Periodic Safety Update Report) summarises drift findings for reg
 ### 8.3 Subgroup degradation
 
 1. Investigate whether subgroup sample size is sufficient for valid comparison
-2. If valid: clinical lead reviews cases; decision on whether to pause routing for the subgroup, re-calibrate, or retrain
+2. If valid: clinical lead architectures cases; decision on whether to pause routing for the subgroup, re-calibrate, or retrain
 3. Fairness re-evaluation per [`../../governance/fairness-evaluation.md`](../../governance/fairness-evaluation.md)
 4. Document decision
 
@@ -166,7 +166,7 @@ A diagnostic question: is the problem the model or the environment?
 |-------------|-------------|----------|
 | Stable input distribution, stable override rate, stable calibration, drop in sensitivity | Probably labelling or ground-truth shift | Investigate clinician panel calibration |
 | Input intensity shift + performance drop | Data drift (camera, protocol) | Camera acceptance protocol |
-| Stable inputs, performance drop, rising override rate | Concept drift or clinician trust issue | Clinical review; possibly retrain |
+| Stable inputs, performance drop, rising override rate | Concept drift or clinician trust issue | Clinical architecture; possibly retrain |
 | Input OOD rate rising | New population or broken pipeline | Investigate upstream |
 
 ## 12. References

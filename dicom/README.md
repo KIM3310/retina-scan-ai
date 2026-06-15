@@ -63,5 +63,5 @@ Or use the `pynetdicom` `apps` (`storescu`, `echoscu`) included in the `pynetdic
 
 ## Disclaimers
 
-- This code is reference / educational. Production use requires integration testing against the target PACS, DICOM conformance statement publication, notified body review if part of a CE-marked device.
+- This code is reference / educational. Production use requires integration testing against the target PACS, DICOM conformance statement publication, notified body architecture if part of a CE-marked device.
 - AE title whitelisting, TLS configuration, and PACS-side routing rules are deployment-specific and outside the scope of this repository.

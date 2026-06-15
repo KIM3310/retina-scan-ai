@@ -10,7 +10,7 @@ Retinal image classification touches almost every high-bar regulatory regime an 
 - **Decision support at the point of care** implicates FDA Software as a Medical Device (SaMD) framing, EU MDR (Medical Device Regulation 2017/745) CE marking, and the UK MHRA's equivalent.
 - **AI-specific risk** implicates the EU AI Act (Annex III, Point 5 Class IIa/IIb medical device AI = high-risk) and emerging US state laws on algorithmic decision-making.
 
-This folder maps each regime to the design and operational controls that a production deployment of this service would need. It is organised so that a regulatory reviewer or auditor can map our evidence to their required artifacts.
+This folder maps each regime to the design and operational controls that a production deployment of this service would need. It is organised so that a regulatory technical reader or auditor can map our evidence to their required artifacts.
 
 ## Contents
 

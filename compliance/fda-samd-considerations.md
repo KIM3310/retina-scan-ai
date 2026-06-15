@@ -114,7 +114,7 @@ IEC 62304 Software Safety Class:
 |-------|-----------|----------------|
 | A | No injury possible | No |
 | B | Non-serious injury possible | Candidate if used with clinician oversight and confirmatory dilated exam |
-| C | Death or serious injury possible | Candidate if used autonomously (no clinician review) |
+| C | Death or serious injury possible | Candidate if used autonomously (no clinician architecture) |
 
 Our deployment pattern (second-reader / triage with mandatory clinician sign-off) supports **Class B**. An autonomous-screening deployment (IDx-DR style) would be **Class C**. The reference UI (`clinical_ui/`) explicitly requires clinician concurrence for high-severity classes.
 
@@ -149,7 +149,7 @@ If cleared, a deployment must:
 |-----------|-------------|
 | HIPAA | Security & privacy baseline underlies all FDA deployment |
 | ISO 13485:2016 | QMS standard; FDA now recognises ISO 13485 under 21 CFR Part 820 QMSR (published Jan 2024, effective Feb 2026) |
-| ISO 14971:2019 | Required risk management process; referenced in CDRH reviews |
+| ISO 14971:2019 | Required risk management process; referenced in CDRH architectures |
 | IEC 62304 | Software lifecycle; FDA consensus standard |
 | IEC 62366-1 | Usability engineering; FDA consensus standard |
 | ISO 14155 | Clinical investigations if prospective pivotal study required |
@@ -163,8 +163,8 @@ For planning purposes, a realistic release-readiness timeline for a first-of-its
 | Algorithm freeze → V&V complete | 6–9 months |
 | Clinical validation study execution | 9–15 months (multi-site prospective) |
 | Submission preparation | 3–6 months |
-| FDA review (510(k)) | 90–180 days review clock; elapsed time often 6–12 months including questions |
-| FDA review (De Novo) | 150 days review clock; elapsed time 12–18 months |
+| FDA architecture (510(k)) | 90–180 days architecture clock; elapsed time often 6–12 months including questions |
+| FDA architecture (De Novo) | 150 days architecture clock; elapsed time 12–18 months |
 | Total wall-clock | 2.5–4 years |
 
 This is the primary reason a mature change-control plan (PCCP) is valuable: subsequent model updates avoid repeating the full cycle.

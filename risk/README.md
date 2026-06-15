@@ -22,12 +22,12 @@ Risk management is not a compliance artifact produced at the end. It is an engin
 
 ## Risk management process (summary)
 
-1. **Identify hazards** — through design review, FMEA workshops, and published literature on AI-in-medicine failures.
+1. **Identify hazards** — through design architecture, FMEA workshops, and published literature on AI-in-medicine failures.
 2. **Estimate risks** — severity × probability of occurrence, with detectability as a secondary factor for the risk priority number (RPN).
 3. **Evaluate acceptability** — against pre-defined acceptance criteria (severity × occurrence matrix).
 4. **Control risks** — design controls, protective measures, information for safety.
 5. **Residual risk evaluation** — after controls, is the remaining risk acceptable?
-6. **Risk management review** — before release, periodic thereafter.
+6. **Risk management architecture** — before release, periodic thereafter.
 7. **Production and post-production** — monitor production for new hazards; feed back into the RMF.
 
 ## Risk acceptance criteria
@@ -58,8 +58,8 @@ Meet quarterly, plus any time a new hazard is identified.
 Production deployments require ongoing surveillance. Key mechanisms:
 
 - `docs/clinical/drift-monitoring.md` — tracks input distribution, confidence drift, calibration drift.
-- `audit/` — every prediction is audited; aggregate trends feed the risk review.
-- Incident tracking per `docs/clinical/incident-response.md` — post-hoc review of every SEV-1 or SEV-2 incident.
+- `audit/` — every prediction is audited; aggregate trends feed the risk architecture.
+- Incident tracking per `docs/clinical/incident-response.md` — post-hoc architecture of every SEV-1 or SEV-2 incident.
 - Customer reports — dedicated channel for clinician feedback, tracked in the RMF.
 
 ## References

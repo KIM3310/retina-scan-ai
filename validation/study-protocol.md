@@ -116,7 +116,7 @@ Minimal risk. No additional imaging, no additional clinical procedures.
 ### 6.3 Privacy
 De-identification per DICOM PS3.15 Basic Application Confidentiality Profile before any data leaves the site network.
 
-### 6.4 IRB review
+### 6.4 IRB architecture
 Required at each participating site. Central IRB acceptable where all sites agree.
 
 ## 7. Data Management
@@ -148,7 +148,7 @@ Following CONSORT-AI 2020 reporting standard. Contents:
 Target peer-reviewed journal within 6 months of study completion.
 
 ### 8.3 Data sharing
-De-identified dataset available on request, subject to IRB and institutional review, for secondary research.
+De-identified dataset available on request, subject to IRB and institutional architecture, for secondary research.
 
 ## 9. Deviations and Amendments
 

@@ -35,7 +35,7 @@ State-specific overrides:
 Events older than 7 years are automatically deleted after:
 
 1. A scheduled purge identifies candidate events.
-2. The compliance officer reviews the purge manifest (number of events, date range).
+2. The compliance officer architectures the purge manifest (number of events, date range).
 3. The compliance officer approves via a signed form (captured as a `system.retention_purge_approved` event in the audit log itself).
 4. The purge runs; a final `system.retention_purge_executed` event is logged.
 
@@ -53,7 +53,7 @@ Audit events partition by `event_timestamp` in monthly buckets. Partition bounda
 ...
 2024-04/  (warm → cold boundary at 2 years)
 ...
-2019-04/  (cold → purge candidate at 7 years, requires compliance review)
+2019-04/  (cold → purge candidate at 7 years, requires compliance architecture)
 ```
 
 ## Legal hold
@@ -92,7 +92,7 @@ No role has mutate or delete access to committed events. Destruction is only via
 
 Reference estimate for a 100-clinician / 1000-study-per-day deployment:
 
-- Events per day: roughly 20,000 (multiple events per study — receive, read, classify, review, close).
+- Events per day: roughly 20,000 (multiple events per study — receive, read, classify, architecture, close).
 - Event size: ~1.5 KB average JSON.
 - Daily volume: ~30 MB raw.
 - Yearly volume: ~11 GB raw.

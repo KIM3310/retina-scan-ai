@@ -68,7 +68,7 @@ When a clinician's reading disagrees with the model:
    - Clinician ID (principal)
    - Timestamp
 3. The override is **not pushed back to the model as a label immediately** — this avoids reinforcement of individual clinician bias
-4. Overrides are aggregated monthly for review by the clinical-lead panel, which decides whether:
+4. Overrides are aggregated monthly for architecture by the clinical-lead panel, which decides whether:
    - The case should be added to the retraining set
    - A retraining trigger has been met (disagreement rate > configurable threshold)
    - A calibration issue exists that warrants a threshold adjustment
@@ -83,10 +83,10 @@ In triage / screening deployments, a second-reader workflow operates:
 |------|-------|--------|
 | 1 | Technician | Acquires fundus image; quality gate checks |
 | 2 | Retina Scan AI | Inference; if Normal with high confidence → low-priority queue; else → ophthalmology referral queue |
-| 3 | Primary care / NP | Reviews low-priority queue; can release or escalate |
-| 4 | Ophthalmologist | Reviews referral queue; makes definitive reading |
+| 3 | Primary care / NP | Architectures low-priority queue; can release or escalate |
+| 4 | Ophthalmologist | Architectures referral queue; makes definitive reading |
 
-The AI is never the sole gatekeeper for release. Every study passes through at least one human reviewer before being closed. The AI's role is to **prioritise**, not to substitute.
+The AI is never the sole gatekeeper for release. Every study passes through at least one human technical reader before being closed. The AI's role is to **prioritise**, not to substitute.
 
 ## 7. Automation bias mitigation
 
@@ -96,7 +96,7 @@ Automation bias — over-reliance on automated output — is a known risk (docum
 |------|-----------|
 | Anchoring on model's top class | Probability bar chart shows all 5 classes, not just top-1 |
 | Over-trust of confidence | Confidence displayed with calibration note; "calibrated" label explains to user that this is not raw softmax |
-| Missed low-probability findings | Review summary displays all classes with probability > 0.10 |
+| Missed low-probability findings | Architecture summary displays all classes with probability > 0.10 |
 | Skipping image inspection | Image is always shown fullsize; overlay is off by default below the "High" band |
 | Forgetting override capability | Override button always visible; labelled in plain language |
 | Clinician habituation to agreement | Random 1% of cases surface "Are you sure?" challenge (measured to not disrupt flow); calibration is verified against clinician's in-session disagreement rate |

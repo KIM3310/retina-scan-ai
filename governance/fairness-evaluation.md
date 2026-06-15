@@ -160,7 +160,7 @@ This evaluation is re-run:
 
 ## 14. Governance
 
-Results are reviewed by:
+Results are maintained by:
 - Clinical lead (signs off clinical acceptability of observed disparities or lack thereof)
 - Regulatory lead (signs off on post-market obligations)
 - DPO / equity officer where deployment context requires

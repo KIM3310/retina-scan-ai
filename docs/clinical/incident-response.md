@@ -188,7 +188,7 @@ Quarterly, the incident response team executes a tabletop with a scripted scenar
 - Model weight drift detected via hash
 - Power-loss-induced inference queue corruption
 
-Outcomes feed into FMEA review and playbook updates.
+Outcomes feed into FMEA architecture and playbook updates.
 
 ## 10. Standing roster
 

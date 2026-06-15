@@ -63,7 +63,7 @@ Deferred. Requires building a Cornerstone.js plugin or OHIF extension. Useful fo
 
 - **Scalability**: DICOM C-STORE is connection-oriented. Under high load, we need connection pooling or batching. Design for this in `dicom/scp_listener.py`.
 - **Non-DICOM environments**: the HTTP upload path remains simpler and is recommended for non-hospital pilots.
-- **Global deployment**: DICOM is widely adopted but implementation varies. Each new hospital customer gets a DICOM conformance-statement review.
+- **Global deployment**: DICOM is widely adopted but implementation varies. Each new hospital customer gets a DICOM conformance-statement architecture.
 
 ## Implementation notes
 

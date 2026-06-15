@@ -57,8 +57,8 @@ When a clinician needs access beyond their role (e.g., Referring Physician readi
    - Session gains `break_glass_active=True` and `break_glass_reason=<text>`.
    - Break-glass session TTL is shorter (2 hours).
 6. Every action under break-glass is marked in the audit log.
-7. Post-hoc review:
-   - Compliance officer reviews break-glass events within 72 hours.
+7. Post-hoc architecture:
+   - Compliance officer architectures break-glass events within 72 hours.
    - If inappropriate, user is contacted; potential disciplinary action per hospital policy.
 
 Break-glass is auditable and reversible (a session can be revoked mid-use). It is NOT a backdoor.
@@ -90,7 +90,7 @@ Where the hospital IdP does not enforce MFA for clinical apps, this application 
 
 - Automated tests verify the permission matrix respects MFA recency requirements.
 - Quarterly penetration test exercises MFA bypass attempts.
-- Compliance officer reviews break-glass events and MFA failure rates monthly.
+- Compliance officer architectures break-glass events and MFA failure rates monthly.
 
 ## References
 

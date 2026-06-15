@@ -41,7 +41,7 @@ Sensitivity at a fixed specificity threshold (typically specificity ≥ 0.90 —
 - Agreement with adjudicator panel (Cohen's kappa).
 - Subgroup performance by age, sex, ethnicity, camera type.
 - Time-to-decision (model) vs time-to-decision (clinician alone).
-- False-positive review burden (additional clinician minutes per 100 cases).
+- False-positive architecture burden (additional clinician minutes per 100 cases).
 
 ## Study population
 

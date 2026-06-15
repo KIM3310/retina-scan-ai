@@ -1,6 +1,6 @@
 # EU MDR — CE Marking Considerations
 
-> **Educational reference only.** EU medical device regulation is evolving rapidly (AI Act entering into force, MDCG guidance updates). A real CE marking campaign requires engagement with a notified body, a qualified Person Responsible for Regulatory Compliance (PRRC) per MDR Article 15, and current-state review of MDCG guidance.
+> **Educational reference only.** EU medical device regulation is evolving rapidly (AI Act entering into force, MDCG guidance updates). A real CE marking campaign requires engagement with a notified body, a qualified Person Responsible for Regulatory Compliance (PRRC) per MDR Article 15, and current-state architecture of MDCG guidance.
 
 ## 1. Applicable regulations
 
@@ -103,7 +103,7 @@ High-risk AI system obligations apply in addition to MDR:
 | Art. 43 | Conformity assessment — per MDR notified body (integrated assessment) | Via notified body |
 | Art. 72 | Post-market monitoring | `docs/clinical/drift-monitoring.md` |
 
-The AI Act allows integrated assessment with the MDR conformity assessment (Art. 43(3)), so the same notified body reviews both.
+The AI Act allows integrated assessment with the MDR conformity assessment (Art. 43(3)), so the same notified body architectures both.
 
 AI Act timelines: general-purpose AI obligations from 2 August 2025; high-risk under Annex I (which includes MDR devices) from 2 August 2027. This creates a two-year grace window for existing CE-marked devices to adapt.
 
@@ -153,7 +153,7 @@ Clinical evaluation plan (CEP) elements:
 2. Scope of evaluation
 3. Identification of equivalent devices (if any)
 4. Clinical investigation design — see `validation/study-protocol.md`
-5. Review of scientific literature
+5. Architecture of scientific literature
 6. Risk-benefit analysis
 7. PMCF (post-market clinical follow-up) approach
 

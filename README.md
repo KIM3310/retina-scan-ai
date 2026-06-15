@@ -3,25 +3,25 @@
 ## Live Demo
 
 - [Open the public GitHub Pages demo](https://kim3310.github.io/retina-scan-ai/)
-- Scope: credential-free, synthetic-data demo for reviewers and evaluators.
+- Scope: credential-free, synthetic-data demo for technical readers and evaluators.
 
 Retinal disease classification system using **ResNet18 transfer learning** with **Grad-CAM interpretability**. Classifies fundus images into 5 categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
 
-Technical review pack: [`docs/technical-review-pack.md`](docs/technical-review-pack.md)
+Architecture pack: [`docs/architecture-pack.md`](docs/architecture-pack.md)
 
-## Product and Review Surface
+## Product and System Surface
 
 A medical-image research workflow that demonstrates validation thinking while clearly staying outside medical-device claims.
 
 | Lens | Definition |
 |---|---|
-| Audience | Research groups, ML reviewers, health-tech prototype teams, and model-governance evaluators. |
-| Review path | Validate the demo, README, architecture notes, and quality gate before deeper workflow review. |
-| Architecture signal | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
-| Safety boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory review. |
-| Fast proof | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
+| Audience | Research groups, ML governance teams, health-tech prototype teams, and model-governance evaluators. |
+| Architecture path | Validate the demo, README, architecture notes, and quality gate before deeper workflow architecture. |
+| System signal | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
+| Safety boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory architecture. |
+| Fast path | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
 
-## Reviewer Fast Path
+## System Fast Path
 
 - **First minute:** Read the model card and risk notes before looking at predictions.
 - **Local demo:** Start the API with `uvicorn api.main:app --host 0.0.0.0 --port 8000`, then test `/predict` or `/gradcam`.
@@ -29,11 +29,11 @@ A medical-image research workflow that demonstrates validation thinking while cl
 
 ## Service Launch Playbook
 
-- [Service launch playbook](docs/service-launch-playbook.md) maps the repository to review audiences, proof gates, operating boundaries, and risk controls.
+- [Service launch playbook](docs/service-launch-playbook.md) maps the repository to architecture audiences, operating gates, operating boundaries, and risk controls.
 
-## Review Notes
+## Architecture Notes
 
-- [Review guide](docs/reviewer-evidence-map.md) summarizes the project angle, first files to inspect, verification commands, and known boundaries.
+- [Architecture guide](docs/architecture-evidence-map.md) summarizes the project angle, first files to inspect, runtime commands, and known boundaries.
 - [Quality notes](docs/quality-gate.md) lists the local checks, CI surface, and release expectations for this repository.
 - [Enterprise readiness notes](docs/enterprise-readiness.md) outlines security, data, operations, integration, and handoff expectations.
 
@@ -203,7 +203,7 @@ Designed for the [ODIR-5K](https://www.kaggle.com/datasets/andrewmvd/ocular-dise
 
 ## Not a Medical Device
 
-This repository is research code. It has not been FDA-cleared, CE-marked, or approved by any regulatory body for clinical use. Any deployment for clinical care requires regulatory clearance, IRB review, and integration with a quality management system. See `compliance/fda-samd-considerations.md` and `risk/known-limitations.md` for details.
+This repository is research code. It has not been FDA-cleared, CE-marked, or approved by any regulatory body for clinical use. Any deployment for clinical care requires regulatory clearance, IRB architecture, and integration with a quality management system. See `compliance/fda-samd-considerations.md` and `risk/known-limitations.md` for details.
 
 ## Compliance & Governance
 
@@ -276,7 +276,7 @@ This repository includes a neutral cloud and AI engineering blueprint that maps 
 
 ## Enterprise Productization
 
-- [Product operating model](docs/product-operating-model.md) defines the reviewer, trust boundary, trust boundary, operating checks, and service path for this repository.
+- [Product operating model](docs/product-operating-model.md) defines the technical reader, trust boundary, trust boundary, operating checks, and service path for this repository.
 
 ## System Architecture
 

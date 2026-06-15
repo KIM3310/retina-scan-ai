@@ -105,14 +105,14 @@ Typical thresholds (illustrative):
 - New model runs alongside current production model; outputs compared, differences logged
 - Duration: minimum 30 days, minimum 5000 studies (site-dependent)
 - No production routing to new model
-- Review of disagreement cases by clinical-lead panel
+- Architecture of disagreement cases by clinical-lead panel
 - Drift metrics tracked
 
 Pass criteria for Shadow:
 - Disagreement rate with current production on top-1 class < 5%
 - No cluster of disagreement concentrated in any single subgroup
 - No unexplained latency regression
-- No clinical review finding catastrophic disagreement (see §6 stopping rules)
+- No clinical architecture finding catastrophic disagreement (see §6 stopping rules)
 
 ### Gate 3 — A/B deployment
 
@@ -149,7 +149,7 @@ Stopping triggers a Tier C classification and an incident response (see `inciden
 
 ## 6. Change Control Board (CCB)
 
-Every material change requires CCB review. CCB membership:
+Every material change requires CCB architecture. CCB membership:
 
 | Role | Typical position |
 |------|------------------|
@@ -203,7 +203,7 @@ This identifier appears in:
 Drift monitoring provides the signal that triggers a change cycle. The typical sequence:
 
 1. Drift monitor detects statistically significant degradation
-2. Clinical-lead review determines whether intervention is warranted
+2. Clinical-lead architecture determines whether intervention is warranted
 3. If yes, a change proposal is filed; Tier is classified based on the intervention needed
 4. Change proceeds through the above lifecycle
 

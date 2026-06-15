@@ -126,7 +126,7 @@ Ophthalmologists at participating institutions (data collection); the upstream o
 
 Not specified in public release; inferred to be 2010s-era clinical imaging.
 
-### 3.6 Were any ethical review processes conducted?
+### 3.6 Were any ethical architecture processes conducted?
 
 Stated to have been conducted by the upstream organisers. Formal IRB protocol not published in the public release.
 
@@ -320,12 +320,12 @@ Class imbalance is addressed by weighted sampling during training; precise weigh
 ### 8.5 Known problems in the dataset
 
 - Multi-finding cases resolved by rule, introducing minor label noise
-- Occasional mislabelling evidenced during clinical review
+- Occasional mislabelling evidenced during clinical architecture
 - Near-duplicate pairs across train/test boundary in the raw release (mitigated by patient-level split)
 
-## 9. Review
+## 9. Architecture
 
-Datasheet is reviewed:
+Datasheet is maintained by:
 - On any change to filtering or preprocessing
 - On any addition of external data
 - Annually at minimum

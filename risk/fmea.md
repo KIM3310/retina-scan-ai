@@ -4,11 +4,11 @@
 |---|-----------|--------------|-------|--------|----------------|------------------|---------------------|-----|-----------|--------------|
 | 1 | Image preprocessing | Out-of-distribution image accepted (not fundus) | Missing gradeability check | False prediction, potential misdirection | 4 | 3 | 3 | 36 | Pre-inference gradeability classifier rejects non-fundus images with <0.60 confidence. Unit test covers 100 known non-fundus samples. | 8 |
 | 2 | Model inference | False negative on Class-2+ Diabetic Retinopathy | Training data imbalance, subtle lesion | Delayed diagnosis, progressive vision loss | 5 | 3 | 2 | 30 | Second-reader workflow recommended for all DR-positive and DR-borderline predictions. Specificity held high to keep FN rate acceptable. Drift monitoring on sensitivity. | 10 |
-| 3 | Model inference | False positive on Normal cases | Over-calling lesions | Unnecessary clinician review, anxiety | 2 | 3 | 3 | 18 | Operating threshold tuned for specificity ≥ 0.90. FP burden tracked in validation study. | 6 |
+| 3 | Model inference | False positive on Normal cases | Over-calling lesions | Unnecessary clinician architecture, anxiety | 2 | 3 | 3 | 18 | Operating threshold tuned for specificity ≥ 0.90. FP burden tracked in validation study. | 6 |
 | 4 | Model inference | Subgroup performance gap (ethnicity, camera) | Training data not representative | Unequal diagnostic quality | 4 | 4 | 3 | 48 | Fairness audit in validation study with gap flag at >10pp. Model not deployed for subgroups where gap exceeds threshold. | 12 |
 | 5 | Grad-CAM generation | Explanation misleading (attends to artifact) | Grad-CAM is approximate, can anchor on non-clinical features | Clinician misguided by explanation | 3 | 3 | 4 | 36 | Grad-CAM is opt-in (not always visible). UI disclaimer explains Grad-CAM limits. Physicians trained on Grad-CAM interpretation. | 12 |
 | 6 | Authentication | Unauthorized access | Stolen session token, MFA bypass | PHI disclosure | 5 | 1 | 3 | 15 | OIDC federated auth, MFA required for all writes, session TTL 8h, anomaly detection on IP/UA changes. | 5 |
-| 7 | Authentication | Break-glass misused | Clinician uses break-glass for convenience, not emergency | Inappropriate access to non-assigned patient records | 3 | 2 | 2 | 12 | Break-glass requires typed reason; compliance officer reviews all break-glass events within 72 hours; disciplinary policy enforced. | 6 |
+| 7 | Authentication | Break-glass misused | Clinician uses break-glass for convenience, not emergency | Inappropriate access to non-assigned patient records | 3 | 2 | 2 | 12 | Break-glass requires typed reason; compliance officer architectures all break-glass events within 72 hours; disciplinary policy enforced. | 6 |
 | 8 | DICOM ingestion | PHI leakage via DICOM tags | Incomplete anonymization | Privacy breach | 5 | 2 | 3 | 30 | DICOM PS3.15 Basic Profile anonymization; re-verification after each DICOM schema update; quarterly penetration test of anonymizer. | 10 |
 | 9 | Audit logging | Audit log tampering | Privileged user or attacker modifies audit records | Loss of compliance posture | 5 | 1 | 2 | 10 | Hash-chained audit log; append-only storage with Object Lock; quarterly chain verification; privileged mutate access eliminated. | 4 |
 | 10 | Data retention | Audit records deleted early | Retention policy misconfiguration | HIPAA violation | 5 | 1 | 3 | 15 | Compliance-officer-approved purge only; legal hold freeze; 7-year retention policy documented. | 5 |
@@ -33,7 +33,7 @@
 
 ## Prioritization
 
-Items with residual RPN > 15 are re-reviewed annually. The top three (rows 18, 17, 11, 4) receive quarterly attention in the risk review meeting.
+Items with residual RPN > 15 are re-reassessed annually. The top three (rows 18, 17, 11, 4) receive quarterly attention in the risk architecture meeting.
 
 ## Change log
 

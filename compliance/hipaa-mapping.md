@@ -30,7 +30,7 @@ Legend for "Status":
 | § 164.308(a)(1)(ii)(A) — Required | Risk Analysis | FMEA + ISO 14971 risk analysis template covers information-security risks as a subset of overall patient-safety risks | `risk/fmea.md`, `risk/iso14971-mapping.md` | Scaffolded |
 | § 164.308(a)(1)(ii)(B) — Required | Risk Management | Mitigations assigned per failure mode with RPN tracking | `risk/fmea.md` (Mitigation column) | Scaffolded |
 | § 164.308(a)(1)(ii)(C) — Required | Sanction Policy | Template policy requires deploying organisation to adopt; audit log supports enforcement | `access/mfa-policy.md` (break-glass section) | Operational |
-| § 164.308(a)(1)(ii)(D) — Required | Information System Activity Review | Structured audit logs searchable by user, patient, and event type | `audit/logger.py`, `audit/search_tools.py` | Implemented |
+| § 164.308(a)(1)(ii)(D) — Required | Information System Activity Architecture | Structured audit logs searchable by user, patient, and event type | `audit/logger.py`, `audit/search_tools.py` | Implemented |
 | § 164.308(a)(2) — Required | Assigned Security Responsibility | Role template requires deploying organisation to designate a Security Official | `access/roles.py` (Admin role) | Operational |
 | § 164.308(a)(3)(i) | Workforce Security | RBAC with clinical roles (Radiologist, Technician, Admin, Researcher) | `access/roles.py` | Implemented |
 | § 164.308(a)(3)(ii)(A) — Addressable | Authorization and/or Supervision | Role-permission matrix; admin role required for user provisioning | `access/roles.py` (permission matrix) | Implemented |
@@ -50,11 +50,11 @@ Legend for "Status":
 | § 164.308(a)(7)(i) | Contingency Plan | Clinical workflow fallback documented | `docs/clinical/incident-response.md` (fallback section) | Scaffolded |
 | § 164.308(a)(7)(ii)(A) — Required | Data Backup Plan | Model artifacts backed up per release; audit log retention on WORM storage | `audit/retention_policy.md` | Guidance |
 | § 164.308(a)(7)(ii)(B) — Required | Disaster Recovery Plan | Documented; hospital DR infrastructure carries runtime | `docs/clinical/deployment-architecture.md` | Guidance |
-| § 164.308(a)(7)(ii)(C) — Required | Emergency Mode Operation Plan | Break-glass procedure permits identity-bypass for emergencies with mandatory post-hoc review | `access/mfa-policy.md` (break-glass) | Scaffolded |
+| § 164.308(a)(7)(ii)(C) — Required | Emergency Mode Operation Plan | Break-glass procedure permits identity-bypass for emergencies with mandatory post-hoc architecture | `access/mfa-policy.md` (break-glass) | Scaffolded |
 | § 164.308(a)(7)(ii)(D) — Addressable | Testing and Revision Procedures | DR drill frequency recommended in retention policy | `audit/retention_policy.md` | Guidance |
 | § 164.308(a)(7)(ii)(E) — Addressable | Applications and Data Criticality Analysis | Criticality documented: Class IIa / high-risk | `compliance/fda-samd-considerations.md`, `compliance/mdr-ce-considerations.md` | Guidance |
-| § 164.308(a)(8) — Required | Evaluation | Periodic security evaluation procedure templated | `audit/retention_policy.md` (review cadence) | Guidance |
-| § 164.308(b)(1) | Business Associate Contracts | Template BAA pointer — legal review required | `compliance/phi-handling.md` (BAA section) | Guidance |
+| § 164.308(a)(8) — Required | Evaluation | Periodic security evaluation procedure templated | `audit/retention_policy.md` (architecture cadence) | Guidance |
+| § 164.308(b)(1) | Business Associate Contracts | Template BAA pointer — legal architecture required | `compliance/phi-handling.md` (BAA section) | Guidance |
 | § 164.308(b)(3) — Required | Written Contract or Other Arrangement | Operational | N/A | Operational |
 
 ### § 164.310 — Physical Safeguards
@@ -80,7 +80,7 @@ Legend for "Status":
 |------|-------------|----------------------|----------|--------|
 | § 164.312(a)(1) | Access Control | RBAC enforced at API layer with role-permission matrix | `access/roles.py` | Implemented |
 | § 164.312(a)(2)(i) — Required | Unique User Identification | OIDC `sub` claim used as stable principal ID; never shared accounts | `access/oidc_integration.py` | Implemented |
-| § 164.312(a)(2)(ii) — Required | Emergency Access Procedure | Break-glass role with mandatory audit trail and post-hoc review | `access/mfa-policy.md` (break-glass) | Implemented |
+| § 164.312(a)(2)(ii) — Required | Emergency Access Procedure | Break-glass role with mandatory audit trail and post-hoc architecture | `access/mfa-policy.md` (break-glass) | Implemented |
 | § 164.312(a)(2)(iii) — Addressable | Automatic Logoff | Session timeout configured at IdP; default 15 minutes idle | `access/mfa-policy.md` (session section) | Scaffolded |
 | § 164.312(a)(2)(iv) — Addressable | Encryption and Decryption | TLS 1.2+ for transit; AES-256-GCM for data at rest (hospital storage layer) | `docs/clinical/deployment-architecture.md` (encryption section) | Scaffolded |
 | § 164.312(b) — Required | Audit Controls | Structured JSON audit log with user, patient, action, timestamp, outcome, source IP | `audit/logger.py` | Implemented |
@@ -110,7 +110,7 @@ Legend for "Status":
 | § 164.316(b)(1) — Required | Documentation | All policies, risk assessments, and audit records retained electronically | `audit/retention_policy.md` | Scaffolded |
 | § 164.316(b)(2)(i) — Required | Retention — 6 years | 7-year retention adopted to exceed HIPAA minimum and align with hospital norms | `audit/retention_policy.md` | Implemented |
 | § 164.316(b)(2)(ii) — Required | Availability | Search-tools script, quarterly restore drills recommended | `audit/search_tools.py` | Implemented |
-| § 164.316(b)(2)(iii) — Required | Updates | Annual policy review cadence documented | `audit/retention_policy.md` | Guidance |
+| § 164.316(b)(2)(iii) — Required | Updates | Annual policy architecture cadence documented | `audit/retention_policy.md` | Guidance |
 
 ## Breach Notification Rule (§§ 164.400–164.414) considerations
 

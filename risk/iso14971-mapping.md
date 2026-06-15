@@ -10,16 +10,16 @@ How the risk management artifacts in this repository map to the clauses of ISO 1
 **This repo**: `risk/README.md` describes the process. `risk/fmea.md` is the primary risk inventory. Per-clause evidence listed below.
 
 ### 4.2 Management responsibilities
-**This repo**: risk management team composition documented in `risk/README.md`. Review cadence quarterly.
+**This repo**: risk management team composition documented in `risk/README.md`. Architecture cadence quarterly.
 
 ### 4.3 Competence of personnel
 **This repo**: not applicable at prototype stage. Production requires documented competency records.
 
 ### 4.4 Risk management plan
-**This repo**: inventoried items, acceptance criteria, review process in `risk/README.md` and `risk/fmea.md`. A formal RMP would be a separate controlled document under a QMS.
+**This repo**: inventoried items, acceptance criteria, architecture process in `risk/README.md` and `risk/fmea.md`. A formal RMP would be a separate controlled document under a QMS.
 
 ### 4.5 Risk management file (RMF)
-**This repo**: the `risk/` directory is the beginning of an RMF. Production requires tracking every change with revision control and review approval.
+**This repo**: the `risk/` directory is the beginning of an RMF. Production requires tracking every change with revision control and architecture approval.
 
 ## Clause 5 — Risk Analysis
 
@@ -58,7 +58,7 @@ How the risk management artifacts in this repository map to the clauses of ISO 1
 - Drift monitoring → `docs/clinical/drift-monitoring.md` + `audit/search_tools.py`.
 - OIDC + MFA → `access/oidc_integration.py`, `access/mfa-policy.md`.
 - Audit log integrity → `audit/logger.py` hash chain, `audit/search_tools.py verify-chain`.
-- Break-glass review → `access/mfa-policy.md` post-hoc review.
+- Break-glass architecture → `access/mfa-policy.md` post-hoc architecture.
 - Fairness audit → `validation/study-protocol.md` subgroup analysis plan.
 
 ### 6.3 Residual risk evaluation
@@ -71,15 +71,15 @@ How the risk management artifacts in this repository map to the clauses of ISO 1
 **This repo**: evaluated in FMEA. Example: opt-in Grad-CAM (mitigation for automation bias) could delay clinical decision in emergency — residual risk acceptable given break-glass + optionality.
 
 ### 6.6 Completeness of risk control
-**This repo**: 20 items in FMEA with residual RPN computed. Periodic review captures new risks.
+**This repo**: 20 items in FMEA with residual RPN computed. Periodic architecture captures new risks.
 
 ## Clause 7 — Evaluation of Overall Residual Risk
 
-**This repo**: aggregate residual risk assessment is a management review artifact, not part of this repo. Production would include a statement signed by the risk management team.
+**This repo**: aggregate residual risk assessment is a management architecture artifact, not part of this repo. Production would include a statement signed by the risk management team.
 
-## Clause 8 — Risk Management Review
+## Clause 8 — Risk Management Architecture
 
-**This repo**: quarterly review cadence in `risk/README.md`. Records of reviews are a separate controlled document.
+**This repo**: quarterly architecture cadence in `risk/README.md`. Records of architectures are a separate controlled document.
 
 ## Clause 9 — Production and Post-production Activities
 
@@ -92,8 +92,8 @@ How the risk management artifacts in this repository map to the clauses of ISO 1
 ### 9.2 Information collection
 **This repo**: incident tracking, audit analytics, drift metrics. A real QMS would add customer-feedback channels, regulatory reports, and external post-market safety signals.
 
-### 9.3 Information review
-**This repo**: implied via quarterly risk review. Production requires documented decision records.
+### 9.3 Information architecture
+**This repo**: implied via quarterly risk architecture. Production requires documented decision records.
 
 ### 9.4 Actions
 **This repo**: implicit. Production requires a change-control process (IEC 62304 §8).
@@ -105,8 +105,8 @@ How the risk management artifacts in this repository map to the clauses of ISO 1
 | 4.1 – 4.5 Process | Partial | Need formal RMP document, QMS integration |
 | 5.1 – 5.5 Analysis | Good | Supplementary techniques (STPA) recommended for production |
 | 6.1 – 6.6 Control | Good | Need explicit benefit-risk memo |
-| 7 Overall residual | Partial | Need management review signoff |
-| 8 Management review | Partial | Need meeting records, signoffs |
+| 7 Overall residual | Partial | Need management architecture signoff |
+| 8 Management architecture | Partial | Need meeting records, signoffs |
 | 9.1 – 9.4 Post-market | Partial | Need customer feedback channels, regulatory reporting links |
 
 ## What this mapping does NOT cover
