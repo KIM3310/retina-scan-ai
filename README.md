@@ -17,7 +17,7 @@ A medical-image research workflow that demonstrates validation thinking while cl
 |---|---|
 | Audience | Research groups, ML reviewers, health-tech prototype teams, and model-governance evaluators. |
 | Review path | Validate the demo, README, architecture notes, and quality gate before deeper workflow review. |
-| Review signal | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
+| Architecture signal | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
 | Safety boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory review. |
 | Fast proof | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
 
@@ -277,6 +277,10 @@ This repository includes a neutral cloud and AI engineering blueprint that maps 
 ## Enterprise Productization
 
 - [Product operating model](docs/product-operating-model.md) defines the reviewer, trust boundary, trust boundary, operating checks, and service path for this repository.
+
+## System Architecture
+
+- [System architecture](docs/system-architecture.md) maps the runtime boundary, data/control flow, cloud or local deployment surface, and operating assumptions for this repository.
 
 ## Service Architecture
 
