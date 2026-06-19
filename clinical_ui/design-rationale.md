@@ -68,7 +68,7 @@ We show the last 3-5 events for the current study only. Full audit querying is a
 
 Top-of-screen disclaimer ("Not a medical device, not for clinical use") on this research prototype. In a production UI, the disclaimer would be replaced by a compliance-approved statement ("Decision support tool; final diagnosis rests with the clinician").
 
-This mockup is labeled as a research prototype so no technical reader mistakes it for a clinical tool.
+This mockup is labeled as a research prototype so no architecture inspection mistakes it for a clinical tool.
 
 ## Keyboard shortcuts
 

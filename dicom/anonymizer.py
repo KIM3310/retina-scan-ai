@@ -250,7 +250,7 @@ class DicomAnonymizer:
         """
         if self._pixel_has_burned_in_annotation(ds):
             raise AnonymizationError(
-                "BurnedInAnnotation is YES -- image must be quarantined for manual review"
+                "BurnedInAnnotation is YES -- image must be quarantined for manual check"
             )
 
         # Work on a deep-ish copy; pydicom's copy.deepcopy is expensive, so we copy

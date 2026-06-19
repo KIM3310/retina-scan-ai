@@ -34,7 +34,7 @@ Implementation: `access/roles.py`.
 
 - **Clinicians understand roles**: hospital IT and clinicians both reason in role-language ("I'm a radiologist," "she's a technician"). Policies match this vocabulary.
 - **Auditability**: a role assignment change is a single event; audit queries like "who was a Radiologist on date X" are direct.
-- **Simple to reason about**: the permission matrix is a 2D table. Compliance technical readers can verify it without reading code.
+- **Simple to reason about**: the permission matrix is a 2D table. Compliance architecture inspection paths can verify it without reading code.
 - **Federation-friendly**: hospital IdP groups map 1:1 to roles. New hospital = new role-mapping config, no code change.
 - **Scope via ReBAC for assignment**: the `_if_assigned_or_breakglass` rule expresses "physicians see their patients" without adding attribute-parsing complexity.
 

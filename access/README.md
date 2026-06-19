@@ -28,7 +28,7 @@ Mapping to typical hospital staff categories:
 Cross-cutting roles (orthogonal to clinical role):
 
 - `billing_authorized` — may view billing-related metadata, not clinical imaging.
-- `quality_technical reader` — may participate in disagreement resolution workflows.
+- `quality_architecture inspection` — may participate in disagreement resolution workflows.
 
 ## Session flow
 

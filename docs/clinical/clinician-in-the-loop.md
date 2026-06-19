@@ -86,7 +86,7 @@ In triage / screening deployments, a second-reader workflow operates:
 | 3 | Primary care / NP | Architectures low-priority queue; can release or escalate |
 | 4 | Ophthalmologist | Architectures referral queue; makes definitive reading |
 
-The AI is never the sole gatekeeper for release. Every study passes through at least one human technical reader before being closed. The AI's role is to **prioritise**, not to substitute.
+The AI is never the sole gatekeeper for release. Every study passes through at least one human architecture inspection before being closed. The AI's role is to **prioritise**, not to substitute.
 
 ## 7. Automation bias mitigation
 
