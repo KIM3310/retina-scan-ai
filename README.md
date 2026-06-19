@@ -293,7 +293,7 @@ This repository includes a neutral cloud and AI engineering blueprint that maps 
 - Public entry: free static research demo with non-diagnostic framing
 - Paid boundary: paid education workspace, research report pack, and private dataset evaluation support
 - Canonical URL: https://kim3310.github.io/retina-scan-ai/
-- Lead capture: mailto:ehdjs1351@gmail.com?subject=Retina%20Scan%20AI%20private%20workspace&body=I%20am%20interested%20in%20paid%20education%20workspace%2C%20research%20report%20pack%2C%20and%20private%20dataset%20evaluation%20support%20for%20Retina%20Scan%20AI.
+- Lead capture: https://github.com/KIM3310/retina-scan-ai/issues/new?template=service-inquiry.yml&title=Private+workspace+inquiry%3A+Retina+Scan+AI
 - Machine-readable offer: [docs/service-offer.json](docs/service-offer.json)
 - Search growth implementation: [docs/search-growth-implementation.md](docs/search-growth-implementation.md)
 - Revenue architecture: [docs/revenue-architecture.md](docs/revenue-architecture.md)

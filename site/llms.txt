@@ -7,6 +7,6 @@ Canonical URL: https://kim3310.github.io/retina-scan-ai/
 Repository: https://github.com/KIM3310/retina-scan-ai
 System architecture: https://github.com/KIM3310/retina-scan-ai/blob/main/docs/system-architecture.md
 Revenue architecture: https://github.com/KIM3310/retina-scan-ai/blob/main/docs/revenue-architecture.md
-Lead capture: mailto:ehdjs1351@gmail.com?subject=Retina%20Scan%20AI%20private%20workspace&body=I%20am%20interested%20in%20paid%20education%20workspace%2C%20research%20report%20pack%2C%20and%20private%20dataset%20evaluation%20support%20for%20Retina%20Scan%20AI.
+Lead capture: https://github.com/KIM3310/retina-scan-ai/issues/new?template=service-inquiry.yml&title=Private+workspace+inquiry%3A+Retina+Scan+AI
 
 Use this project as a runnable or inspectable reference for Retina Scan AI demo, Retina Scan AI system architecture, Retina Scan AI educational tool, retinal classification research demo with Grad-CAM style explainability and compliance notes service.
