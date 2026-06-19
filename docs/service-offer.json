@@ -1,0 +1,73 @@
+{
+  "name": "Retina Scan AI",
+  "slug": "retina-scan-ai",
+  "canonical_url": "https://kim3310.github.io/retina-scan-ai/",
+  "repository_url": "https://github.com/KIM3310/retina-scan-ai",
+  "architecture_url": "https://github.com/KIM3310/retina-scan-ai/blob/main/docs/system-architecture.md",
+  "revenue_architecture_url": "https://github.com/KIM3310/retina-scan-ai/blob/main/docs/revenue-architecture.md",
+  "lead_capture_url": "mailto:ehdjs1351@gmail.com?subject=Retina%20Scan%20AI%20private%20workspace&body=I%20am%20interested%20in%20paid%20education%20workspace%2C%20research%20report%20pack%2C%20and%20private%20dataset%20evaluation%20support%20for%20Retina%20Scan%20AI.",
+  "productized_offer": "retinal classification research demo with Grad-CAM style explainability and compliance notes",
+  "first_paid_sku": "paid education workspace, research report pack, and private dataset evaluation support",
+  "free_lead_magnet": "free static research demo with non-diagnostic framing",
+  "search_positioning": {
+    "primary_query": "Retina Scan AI retinal classification research",
+    "secondary_queries": [
+      "Retina Scan AI demo",
+      "Retina Scan AI system architecture",
+      "Retina Scan AI educational tool",
+      "retinal classification research demo with Grad-CAM style explainability and compliance notes service"
+    ],
+    "audience_intent": "Find a runnable demo, inspect the system architecture, and decide whether a private workspace or implementation package is useful."
+  },
+  "monetization_boundary": {
+    "free": "free static research demo with non-diagnostic framing",
+    "paid": "paid education workspace, research report pack, and private dataset evaluation support",
+    "metering_hooks": [
+      "workspace_id",
+      "plan",
+      "quota_day",
+      "export_count",
+      "lead_source"
+    ],
+    "cost_guardrails": [
+      "static first",
+      "edge functions",
+      "customer API keys",
+      "cached AI outputs",
+      "synthetic public data"
+    ]
+  },
+  "structured_data": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Retina Scan AI",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web, serverless, and local development environments",
+    "url": "https://kim3310.github.io/retina-scan-ai/",
+    "codeRepository": "https://github.com/KIM3310/retina-scan-ai",
+    "description": "Retina Scan AI: retinal classification research demo with Grad-CAM style explainability and compliance notes. Free entry point: free static research demo with non-diagnostic framing. Paid path: paid education workspace.",
+    "creator": {
+      "@type": "Person",
+      "name": "KIM3310",
+      "url": "https://github.com/KIM3310"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "free static research demo with non-diagnostic framing",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://kim3310.github.io/retina-scan-ai/"
+      },
+      {
+        "@type": "Offer",
+        "name": "paid education workspace, research report pack, and private dataset evaluation support",
+        "availability": "https://schema.org/LimitedAvailability",
+        "url": "https://github.com/KIM3310/retina-scan-ai/blob/main/docs/revenue-architecture.md"
+      }
+    ],
+    "isAccessibleForFree": true,
+    "keywords": "retina-scan-ai, Retina, Scan, retinal, classification, research, Grad-CAM, style, explainability, compliance, notes, education, pack, dataset, evaluation, support, static, non-diagnostic, framing, tier, Cloudflare, Pages"
+  }
+}
