@@ -27,7 +27,13 @@ pip install pydicom pynetdicom
 python -m dicom.scp_listener --ae-title RETINASCAN --port 11112
 ```
 
-This starts a DICOM SCP on port 11112 accepting C-STORE associations. Received instances are anonymised, staged to a configured directory, and logged via the audit logger. Inference is triggered by a downstream worker in production; the listener itself is narrow by design.
+This starts a DICOM SCP on `127.0.0.1:11112` accepting C-STORE associations. Received instances are anonymised, staged to a configured directory, and logged via the audit logger. Inference is triggered by a downstream worker in production; the listener itself is narrow by design.
+
+To expose the listener beyond loopback, make the interface explicit after applying the site network controls:
+
+```
+python -m dicom.scp_listener --host 0.0.0.0 --ae-title RETINASCAN --port 11112
+```
 
 ## Architecture
 
@@ -63,5 +69,5 @@ Or use the `pynetdicom` `apps` (`storescu`, `echoscu`) included in the `pynetdic
 
 ## Disclaimers
 
-- This code is reference / educational. Production use requires integration testing against the target PACS, DICOM conformance statement publication, notified body architecture if part of a CE-marked device.
+- This code is reference / educational. Production use requires integration testing against the target PACS, DICOM conformance statement publication, and notified body review if part of a CE-marked device.
 - AE title whitelisting, TLS configuration, and PACS-side routing rules are deployment-specific and outside the scope of this repository.

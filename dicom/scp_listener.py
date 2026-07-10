@@ -45,12 +45,14 @@ class SCPConfig:
     def __init__(
         self,
         ae_title: str = "RETINA_SCP",
+        host: str = "127.0.0.1",
         port: int = 11112,
         staging_dir: str = "/var/spool/retina-scan-ai/inbound",
         anonymize: bool = True,
         max_pdu_size: int = 16384,
     ) -> None:
         self.ae_title = ae_title
+        self.host = host
         self.port = port
         self.staging_dir = Path(staging_dir)
         self.anonymize = anonymize
@@ -173,7 +175,7 @@ def run(config: SCPConfig) -> int:
         level=os.getenv("LOG_LEVEL", "INFO"),
         format="%(asctime)s %(levelname)s %(name)s %(message)s",
     )
-    log.info("Starting DICOM SCP on %s:%s as %s", "0.0.0.0", config.port, config.ae_title)
+    log.info("Starting DICOM SCP on %s:%s as %s", config.host, config.port, config.ae_title)
     log.info("Staging directory: %s (anonymize=%s)", config.staging_dir, config.anonymize)
 
     if os.getenv("DICOM_DEBUG", "0") == "1":
@@ -183,7 +185,7 @@ def run(config: SCPConfig) -> int:
     handlers = ae._retina_handlers  # type: ignore[attr-defined]
 
     # Graceful shutdown on SIGINT/SIGTERM
-    server = ae.start_server(("0.0.0.0", config.port), evt_handlers=handlers, block=False)
+    server = ae.start_server((config.host, config.port), evt_handlers=handlers, block=False)
 
     def _shutdown(signum: int, _frame: Any) -> None:
         log.info("Received signal %s; shutting down SCP", signum)
@@ -202,6 +204,11 @@ def run(config: SCPConfig) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="DICOM C-STORE SCP listener")
     parser.add_argument("--ae-title", default=os.getenv("DICOM_AE_TITLE", "RETINA_SCP"))
+    parser.add_argument(
+        "--host",
+        default=os.getenv("DICOM_HOST", "127.0.0.1"),
+        help="Host/interface to bind. Use 0.0.0.0 only when intentionally exposing the SCP.",
+    )
     parser.add_argument("--port", type=int, default=int(os.getenv("DICOM_PORT", "11112")))
     parser.add_argument(
         "--staging-dir",
@@ -216,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
 
     config = SCPConfig(
         ae_title=args.ae_title,
+        host=args.host,
         port=args.port,
         staging_dir=args.staging_dir,
         anonymize=not args.no_anonymize,

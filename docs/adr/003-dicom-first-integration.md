@@ -63,11 +63,11 @@ Deferred. Requires building a Cornerstone.js plugin or OHIF extension. Useful fo
 
 - **Scalability**: DICOM C-STORE is connection-oriented. Under high load, we need connection pooling or batching. Design for this in `dicom/scp_listener.py`.
 - **Non-DICOM environments**: the HTTP upload path remains simpler and is recommended for non-hospital pilots.
-- **Global deployment**: DICOM is widely adopted but implementation varies. Each new hospital customer gets a DICOM conformance-statement architecture.
+- **Global deployment**: DICOM is widely adopted but implementation varies. Each new hospital customer gets a DICOM conformance-statement review.
 
 ## Implementation notes
 
-- SCP listener: `dicom/scp_listener.py`, binds configurable port (default 11112).
+- SCP listener: `dicom/scp_listener.py`, binds configurable host (default `127.0.0.1`) and port (default 11112). Binding `0.0.0.0` is an explicit deployment choice.
 - Anonymization: `dicom/anonymizer.py`, implements DICOM PS3.15 Annex E Basic Application Confidentiality Profile.
 - GSPS overlay: `dicom/gsps_generator.py`, produces GSPS objects with Grad-CAM heatmap as a Graphic Annotation.
 - Audit: `dicom/audit_logger.py` emits audit events for every DICOM operation.

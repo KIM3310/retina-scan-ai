@@ -3,7 +3,7 @@
 ## Public Demo
 
 - URL: https://kim3310.github.io/retina-scan-ai/
-- Scope: credential-free synthetic demo surface for quick architecture inspection inspection.
+- Scope: credential-free synthetic demo surface for quick clinical review.
 
 Repository: `retina-scan-ai`
 Last updated: 2026-06-03 KST

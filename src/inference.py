@@ -6,6 +6,7 @@ import torch
 from PIL import Image
 from torchvision import transforms
 
+from src.checkpoints import load_model_checkpoint
 from src.config import CLASS_LABELS
 from src.model import build_model
 
@@ -16,14 +17,14 @@ class RetinalPredictor:
     def __init__(self, checkpoint_path: str | Path, device: str | None = None):
         self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
 
-        checkpoint = torch.load(checkpoint_path, map_location=self.device, weights_only=False)
-        ckpt_config = checkpoint.get("config", {})
+        checkpoint = load_model_checkpoint(checkpoint_path, map_location=self.device)
+        ckpt_config = checkpoint.config
 
         self.model = build_model(
             num_classes=ckpt_config.get("num_classes", 5),
             pretrained=False,
         ).to(self.device)
-        self.model.load_state_dict(checkpoint["model_state_dict"])
+        self.model.load_state_dict(checkpoint.model_state_dict)
         self.model.eval()
 
         img_size = ckpt_config.get("img_size", 224)

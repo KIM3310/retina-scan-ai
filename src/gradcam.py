@@ -16,6 +16,7 @@ import torch.nn.functional as F
 from PIL import Image
 from torchvision import transforms
 
+from src.checkpoints import load_model_checkpoint
 from src.config import CLASS_LABELS
 from src.model import build_model
 
@@ -85,11 +86,11 @@ def visualize_gradcam(
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
-    ckpt_config = checkpoint.get("config", {})
+    checkpoint = load_model_checkpoint(checkpoint_path, map_location=device)
+    ckpt_config = checkpoint.config
 
     model = build_model(num_classes=ckpt_config.get("num_classes", 5), pretrained=False).to(device)
-    model.load_state_dict(checkpoint["model_state_dict"])
+    model.load_state_dict(checkpoint.model_state_dict)
 
     transform = transforms.Compose([
         transforms.Resize((224, 224)),

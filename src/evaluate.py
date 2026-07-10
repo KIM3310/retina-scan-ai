@@ -21,6 +21,7 @@ from sklearn.metrics import (
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+from src.checkpoints import load_model_checkpoint
 from src.config import TrainConfig
 from src.dataset import create_dataloaders
 from src.model import build_model
@@ -126,14 +127,14 @@ def evaluate(checkpoint_path: str | Path, config: TrainConfig | None = None) -> 
     config.output_dir.mkdir(parents=True, exist_ok=True)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
-    ckpt_config = checkpoint.get("config", {})
+    checkpoint = load_model_checkpoint(checkpoint_path, map_location=device)
+    ckpt_config = checkpoint.config
 
     model = build_model(
         num_classes=ckpt_config.get("num_classes", config.num_classes),
         pretrained=False,
     ).to(device)
-    model.load_state_dict(checkpoint["model_state_dict"])
+    model.load_state_dict(checkpoint.model_state_dict)
 
     _, _, test_loader = create_dataloaders(config)
     print(f"Test set: {len(test_loader.dataset)} images")
