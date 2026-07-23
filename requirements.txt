@@ -1,6 +1,7 @@
-torch>=2.2.0
-torchvision>=0.17.0
-pillow>=10.2.0
+torch>=2.13.0
+torchvision>=0.28.0
+pillow>=12.3.0
+setuptools>=83.0.0
 numpy>=1.26.0
 pandas>=2.2.0
 scikit-learn>=1.4.0
