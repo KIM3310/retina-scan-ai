@@ -22,7 +22,7 @@ import os
 import threading
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -90,9 +90,8 @@ class FileBackend(AuditBackend):
         self._lock = threading.Lock()
 
     def append(self, event: dict) -> None:
-        with self._lock:
-            with open(self.path, "a", encoding="utf-8") as f:
-                f.write(json.dumps(event, separators=(",", ":")) + "\n")
+        with self._lock, open(self.path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(event, separators=(",", ":")) + "\n")
 
 
 class InMemoryBackend(AuditBackend):
@@ -123,9 +122,7 @@ class AuditLogger:
     def _default_backend() -> AuditBackend:
         kind = os.getenv("AUDIT_BACKEND", "file")
         if kind == "file":
-            return FileBackend(
-                os.getenv("AUDIT_FILE_PATH", "/var/log/retina-scan-ai/audit.jsonl")
-            )
+            return FileBackend(os.getenv("AUDIT_FILE_PATH", "/var/log/retina-scan-ai/audit.jsonl"))
         if kind == "memory":
             return InMemoryBackend()
         raise ValueError(f"unknown AUDIT_BACKEND: {kind}")
@@ -148,7 +145,7 @@ class AuditLogger:
         """
         with self._lock:
             event_id = "evt_" + uuid.uuid4().hex
-            ts = datetime.now(timezone.utc).isoformat()
+            ts = datetime.now(UTC).isoformat()
 
             if category is None:
                 # Infer category from event_type prefix.
@@ -218,7 +215,9 @@ def log_access(
     )
 
 
-def log_modify(event_type: str, actor: Actor, subject: Subject | None = None, **kwargs: Any) -> dict:
+def log_modify(
+    event_type: str, actor: Actor, subject: Subject | None = None, **kwargs: Any
+) -> dict:
     return get_logger().emit(
         event_type=event_type,
         actor=actor,

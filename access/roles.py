@@ -88,7 +88,7 @@ def _never(_ctx: PermissionContext, _subject: dict | None) -> bool:
     return False
 
 
-_MATRIX: dict[Role, dict[Action, "AllowFn"]] = {
+_MATRIX: dict[Role, dict[Action, AllowFn]] = {
     Role.RADIOLOGIST: {
         Action.STUDY_READ: _always,
         Action.STUDY_LIST: _always,
@@ -144,9 +144,7 @@ _MATRIX: dict[Role, dict[Action, "AllowFn"]] = {
 }
 
 
-def is_permitted(
-    action: Action, context: PermissionContext, subject: dict | None = None
-) -> bool:
+def is_permitted(action: Action, context: PermissionContext, subject: dict | None = None) -> bool:
     """Check whether the given action is permitted for the context.
 
     Returns True/False. No errors raised for missing permissions — caller emits
@@ -167,7 +165,7 @@ def permissions_for_role(role: Role) -> list[Action]:
 def describe_permission_matrix() -> str:
     """Human-readable matrix dump for documentation and compliance review."""
     lines = ["Role × Action permission matrix", ""]
-    all_actions = sorted({a for perms in _MATRIX.values() for a in perms.keys()}, key=lambda a: a.value)
+    all_actions = sorted({a for perms in _MATRIX.values() for a in perms}, key=lambda a: a.value)
     header = "Role".ljust(24) + "".join(a.value.ljust(30) for a in all_actions)
     lines.append(header)
     lines.append("-" * len(header))

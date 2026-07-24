@@ -21,8 +21,8 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from pynetdicom import AE, evt, debug_logger  # type: ignore
     from pydicom import dcmwrite  # type: ignore
+    from pynetdicom import AE, debug_logger, evt  # type: ignore
 
     _PYNETDICOM_AVAILABLE = True
 except ImportError:  # pragma: no cover
@@ -94,8 +94,8 @@ def handle_store(event: Any, config: SCPConfig) -> int:
             except ImportError:
                 log.error("anonymizer not available; refusing store to avoid PHI spill")
                 return 0xA700
-            except Exception as e:  # pragma: no cover
-                log.exception("anonymization failed: %s", e)
+            except Exception:  # pragma: no cover
+                log.exception("anonymization failed")
                 return 0xA700
 
         # Stage the file
@@ -116,8 +116,8 @@ def handle_store(event: Any, config: SCPConfig) -> int:
         )
         return 0x0000
 
-    except Exception as e:  # pragma: no cover
-        log.exception("store handler failed: %s", e)
+    except Exception:  # pragma: no cover
+        log.exception("store handler failed")
         # 0xC000 — error: cannot understand
         return 0xC000
 
@@ -125,7 +125,7 @@ def handle_store(event: Any, config: SCPConfig) -> int:
 def _emit_audit(**kwargs: Any) -> None:
     """Best-effort audit emit. Silently logs if audit module unavailable."""
     try:
-        from audit.logger import Actor, Subject, Source, log_access  # type: ignore
+        from audit.logger import Actor, Source, Subject, log_access  # type: ignore
 
         log_access(
             event_type=kwargs.get("event_type", "access.study_receive"),

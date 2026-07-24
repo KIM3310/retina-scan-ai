@@ -23,10 +23,9 @@ import sys
 import threading
 import uuid
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-
 
 DEFAULT_LOG_PATH = Path(os.environ.get("RETINA_DICOM_AUDIT_LOG", "logs/dicom_audit.jsonl"))
 
@@ -40,7 +39,9 @@ class DicomAuditEvent:
     """
 
     event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    timestamp_utc: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat(timespec="microseconds"))
+    timestamp_utc: str = field(
+        default_factory=lambda: datetime.now(UTC).isoformat(timespec="microseconds")
+    )
     event_type: str = ""
     outcome: str = "success"
     outcome_detail: str | None = None

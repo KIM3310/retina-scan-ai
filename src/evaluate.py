@@ -4,13 +4,13 @@ import json
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import torch
-import torch.nn as nn
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
@@ -18,6 +18,7 @@ from sklearn.metrics import (
     roc_auc_score,
     roc_curve,
 )
+from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
@@ -62,16 +63,30 @@ def plot_confusion_matrix(
     cm = confusion_matrix(y_true, y_pred)
     cm_normalized = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis]
 
-    fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+    _fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names,
-                yticklabels=class_names, ax=axes[0])
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=class_names,
+        yticklabels=class_names,
+        ax=axes[0],
+    )
     axes[0].set_title("Confusion Matrix (Counts)")
     axes[0].set_ylabel("True Label")
     axes[0].set_xlabel("Predicted Label")
 
-    sns.heatmap(cm_normalized, annot=True, fmt=".2f", cmap="Blues", xticklabels=class_names,
-                yticklabels=class_names, ax=axes[1])
+    sns.heatmap(
+        cm_normalized,
+        annot=True,
+        fmt=".2f",
+        cmap="Blues",
+        xticklabels=class_names,
+        yticklabels=class_names,
+        ax=axes[1],
+    )
     axes[1].set_title("Confusion Matrix (Normalized)")
     axes[1].set_ylabel("True Label")
     axes[1].set_xlabel("Predicted Label")
@@ -92,7 +107,7 @@ def plot_roc_curves(
     n_classes = len(class_names)
     auc_scores = {}
 
-    fig, ax = plt.subplots(figsize=(10, 8))
+    _fig, ax = plt.subplots(figsize=(10, 8))
 
     for i in range(n_classes):
         y_binary = (y_true == i).astype(int)
@@ -142,14 +157,20 @@ def evaluate(checkpoint_path: str | Path, config: TrainConfig | None = None) -> 
     y_true, y_pred, y_prob = collect_predictions(model, test_loader, device)
 
     accuracy = accuracy_score(y_true, y_pred)
-    report = classification_report(y_true, y_pred, target_names=config.class_names, output_dict=True)
+    report = classification_report(
+        y_true, y_pred, target_names=config.class_names, output_dict=True
+    )
     report_text = classification_report(y_true, y_pred, target_names=config.class_names)
 
     print(f"\nTest Accuracy: {accuracy:.4f}")
     print(f"\n{report_text}")
 
-    plot_confusion_matrix(y_true, y_pred, config.class_names, config.output_dir / "confusion_matrix.png")
-    auc_scores = plot_roc_curves(y_true, y_prob, config.class_names, config.output_dir / "roc_curves.png")
+    plot_confusion_matrix(
+        y_true, y_pred, config.class_names, config.output_dir / "confusion_matrix.png"
+    )
+    auc_scores = plot_roc_curves(
+        y_true, y_prob, config.class_names, config.output_dir / "roc_curves.png"
+    )
 
     results = {
         "accuracy": float(accuracy),
@@ -170,5 +191,6 @@ def evaluate(checkpoint_path: str | Path, config: TrainConfig | None = None) -> 
 
 if __name__ == "__main__":
     import sys
+
     ckpt = sys.argv[1] if len(sys.argv) > 1 else "checkpoints/best_model.pth"
     evaluate(ckpt)

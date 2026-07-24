@@ -20,12 +20,13 @@ try:
     # In a real deployment, use `authlib` or `python-jose` for JWT handling.
     # We import lazily so this module imports cleanly without the dep.
     from authlib.integrations.requests_client import OAuth2Session  # type: ignore
-    from authlib.jose import JsonWebToken, JsonWebKey  # type: ignore
+    from authlib.jose import JsonWebKey, JsonWebToken  # type: ignore
+
     _AUTHLIB_AVAILABLE = True
 except ImportError:  # pragma: no cover — production needs this dependency
     _AUTHLIB_AVAILABLE = False
 
-from access.roles import Role, PurposeOfUse
+from access.roles import PurposeOfUse, Role
 
 
 @dataclass
@@ -37,9 +38,7 @@ class OIDCConfig:
     scopes: list[str] = field(default_factory=lambda: ["openid", "profile", "email", "groups"])
     group_claim: str = "groups"
     role_mapping: dict[str, Role] = field(default_factory=dict)
-    allowed_purposes: list[PurposeOfUse] = field(
-        default_factory=lambda: list(PurposeOfUse)
-    )
+    allowed_purposes: list[PurposeOfUse] = field(default_factory=lambda: list(PurposeOfUse))
     session_ttl_seconds: int = 8 * 3600
     jwks_cache_seconds: int = 3600
 
@@ -86,9 +85,7 @@ class OIDCClient:
     # -------------------------------------------------
     # Authorization URL construction (start of flow)
     # -------------------------------------------------
-    def authorization_url(
-        self, redirect_uri: str, purpose: PurposeOfUse
-    ) -> tuple[str, str]:
+    def authorization_url(self, redirect_uri: str, purpose: PurposeOfUse) -> tuple[str, str]:
         """Return (authorization_url, state).
 
         Include purpose as a custom parameter so the user's purpose-of-use
@@ -173,7 +170,10 @@ class OIDCClient:
         return dict(claims)
 
     def _get_jwks(self) -> Any:
-        if self._jwks is None or (time.time() - self._jwks_fetched_at) > self.config.jwks_cache_seconds:
+        if (
+            self._jwks is None
+            or (time.time() - self._jwks_fetched_at) > self.config.jwks_cache_seconds
+        ):
             metadata = self._discovery()
             import requests
 

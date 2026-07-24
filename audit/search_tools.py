@@ -16,9 +16,9 @@ import argparse
 import hashlib
 import json
 import sys
-from datetime import datetime, timedelta, timezone
+from collections.abc import Iterable
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Iterable
 
 
 def _parse_window(window: str) -> timedelta:
@@ -44,10 +44,10 @@ def _iter_events(path: Path) -> Iterable[dict]:
 
 
 def search_by_patient(path: Path, patient_hash: str, window: timedelta) -> list[dict]:
-    cutoff = datetime.now(timezone.utc) - window
+    cutoff = datetime.now(UTC) - window
     matches: list[dict] = []
     for event in _iter_events(path):
-        ts = datetime.fromisoformat(event["event_timestamp"].replace("Z", "+00:00"))
+        ts = datetime.fromisoformat(event["event_timestamp"])
         if ts < cutoff:
             continue
         subject = event.get("subject") or {}
@@ -57,10 +57,10 @@ def search_by_patient(path: Path, patient_hash: str, window: timedelta) -> list[
 
 
 def search_by_user(path: Path, user_id: str, window: timedelta) -> list[dict]:
-    cutoff = datetime.now(timezone.utc) - window
+    cutoff = datetime.now(UTC) - window
     matches: list[dict] = []
     for event in _iter_events(path):
-        ts = datetime.fromisoformat(event["event_timestamp"].replace("Z", "+00:00"))
+        ts = datetime.fromisoformat(event["event_timestamp"])
         if ts < cutoff:
             continue
         actor = event.get("actor") or {}
@@ -78,7 +78,7 @@ def verify_chain(path: Path, from_date: datetime | None = None) -> tuple[bool, l
     for event in _iter_events(path):
         ts_str = event["event_timestamp"]
         if from_date is not None:
-            ts = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+            ts = datetime.fromisoformat(ts_str)
             if ts < from_date:
                 prev_hash = event["integrity"]["current_hash"]
                 prev_ts = ts_str
@@ -111,7 +111,7 @@ def export_range(path: Path, start: datetime, end: datetime, out: Path) -> int:
     count = 0
     with open(out, "w", encoding="utf-8") as f:
         for event in _iter_events(path):
-            ts = datetime.fromisoformat(event["event_timestamp"].replace("Z", "+00:00"))
+            ts = datetime.fromisoformat(event["event_timestamp"])
             if start <= ts < end:
                 f.write(json.dumps(event, separators=(",", ":")) + "\n")
                 count += 1
@@ -176,9 +176,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "verify-chain":
         from_date = (
-            datetime.fromisoformat(args.from_date).replace(tzinfo=timezone.utc)
-            if args.from_date
-            else None
+            datetime.fromisoformat(args.from_date).replace(tzinfo=UTC) if args.from_date else None
         )
         ok, breaks = verify_chain(path, from_date=from_date)
         if ok:
@@ -191,8 +189,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "export":
         start_str, end_str = args.date_range.split(":")
-        start = datetime.fromisoformat(start_str).replace(tzinfo=timezone.utc)
-        end = datetime.fromisoformat(end_str).replace(tzinfo=timezone.utc)
+        start = datetime.fromisoformat(start_str).replace(tzinfo=UTC)
+        end = datetime.fromisoformat(end_str).replace(tzinfo=UTC)
         count = export_range(path, start, end, Path(args.out))
         print(f"Exported {count} events to {args.out}")
         return 0

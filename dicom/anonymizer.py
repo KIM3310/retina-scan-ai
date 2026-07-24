@@ -27,11 +27,11 @@ import hmac
 import logging
 import os
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 try:
-    from pydicom import Dataset, DataElement
+    from pydicom import DataElement, Dataset
     from pydicom.dataset import FileDataset
     from pydicom.tag import Tag
     from pydicom.uid import generate_uid
@@ -96,7 +96,10 @@ TAGS_TO_EMPTY: tuple[tuple[int, int], ...] = (
     (0x0008, 0x1070),  # OperatorsName
     (0x0010, 0x0010),  # PatientName
     (0x0010, 0x1001),  # OtherPatientNames
-    (0x0010, 0x2160),  # EthnicGroup -- redacted unless retention is explicitly configured for fairness monitoring
+    (
+        0x0010,
+        0x2160,
+    ),  # EthnicGroup -- redacted unless retention is explicitly configured for fairness monitoring
     (0x0040, 0xA075),  # VerifyingObserverName
 )
 
@@ -329,7 +332,8 @@ class DicomAnonymizer:
                     new_file_meta.MediaStorageSOPInstanceUID = new_ds.get(
                         "SOPInstanceUID", new_file_meta.MediaStorageSOPInstanceUID
                     )
-            except Exception:  # pragma: no cover -- defensive
+            # Malformed third-party metadata must fall back to the original file meta.
+            except Exception:  # noqa: BLE001  # pragma: no cover
                 new_file_meta = ds.file_meta
 
         out = FileDataset(
@@ -364,9 +368,7 @@ class DicomAnonymizer:
             return True
         if (group, elem) == (0x0010, 0x1010) and self._retain_patient_age:
             return True
-        if (group, elem) == (0x0010, 0x2160) and self._retain_ethnic_group:
-            return True
-        return False
+        return (group, elem) == (0x0010, 0x2160) and self._retain_ethnic_group
 
     def _remap_uid(self, original: str) -> str:
         if not original:
@@ -446,7 +448,7 @@ def _set_deidentification_headers(ds: Dataset) -> None:
         "LO",
         "Anonymised by Retina Scan AI per DICOM PS3.15 Annex E Basic Profile",
     )
-    now_dt = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    now_dt = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
     # A minimal De-identification Method Code Sequence (0012,0064).
     method_item = Dataset()
     method_item.CodeValue = "113100"

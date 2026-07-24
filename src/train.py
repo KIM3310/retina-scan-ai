@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 
 import torch
-import torch.nn as nn
+from torch import nn
 from torch.optim import Adam
 from torch.optim.lr_scheduler import StepLR
 from torch.utils.data import DataLoader

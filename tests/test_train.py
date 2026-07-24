@@ -1,6 +1,5 @@
 """Tests for training components."""
 
-
 from src.train import EarlyStopping
 
 

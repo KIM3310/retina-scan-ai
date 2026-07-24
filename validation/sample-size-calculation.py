@@ -42,7 +42,7 @@ def cases_for_sensitivity(
     z = z_score(confidence)
     p = expected_sensitivity
     n = (z**2) * p * (1 - p) / (ci_half_width**2)
-    return int(math.ceil(n))
+    return math.ceil(n)
 
 
 def total_sample_for_sensitivity(
@@ -54,7 +54,7 @@ def total_sample_for_sensitivity(
     """Total population needed given the disease prevalence."""
     cases = cases_for_sensitivity(expected_sensitivity, ci_half_width, confidence)
     total = cases / prevalence
-    return int(math.ceil(total))
+    return math.ceil(total)
 
 
 @dataclass

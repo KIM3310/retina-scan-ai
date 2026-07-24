@@ -23,7 +23,8 @@ $(VENV_STAMP): pyproject.toml $(VENV_PYTHON)
 install: $(VENV_STAMP)
 
 lint: install
-	$(VENV_PYTHON) -m ruff check api clinical_ui compliance dicom risk src tests
+	$(VENV_PYTHON) -m ruff check .
+	$(VENV_PYTHON) -m ruff format --check .
 
 test: install
 	$(VENV_PYTHON) -m pytest -q

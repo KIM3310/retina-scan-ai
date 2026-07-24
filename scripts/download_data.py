@@ -17,7 +17,6 @@ import pandas as pd
 from PIL import Image
 from tqdm import tqdm
 
-
 DATA_DIR = Path("data/retina")
 RAW_DIR = Path("data/raw")
 
@@ -92,6 +91,7 @@ def create_synthetic_dataset(n_per_class: int = 100) -> None:
 
         for i in range(n_per_class):
             import random
+
             r = max(0, min(255, base_color[0] + random.randint(-30, 30)))
             g = max(0, min(255, base_color[1] + random.randint(-30, 30)))
             b = max(0, min(255, base_color[2] + random.randint(-30, 30)))

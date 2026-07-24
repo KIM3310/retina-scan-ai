@@ -36,9 +36,7 @@ def load_model_checkpoint(
         )
 
     if "model_state_dict" not in checkpoint:
-        raise UnsupportedCheckpointError(
-            "Unsupported checkpoint shape: missing model_state_dict"
-        )
+        raise UnsupportedCheckpointError("Unsupported checkpoint shape: missing model_state_dict")
 
     model_state_dict = _validate_model_state_dict(checkpoint["model_state_dict"])
     config = checkpoint.get("config", {})

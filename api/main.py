@@ -1,5 +1,6 @@
 """FastAPI inference server for retinal disease classification."""
 
+import asyncio
 import io
 from pathlib import Path
 
@@ -25,7 +26,9 @@ def get_predictor() -> RetinalPredictor:
     global predictor
     if predictor is None:
         if not CHECKPOINT_PATH.exists():
-            raise HTTPException(status_code=503, detail="Model checkpoint not found. Train the model first.")
+            raise HTTPException(
+                status_code=503, detail="Model checkpoint not found. Train the model first."
+            )
         predictor = RetinalPredictor(CHECKPOINT_PATH)
     return predictor
 
@@ -41,7 +44,7 @@ def get_classes() -> dict:
 
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...)) -> dict:
+async def predict(file: UploadFile = File(...)) -> dict:  # noqa: B008 - FastAPI dependency marker
     """Classify a retinal fundus image.
 
     Upload a retinal image and receive disease classification
@@ -61,7 +64,7 @@ async def predict(file: UploadFile = File(...)) -> dict:
 
 
 @app.post("/gradcam")
-async def gradcam(file: UploadFile = File(...)) -> FileResponse:
+async def gradcam(file: UploadFile = File(...)) -> FileResponse:  # noqa: B008 - FastAPI dependency marker
     """Generate Grad-CAM heatmap for model interpretability.
 
     Upload a retinal image and receive a visualization showing
@@ -73,8 +76,7 @@ async def gradcam(file: UploadFile = File(...)) -> FileResponse:
     contents = await file.read()
     tmp_path = Path("outputs/tmp_upload.png")
     tmp_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(tmp_path, "wb") as f:
-        f.write(contents)
+    await asyncio.to_thread(tmp_path.write_bytes, contents)
 
     output_path = Path("outputs/gradcam_result.png")
     visualize_gradcam(tmp_path, CHECKPOINT_PATH, output_path)

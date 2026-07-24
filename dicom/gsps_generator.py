@@ -22,6 +22,7 @@ try:
     from pydicom import Dataset, Sequence, dcmread, dcmwrite  # type: ignore
     from pydicom.dataset import FileDataset, FileMetaDataset  # type: ignore
     from pydicom.uid import ExplicitVRLittleEndian, generate_uid  # type: ignore
+
     _DEPS_AVAILABLE = True
 except ImportError:  # pragma: no cover
     _DEPS_AVAILABLE = False
@@ -34,7 +35,7 @@ GSPS_SOP_CLASS_UID = "1.2.840.10008.5.1.4.1.1.11.1"  # Grayscale Softcopy Presen
 
 
 def heatmap_to_contours(
-    heatmap: "np.ndarray", threshold: float = 0.5, max_contours: int = 20
+    heatmap: np.ndarray, threshold: float = 0.5, max_contours: int = 20
 ) -> list[list[tuple[float, float]]]:
     """Convert a Grad-CAM heatmap into contour polygons above the threshold.
 
@@ -67,12 +68,12 @@ def heatmap_to_contours(
 
 
 def build_gsps(
-    source_ds: "Dataset",
-    heatmap: "np.ndarray",
+    source_ds: Dataset,
+    heatmap: np.ndarray,
     threshold: float = 0.5,
     description: str = "Grad-CAM attention overlay",
     softcopy_type: str = "Analysis",
-) -> "FileDataset":
+) -> FileDataset:
     """Build a GSPS Dataset referencing the source image, with heatmap overlay.
 
     The returned object can be written to disk or sent via C-STORE.
@@ -92,7 +93,8 @@ def build_gsps(
     file_meta.ImplementationVersionName = "RETINA_SCAN_AI"
 
     ds = FileDataset("", {}, file_meta=file_meta, preamble=b"\x00" * 128)
-    now = datetime.now()
+    # DICOM DA/TM values intentionally use local wall-clock time without an offset.
+    now = datetime.now()  # noqa: DTZ005
 
     # Patient / study / series identity (inherit from source so the PACS links them)
     for attr in ("PatientID", "PatientName", "PatientBirthDate", "PatientSex"):
@@ -193,7 +195,7 @@ def build_gsps(
 
 def build_and_save(
     source_dicom_path: str,
-    heatmap: "np.ndarray",
+    heatmap: np.ndarray,
     output_path: str,
     threshold: float = 0.5,
 ) -> None:
@@ -207,7 +209,9 @@ def build_and_save(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Generate a GSPS DICOM object with a Grad-CAM overlay")
+    parser = argparse.ArgumentParser(
+        description="Generate a GSPS DICOM object with a Grad-CAM overlay"
+    )
     parser.add_argument("--source", required=True, help="Path to the source fundus DICOM")
     parser.add_argument(
         "--heatmap",

@@ -7,6 +7,7 @@ for each prediction, providing clinical interpretability.
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
@@ -38,10 +39,14 @@ class GradCAM:
         target.register_forward_hook(self._save_activations)
         target.register_full_backward_hook(self._save_gradients)
 
-    def _save_activations(self, module: torch.nn.Module, input: tuple, output: torch.Tensor) -> None:
+    def _save_activations(
+        self, module: torch.nn.Module, input: tuple, output: torch.Tensor
+    ) -> None:
         self.activations = output.detach()
 
-    def _save_gradients(self, module: torch.nn.Module, grad_input: tuple, grad_output: tuple) -> None:
+    def _save_gradients(
+        self, module: torch.nn.Module, grad_input: tuple, grad_output: tuple
+    ) -> None:
         self.gradients = grad_output[0].detach()
 
     def generate(self, input_tensor: torch.Tensor, target_class: int | None = None) -> np.ndarray:
@@ -92,11 +97,13 @@ def visualize_gradcam(
     model = build_model(num_classes=ckpt_config.get("num_classes", 5), pretrained=False).to(device)
     model.load_state_dict(checkpoint.model_state_dict)
 
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
+    transform = transforms.Compose(
+        [
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
 
     original = Image.open(image_path).convert("RGB")
     input_tensor = transform(original).unsqueeze(0).to(device)
@@ -115,7 +122,7 @@ def visualize_gradcam(
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    _fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
     original_resized = original.resize((224, 224))
     axes[0].imshow(original_resized)
@@ -140,13 +147,16 @@ def visualize_gradcam(
         "predicted_class": pred_class,
         "predicted_label": pred_label,
         "confidence": confidence,
-        "all_probabilities": {CLASS_LABELS.get(i, f"Class {i}"): float(probs[0, i]) for i in range(probs.shape[1])},
+        "all_probabilities": {
+            CLASS_LABELS.get(i, f"Class {i}"): float(probs[0, i]) for i in range(probs.shape[1])
+        },
         "gradcam_path": str(output_path),
     }
 
 
 if __name__ == "__main__":
     import sys
+
     img = sys.argv[1] if len(sys.argv) > 1 else "sample.jpg"
     ckpt = sys.argv[2] if len(sys.argv) > 2 else "checkpoints/best_model.pth"
     result = visualize_gradcam(img, ckpt)

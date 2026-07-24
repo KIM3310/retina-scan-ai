@@ -1,7 +1,7 @@
 """ResNet18 transfer learning model for retinal disease classification."""
 
 import torch
-import torch.nn as nn
+from torch import nn
 from torchvision import models
 from torchvision.models import ResNet18_Weights
 
@@ -15,7 +15,9 @@ class RetinalClassifier(nn.Module):
     3. Optionally freeze backbone for feature extraction mode
     """
 
-    def __init__(self, num_classes: int = 5, pretrained: bool = True, freeze_backbone: bool = False):
+    def __init__(
+        self, num_classes: int = 5, pretrained: bool = True, freeze_backbone: bool = False
+    ):
         super().__init__()
 
         weights = ResNet18_Weights.DEFAULT if pretrained else None
@@ -53,7 +55,9 @@ class RetinalClassifier(nn.Module):
         return {"total": total, "trainable": trainable, "frozen": total - trainable}
 
 
-def build_model(num_classes: int = 5, pretrained: bool = True, freeze_backbone: bool = False) -> RetinalClassifier:
+def build_model(
+    num_classes: int = 5, pretrained: bool = True, freeze_backbone: bool = False
+) -> RetinalClassifier:
     """Factory function for creating RetinalClassifier."""
     model = RetinalClassifier(
         num_classes=num_classes,
