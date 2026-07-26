@@ -292,6 +292,7 @@ This service includes compliance and governance artifacts that align with typica
 - Paid boundary: paid education workspace, research report pack, and private dataset evaluation support
 - Canonical URL: https://kim3310.github.io/retina-scan-ai/
 - Lead capture: https://github.com/KIM3310/retina-scan-ai/issues/new?template=service-inquiry.yml&title=Private+workspace+inquiry%3A+Retina+Scan+AI
+- Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers
 - Machine-readable offer: [docs/service-offer.json](docs/service-offer.json)
 - Search growth implementation: [docs/search-growth-implementation.md](docs/search-growth-implementation.md)
 - Revenue architecture: [docs/revenue-architecture.md](docs/revenue-architecture.md)
