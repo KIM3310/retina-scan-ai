@@ -10,23 +10,23 @@ This repository now exposes a search-readable service surface in addition to the
 | Revenue architecture | [docs/revenue-architecture.md](./revenue-architecture.md) |
 | System architecture | [docs/system-architecture.md](./system-architecture.md) |
 | Public canonical URL | https://kim3310.github.io/retina-scan-ai/ |
-| Lead capture URL | https://github.com/KIM3310/retina-scan-ai/issues/new?template=service-inquiry.yml&title=Private+workspace+inquiry%3A+Retina+Scan+AI |
+| Lead capture URL | https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&inquiry=industrial-validation-discovery#private-inquiry |
 | Commercial route | https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers |
 
 ## Search Positioning
 
-- Primary query: Retina Scan AI retinal classification research
-- Secondary queries: Retina Scan AI demo; Retina Scan AI system architecture; Retina Scan AI educational tool; retinal classification research demo with Grad-CAM style explainability and compliance notes service
-- Public entry point: free static research demo with non-diagnostic framing
-- Paid boundary: paid education workspace, research report pack, and private dataset evaluation support
+- Primary query: Retina Scan AI industrial validation discovery
+- Secondary queries: Retina Scan AI demo; Retina Scan AI system architecture; Retina Scan AI non-clinical demo; synthetic retinal classification validation discovery
+- Public entry point: free synthetic-data research demo with non-diagnostic framing
+- Paid boundary: private industrial validation discovery for data suitability, baseline evaluation, model-card draft, and human-review acceptance criteria
 
 ## Conversion Boundary
 
-The public surface stays crawlable and free. Paid value starts when a visitor wants private data, saved history, branded export packs, customer-specific connectors, recurring reports, or implementation support.
+The public surface stays crawlable, synthetic, and non-diagnostic. Private value starts when a visitor wants data suitability review, baseline evaluation planning, model-card drafting, and human-review acceptance criteria.
 
 ## Deployment Notes
 
 - Keep the sitemap and robots file aligned with the final production domain.
 - Submit the canonical URL and sitemap in Google Search Console after the domain is connected.
-- The lead-capture path is a GitHub Issue Form so private workspace and paid-package requests create a trackable queue before payment infrastructure is added.
+- The lead-capture path is the central private inquiry URL for the `industrial-validation-discovery` lane.
 - Keep exact free-tier quotas out of public promises because provider limits change.

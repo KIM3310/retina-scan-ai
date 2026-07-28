@@ -3,22 +3,22 @@
 ## Live Demo
 
 - [Open the public GitHub Pages demo](https://kim3310.github.io/retina-scan-ai/)
-- Scope: credential-free, synthetic-data demo for clinical reviewers and model-governance evaluators.
+- Scope: credential-free, synthetic-data demo for industrial validation discovery and model-governance evaluators.
 
-Retinal disease classification system using **ResNet18 transfer learning** with **Grad-CAM interpretability**. Classifies fundus images into 5 categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
+Non-clinical retinal-image classification research sandbox using **ResNet18 transfer learning** with **Grad-CAM interpretability**. It classifies synthetic or explicitly approved fundus-style images into 5 demonstration categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
 
-Clinical review pack: [`docs/architecture-pack.md`](docs/architecture-pack.md)
+Validation review pack: [`docs/architecture-pack.md`](docs/architecture-pack.md)
 
 ## System Overview
 
-A medical-image research workflow that demonstrates validation thinking while clearly staying outside medical-device claims.
+A non-clinical vision validation workflow that demonstrates model-governance review patterns while clearly staying outside diagnostic, medical-device, and production-readiness claims.
 
 | Area | Details |
 |---|---|
-| Users | Research groups, ML governance teams, health-tech prototype teams, and model-governance evaluators. |
+| Users | Industrial AI validation teams, ML governance teams, health-tech prototype teams, and model-governance evaluators. |
 | Technical path | Validate the demo, README, architecture notes, and quality gate before deeper workflow review. |
 | System scope | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
-| Operating boundary | Research prototype only, not diagnosis and not a medical device; clinical use would require formal validation and regulatory review. |
+| Operating boundary | Research prototype only, not diagnosis and not a medical device; clinical or production use would require formal validation, site review, and regulatory assessment. |
 | Evaluation path | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
 
 ## Evaluation Path
@@ -166,6 +166,12 @@ curl -X POST http://localhost:8000/predict -F "file=@retina_image.jpg"
 curl -X POST http://localhost:8000/gradcam -F "file=@retina_image.jpg" -o gradcam.png
 ```
 
+HTTP image uploads are capped at 16 MiB and 50 million decoded pixels by default. Expensive
+prediction and Grad-CAM work is limited to one in-flight operation per process, and Grad-CAM
+artifacts use request-scoped temporary directories that are removed after the response is sent.
+Deployments can tune these safeguards with `RETINA_MAX_UPLOAD_BYTES`,
+`RETINA_MAX_IMAGE_PIXELS`, and `RETINA_MAX_CONCURRENT_INFERENCES`.
+
 ### Docker
 
 ```bash
@@ -222,9 +228,9 @@ This service includes compliance and governance artifacts that align with typica
 | Explainability | `governance/explainability-design.md` | Grad-CAM rationale and limits |
 | Biases and limits | `governance/bias-and-limitations.md` | Documented biases, unsupported populations |
 
-## Clinical Integration
+## Deferred Clinical Artifacts
 
-`docs/clinical/` documents how the service integrates with hospital workflows:
+`docs/clinical/` contains planning artifacts for reviewers who need to understand what would be required before any clinical workflow discussion. These files are not evidence of clinical deployment, diagnostic performance, regulatory clearance, or production readiness:
 
 - [deployment-architecture.md](docs/clinical/deployment-architecture.md) — DMZ placement, OIDC federation, DICOM routing.
 - [dicom-integration.md](docs/clinical/dicom-integration.md) — PACS C-STORE SCP, anonymization, GSPS overlays.
@@ -235,15 +241,15 @@ This service includes compliance and governance artifacts that align with typica
 
 `dicom/` has the DICOM integration code (C-STORE SCP listener, anonymizer, GSPS generator, audit logger).
 
-`access/` has the RBAC + OIDC layer with clinical roles (Radiologist, Ophthalmologist, etc.).
+`access/` has the RBAC + OIDC reference layer with example reviewer roles.
 
 `audit/` has the HIPAA-aligned hash-chained audit logger and compliance officer search tooling.
 
-`clinical_ui/` has a static HTML mockup of the clinician triage view.
+`clinical_ui/` has a static HTML mockup for human-review discussion, not clinical use.
 
 ## Validation
 
-`validation/` contains templates for running a multi-site clinical validation study:
+`validation/` contains templates for planning a validation study. They are discovery artifacts, not active clinical-study results:
 
 - [study-protocol.md](validation/study-protocol.md) — Protocol following CONSORT-AI / SPIRIT-AI standards.
 - [sample-size-calculation.py](validation/sample-size-calculation.py) — Runnable sample size calculator.
@@ -264,7 +270,7 @@ This service includes compliance and governance artifacts that align with typica
 |---------|-------------|
 | [weld-defect-vision](https://github.com/KIM3310/weld-defect-vision) | Sibling vision project — industrial defect detection with YOLOv8 |
 | [enterprise-llm-adoption-kit](https://github.com/KIM3310/enterprise-llm-adoption-kit) | Shared governance patterns (RBAC, audit, RAG) |
-| [AegisOps](https://github.com/KIM3310/AegisOps) | Operator handoff and incident analysis — clinical incident-response patterns |
+| [AegisOps](https://github.com/KIM3310/AegisOps) | Operator handoff and incident analysis — regulated incident-response patterns |
 
 ## Cloud + AI Architecture
 
@@ -288,11 +294,12 @@ This service includes compliance and governance artifacts that align with typica
 
 ## Search And Service Surface
 
-- Public entry: free static research demo with non-diagnostic framing
-- Paid boundary: paid education workspace, research report pack, and private dataset evaluation support
+- Public entry: free synthetic-data research demo with non-diagnostic framing
+- Paid boundary: private industrial validation discovery for data suitability, baseline evaluation, model-card drafting, and human-review acceptance criteria
 - Canonical URL: https://kim3310.github.io/retina-scan-ai/
-- Lead capture: https://github.com/KIM3310/retina-scan-ai/issues/new?template=service-inquiry.yml&title=Private+workspace+inquiry%3A+Retina+Scan+AI
+- Lead capture: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&inquiry=industrial-validation-discovery#private-inquiry
 - Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers
+- CTA: Request private industrial validation discovery through the central inquiry URL
 - Machine-readable offer: [docs/service-offer.json](docs/service-offer.json)
 - Search growth implementation: [docs/search-growth-implementation.md](docs/search-growth-implementation.md)
 - Revenue architecture: [docs/revenue-architecture.md](docs/revenue-architecture.md)
