@@ -4,7 +4,6 @@ import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 PAGES_ORIGIN = "https://retina-scan-ai.pages.dev/"
 

@@ -12,3 +12,9 @@ Resource route: https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-s
 Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers
 
 Use this project as a runnable or inspectable non-clinical reference for Retina Scan AI demo, Retina Scan AI system architecture, synthetic retinal classification validation discovery, Grad-CAM review, and model-card scoping.
+# ADSENSE-PUBLICATION:START
+Editorial guide: https://retina-scan-ai.pages.dev/guide.html
+Architecture article: https://retina-scan-ai.pages.dev/architecture.html
+Verification article: https://retina-scan-ai.pages.dev/verification.html
+Publisher information: https://retina-scan-ai.pages.dev/publisher.html
+# ADSENSE-PUBLICATION:END

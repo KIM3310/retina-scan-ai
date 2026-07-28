@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Guide | Retina Scan AI</title>
+  <meta name="description" content="Free medical-imaging model-card template for explainability and validation boundaries. Source-backed guide for AI validation reviewers and medical-imaging…">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="google-adsense-account" content="ca-pub-4973160293737562">
+  <link rel="canonical" href="https://retina-scan-ai.pages.dev/guide.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Project Guide | Retina Scan AI">
+  <meta property="og:description" content="Free medical-imaging model-card template for explainability and validation boundaries. Source-backed guide for AI validation reviewers and medical-imaging prototype teams.">
+  <meta property="og:url" content="https://retina-scan-ai.pages.dev/guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Project Guide | Retina Scan AI","description":"Free medical-imaging model-card template for explainability and validation boundaries. Source-backed guide for AI validation reviewers and medical-imaging prototype teams.","url":"https://retina-scan-ai.pages.dev/guide.html","dateModified":"2026-07-28","author":{"@type":"Person","name":"KIM3310","url":"https://github.com/KIM3310"},"publisher":{"@type":"Person","name":"KIM3310","url":"https://kim3310-doeon-kim-portfolio.pages.dev"},"isAccessibleForFree":true}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4973160293737562" crossorigin="anonymous"></script>
+  <style>
+    :root { color-scheme: light; --ink: #17201f; --muted: #52605d; --line: #cbd2ce; --paper: #ffffff; --ground: #f5f6f4; --green: #126455; --coral: #c94732; --gold: #b67a00; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--ground); color: var(--ink); font: 17px/1.72 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: 3px; }
+    .site-header { border-bottom: 1px solid var(--line); background: rgba(245, 246, 244, .97); }
+    .site-nav, .article-shell, .site-footer-inner { width: min(920px, calc(100% - 32px)); margin: 0 auto; }
+    .site-nav { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .site-nav strong { font-size: .92rem; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 14px; font-size: .84rem; }
+    .article-shell { padding: 54px 0 72px; }
+    .breadcrumbs { color: var(--muted); font-size: .82rem; }
+    .article-intro { padding: 28px 0 36px; border-bottom: 2px solid var(--ink); }
+    .kicker { color: var(--coral); font-size: .76rem; font-weight: 800; text-transform: uppercase; }
+    h1 { margin: 10px 0 16px; max-width: 18ch; font-size: 3.5rem; line-height: 1.04; letter-spacing: 0; overflow-wrap: anywhere; }
+    .lede { max-width: 68ch; color: var(--muted); font-size: 1.08rem; }
+    .review-note { margin-top: 18px; color: var(--muted); font-size: .84rem; }
+    article { padding-top: 24px; }
+    article h2 { margin: 42px 0 12px; padding-top: 6px; font-size: 1.75rem; line-height: 1.2; letter-spacing: 0; }
+    article h3 { margin: 30px 0 8px; font-size: 1.2rem; letter-spacing: 0; }
+    article h4 { margin: 24px 0 6px; font-size: 1.02rem; letter-spacing: 0; }
+    article p, article li { max-width: 76ch; }
+    article li + li { margin-top: 6px; }
+    pre { max-width: 100%; overflow: auto; border-left: 4px solid var(--gold); background: #1d2423; color: #f6f8f7; padding: 18px; border-radius: 4px; font-size: .86rem; }
+    code { overflow-wrap: anywhere; }
+    :not(pre) > code { border: 1px solid var(--line); background: var(--paper); padding: 1px 5px; border-radius: 3px; font-size: .9em; }
+    .table-scroll { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; background: var(--paper); font-size: .9rem; }
+    th, td { border: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #e9eeeb; }
+    .boundary-note { margin: 30px 0 4px; border-left: 4px solid var(--coral); background: var(--paper); padding: 18px; }
+    .source-basis { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 22px; color: var(--muted); }
+    .site-footer { border-top: 1px solid var(--line); background: var(--paper); }
+    .site-footer-inner { padding: 28px 0 44px; color: var(--muted); font-size: .84rem; }
+    .site-footer-links { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; }
+    @media (max-width: 720px) {
+      .site-nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .article-shell { padding-top: 32px; }
+      h1 { font-size: 2.35rem; }
+    }
+  </style>
+</head>
+<body data-ad-surface="editorial">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <strong>Retina Scan AI</strong>
+      <div class="nav-links"><a href="/">Home</a><a href="/guide.html">Project guide</a><a href="/architecture.html">Architecture</a><a href="/verification.html">Verification</a><a href="/publisher.html">Publisher</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+    </nav>
+  </header>
+  <main class="article-shell">
+    <p class="breadcrumbs"><a href="/">Home</a> / Project guide</p>
+    <header class="article-intro">
+      <div class="kicker">Project guide</div>
+      <h1>Project Guide | Retina Scan AI</h1>
+      <p class="lede">Free medical-imaging model-card template for explainability and validation boundaries. This guide organizes the repository&#039;s original implementation notes for AI validation reviewers and medical-imaging prototype teams.</p>
+      <p class="review-note">Reviewed 2026-07-28. This page is derived from checked-in repository evidence and links back to its source.</p>
+    </header>
+    <aside class="boundary-note"><strong>Scope boundary.</strong> This material describes a synthetic research prototype. It is not medical advice, a diagnosis, a screening service, or a substitute for review by qualified clinicians.</aside>
+    <article><h3>Live Demo</h3>
+<ul><li><a href="https://retina-scan-ai.pages.dev/" rel="noopener">Open the public Cloudflare Pages demo</a></li><li>Scope: credential-free, synthetic-data demo for industrial validation discovery and model-governance evaluators.</li></ul>
+<p>Non-clinical retinal-image classification research sandbox using <strong>ResNet18 transfer learning</strong> with <strong>Grad-CAM interpretability</strong>. It classifies synthetic or explicitly approved fundus-style images into 5 demonstration categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).</p>
+<p>Validation review pack: <a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/architecture-pack.md" rel="noopener">`docs/architecture-pack.md`</a></p>
+<h3>System Overview</h3>
+<p>A non-clinical vision validation workflow that demonstrates model-governance review patterns while clearly staying outside diagnostic, medical-device, and production-readiness claims.</p>
+<div class="table-scroll"><table><thead><tr><th>Area</th><th>Details</th></tr></thead><tbody><tr><td>Users</td><td>Industrial AI validation teams, ML governance teams, health-tech prototype teams, and model-governance evaluators.</td></tr><tr><td>Technical path</td><td>Validate the demo, README, architecture notes, and quality gate before deeper workflow review.</td></tr><tr><td>System scope</td><td>ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card.</td></tr><tr><td>Operating boundary</td><td>Research prototype only, not diagnosis and not a medical device; clinical or production use would require formal validation, site review, and regulatory assessment.</td></tr><tr><td>Evaluation path</td><td>Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts.</td></tr></tbody></table></div>
+<h3>Evaluation Path</h3>
+<ul><li><strong>Start here:</strong> Read the model card and risk notes before looking at predictions.</li><li><strong>Local demo:</strong> Start the API with <code>uvicorn api.main:app --host 0.0.0.0 --port 8000</code>, then test <code>/predict</code> or <code>/gradcam</code>.</li><li><strong>Checks:</strong> Run <code>pytest -v</code>; training and serving paths are intentionally separated from clinical claims.</li></ul>
+<h3>Architecture Notes</h3>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/architecture-evidence-map.md" rel="noopener">Architecture guide</a> summarizes the system scope, first files to inspect, runtime commands, and known boundaries.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/quality-gate.md" rel="noopener">Quality notes</a> lists the local checks, CI surface, and release expectations for this repository.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/enterprise-readiness.md" rel="noopener">Enterprise readiness notes</a> outlines security, data, operations, integration, and handoff expectations.</li></ul>
+<h3>Architecture</h3>
+<pre><code>Input Image (224x224)
+    │
+    ▼
+┌──────────────────────┐
+│  ResNet18 Backbone    │  ← ImageNet pretrained weights
+│  (Feature Extractor)  │
+└──────────┬───────────┘
+           │ 512-dim features
+           ▼
+┌──────────────────────┐
+│  Classification Head  │
+│  Dropout(0.3) →       │
+│  Linear(512→256) →    │
+│  ReLU → Dropout(0.2)  │
+│  → Linear(256→5)      │
+└──────────┬───────────┘
+           │
+           ▼
+    5-class prediction</code></pre>
+<h3>Key Features</h3>
+<ul><li><strong>Transfer Learning</strong>: ResNet18 pretrained on ImageNet, fine-tuned for retinal classification</li><li><strong>Data Augmentation</strong>: Random flip, rotation, color jitter, affine transforms</li><li><strong>Training Pipeline</strong>: Early stopping, LR scheduling, checkpointing, metric logging</li><li><strong>Evaluation</strong>: Confusion matrix, per-class precision/recall/F1, ROC-AUC curves</li><li><strong>Grad-CAM</strong>: Visual explanations showing which retinal regions drive each prediction</li><li><strong>Inference API</strong>: FastAPI REST endpoint for real-time classification</li><li><strong>Docker</strong>: Containerized training and serving</li></ul>
+<h3>Project Structure</h3>
+<pre><code>retina-scan-ai/
+├── src/
+│   ├── config.py        # Hyperparameters and class labels
+│   ├── dataset.py       # Custom dataset with augmentation pipeline
+│   ├── model.py         # ResNet18 transfer learning architecture
+│   ├── train.py         # Training loop with early stopping
+│   ├── evaluate.py      # Confusion matrix, ROC curves, classification report
+│   ├── gradcam.py       # Grad-CAM visualization for interpretability
+│   └── inference.py     # Single-image prediction wrapper
+├── api/
+│   ├── main.py          # FastAPI inference server
+│   └── schemas.py       # Request/response models
+├── tests/
+│   ├── test_model.py    # Model architecture tests
+│   ├── test_dataset.py  # Dataset and transform tests
+│   ├── test_train.py    # Training component tests
+│   └── test_api.py      # API endpoint tests
+├── scripts/
+│   └── download_data.py # Dataset preparation utility
+├── Dockerfile
+├── docker-compose.yml
+├── pyproject.toml
+└── requirements.txt</code></pre>
+<h4>Setup</h4>
+<pre><code>pip install -r requirements.txt</code></pre>
+<h4>Prepare Dataset</h4>
+<pre><code>
+## Option 1: Use ODIR-5K dataset from Kaggle
+python scripts/download_data.py &lt;csv_path&gt; &lt;images_dir&gt;
+
+
+## Option 2: Generate synthetic data for pipeline testing
+python scripts/download_data.py --synthetic 100</code></pre>
+<p>Expected directory structure:</p>
+<pre><code>data/retina/
+├── Normal/
+├── Diabetic_Retinopathy/
+├── Glaucoma/
+├── Cataract/
+└── AMD/</code></pre>
+<h4>Train</h4>
+<pre><code>python -m src.train</code></pre>
+<p>Outputs:</p>
+<ul><li><code>checkpoints/best_model.pth</code> — Best model weights</li><li><code>outputs/training_history.json</code> — Epoch-level metrics</li></ul>
+<h4>Evaluate</h4>
+<pre><code>python -m src.evaluate checkpoints/best_model.pth</code></pre>
+<p>Outputs:</p>
+<ul><li><code>outputs/confusion_matrix.png</code> — Confusion matrix heatmap</li><li><code>outputs/roc_curves.png</code> — Per-class ROC curves with AUC</li><li><code>outputs/evaluation_results.json</code> — Full metrics report</li></ul>
+<h4>Grad-CAM Visualization</h4>
+<pre><code>python -m src.gradcam &lt;image_path&gt; checkpoints/best_model.pth</code></pre>
+<h4>Inference API</h4>
+<pre><code>uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+
+## Predict
+curl -X POST http://localhost:8000/predict -F &quot;file=@retina_image.jpg&quot;
+
+
+## Grad-CAM
+curl -X POST http://localhost:8000/gradcam -F &quot;file=@retina_image.jpg&quot; -o gradcam.png</code></pre>
+<p>HTTP image uploads are capped at 16 MiB and 50 million decoded pixels by default. Expensive prediction and Grad-CAM work is limited to one in-flight operation per process, and Grad-CAM artifacts use request-scoped temporary directories that are removed after the response is sent. Deployments can tune these safeguards with <code>RETINA_MAX_UPLOAD_BYTES</code>, <code>RETINA_MAX_IMAGE_PIXELS</code>, and <code>RETINA_MAX_CONCURRENT_INFERENCES</code>.</p>
+<h4>Docker</h4>
+<pre><code>
+## Inference server
+docker compose up api
+
+
+## Training
+docker compose --profile training run train</code></pre>
+<h4>Tests</h4>
+<pre><code>pytest -v</code></pre>
+<h3>Dataset</h3>
+<p>Designed for the <a href="https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k" rel="noopener">ODIR-5K</a> (Ocular Disease Intelligent Recognition) dataset containing 5,000 retinal fundus photographs across 8 disease categories, filtered to 5 primary classes.</p>
+<h3>Tech Stack</h3>
+<div class="table-scroll"><table><thead><tr><th>Component</th><th>Technology</th></tr></thead><tbody><tr><td>Deep Learning</td><td>PyTorch, torchvision</td></tr><tr><td>Model</td><td>ResNet18 (transfer learning)</td></tr><tr><td>Interpretability</td><td>Grad-CAM</td></tr><tr><td>Evaluation</td><td>scikit-learn, matplotlib, seaborn</td></tr><tr><td>API</td><td>FastAPI, Uvicorn</td></tr><tr><td>Container</td><td>Docker, Docker Compose</td></tr><tr><td>Testing</td><td>pytest</td></tr><tr><td>DICOM</td><td>pydicom, pynetdicom (via <code>dicom/</code>)</td></tr><tr><td>Identity Federation</td><td>OIDC (Keycloak/Okta/Azure AD via <code>access/</code>)</td></tr><tr><td>Audit</td><td>Hash-chained event log (via <code>audit/</code>)</td></tr></tbody></table></div>
+<h3>Not a Medical Device</h3>
+<p>This repository is research code. It has not been FDA-cleared, CE-marked, or approved by any regulatory body for clinical use. Any deployment for clinical care requires regulatory clearance, IRB review, and integration with a quality management system. See <code>compliance/fda-samd-considerations.md</code> and <code>risk/known-limitations.md</code> for details.</p>
+<h3>Compliance &amp; Governance</h3>
+<p>This service includes compliance and governance artifacts that align with typical healthcare-AI deployment requirements. Refer to the relevant directory for details.</p>
+<div class="table-scroll"><table><thead><tr><th>Area</th><th>Directory</th><th>Notes</th></tr></thead><tbody><tr><td>HIPAA</td><td><code>compliance/hipaa-mapping.md</code></td><td>Each Security Rule safeguard → this repo&#039;s approach</td></tr><tr><td>FDA SaMD</td><td><code>compliance/fda-samd-considerations.md</code></td><td>Educational framing; not legal advice</td></tr><tr><td>EU MDR</td><td><code>compliance/mdr-ce-considerations.md</code></td><td>CE marking considerations</td></tr><tr><td>GDPR</td><td><code>compliance/gdpr-dpia.md</code></td><td>DPIA template</td></tr><tr><td>PHI handling</td><td><code>compliance/phi-handling.md</code></td><td>Storage, transmission, anonymization</td></tr><tr><td>Model card</td><td><code>governance/model-card.md</code></td><td>Google-style Model Card</td></tr><tr><td>Datasheet</td><td><code>governance/datasheet.md</code></td><td>Gebru-style Datasheet for ODIR-5K</td></tr><tr><td>Fairness</td><td><code>governance/fairness-evaluation.md</code></td><td>Per-subgroup metrics, disparity detection</td></tr><tr><td>Explainability</td><td><code>governance/explainability-design.md</code></td><td>Grad-CAM rationale and limits</td></tr><tr><td>Biases and limits</td><td><code>governance/bias-and-limitations.md</code></td><td>Documented biases, unsupported populations</td></tr></tbody></table></div>
+<h3>Deferred Clinical Artifacts</h3>
+<p><code>docs/clinical/</code> contains planning artifacts for reviewers who need to understand what would be required before any clinical workflow discussion. These files are not evidence of clinical deployment, diagnostic performance, regulatory clearance, or production readiness:</p>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/clinical/deployment-architecture.md" rel="noopener">deployment-architecture.md</a> — DMZ placement, OIDC federation, DICOM routing.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/clinical/dicom-integration.md" rel="noopener">dicom-integration.md</a> — PACS C-STORE SCP, anonymization, GSPS overlays.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/clinical/clinician-in-the-loop.md" rel="noopener">clinician-in-the-loop.md</a> — Second-reader / triage UX; disagreement handling.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/clinical/change-control.md" rel="noopener">change-control.md</a> — Model retraining governance.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/clinical/drift-monitoring.md" rel="noopener">drift-monitoring.md</a> — Input distribution, calibration, population drift.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/clinical/incident-response.md" rel="noopener">incident-response.md</a> — Clinical workflow fallback, recall procedure.</li></ul>
+<p><code>dicom/</code> has the DICOM integration code (C-STORE SCP listener, anonymizer, GSPS generator, audit logger).</p>
+<p><code>access/</code> has the RBAC + OIDC reference layer with example reviewer roles.</p>
+<p><code>audit/</code> has the HIPAA-aligned hash-chained audit logger and compliance officer search tooling.</p>
+<p><code>clinical_ui/</code> has a static HTML mockup for human-review discussion, not clinical use.</p>
+<h3>Validation</h3>
+<p><code>validation/</code> contains templates for planning a validation study. They are discovery artifacts, not active clinical-study results:</p>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/validation/study-protocol.md" rel="noopener">study-protocol.md</a> — Protocol following CONSORT-AI / SPIRIT-AI standards.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/validation/sample-size-calculation.py" rel="noopener">sample-size-calculation.py</a> — Runnable sample size calculator.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/validation/case-report-form.md" rel="noopener">case-report-form.md</a> — Per-subject CRF template.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/validation/results-template.json" rel="noopener">results-template.json</a> — JSON schema of the validation-study output.</li></ul>
+<h3>Risk Management</h3>
+<p><code>risk/</code> follows ISO 14971:2019:</p>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/risk/fmea.md" rel="noopener">fmea.md</a> — Failure Mode and Effects Analysis (20 items).</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/risk/iso14971-mapping.md" rel="noopener">iso14971-mapping.md</a> — Clause-by-clause coverage of ISO 14971.</li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/risk/known-limitations.md" rel="noopener">known-limitations.md</a> — Cataloged constraints and edge cases.</li></ul>
+<h3>Related Projects</h3>
+<div class="table-scroll"><table><thead><tr><th>Project</th><th>Relationship</th></tr></thead><tbody><tr><td><a href="https://github.com/KIM3310/weld-defect-vision" rel="noopener">weld-defect-vision</a></td><td>Sibling vision project — industrial defect detection with YOLOv8</td></tr><tr><td><a href="https://github.com/KIM3310/enterprise-llm-adoption-kit" rel="noopener">enterprise-llm-adoption-kit</a></td><td>Shared governance patterns (RBAC, audit, RAG)</td></tr><tr><td><a href="https://github.com/KIM3310/AegisOps" rel="noopener">AegisOps</a></td><td>Operator handoff and incident analysis — regulated incident-response patterns</td></tr></tbody></table></div>
+<h3>Cloud + AI Architecture</h3>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/cloud-ai-architecture.md" rel="noopener">Cloud + AI architecture blueprint</a></li><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/architecture/blueprint.json" rel="noopener">Machine-readable architecture manifest</a></li><li>Validation command: <code>python3 scripts/validate_architecture_blueprint.py</code></li></ul>
+<h3>Enterprise Productization</h3>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/product-operating-model.md" rel="noopener">Product operating model</a> defines the product scope, trust boundary, operating checks, and service path for this repository.</li></ul>
+<h3>System Architecture</h3>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/system-architecture.md" rel="noopener">System architecture</a> maps the runtime boundary, data/control flow, cloud or local deployment surface, and operating assumptions for this repository.</li></ul>
+<h3>Service Architecture</h3>
+<ul><li><a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/service-architecture.md" rel="noopener">Service architecture</a> defines the cloud resources, account information, cost controls, and production guardrails needed to turn this repo into a scoped service without publishing public financial assumptions.</li></ul>
+<h3>Search And Service Surface</h3>
+<ul><li>Public entry: free synthetic-data research demo with non-diagnostic framing</li><li>Paid boundary: private industrial validation discovery for data suitability, baseline evaluation, model-card drafting, and human-review acceptance criteria</li><li>Canonical URL: https://retina-scan-ai.pages.dev/</li><li>Lead capture: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&amp;inquiry=industrial-validation-discovery#private-inquiry</li><li>Resource route: https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/</li><li>Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers</li><li>CTA: Request private industrial validation discovery through the central inquiry URL</li><li>Machine-readable offer: <a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/service-offer.json" rel="noopener">docs/service-offer.json</a></li><li>Search growth implementation: <a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/search-growth-implementation.md" rel="noopener">docs/search-growth-implementation.md</a></li><li>Revenue architecture: <a href="https://github.com/KIM3310/retina-scan-ai/blob/main/docs/revenue-architecture.md" rel="noopener">docs/revenue-architecture.md</a></li></ul></article>
+    <aside class="source-basis">
+      <strong>Source basis:</strong> <a href="https://github.com/KIM3310/retina-scan-ai/blob/main/README.md" rel="noopener">README.md</a>. Corrections can be proposed through the public repository without submitting private data.
+    </aside>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="site-footer-links"><a href="/">Home</a><a href="/guide.html">Project guide</a><a href="/architecture.html">Architecture</a><a href="/verification.html">Verification</a><a href="/publisher.html">Publisher</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="https://kim3310-doeon-kim-portfolio.pages.dev/">Resource atlas</a></div>
+      <p>Advertising may appear on this public editorial page after Google approves the site. Ads are not placed inside private, transactional, diagnostic, security-response, or operational workflows.</p>
+    </div>
+  </footer>
+</body>
+</html>
