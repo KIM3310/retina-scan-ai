@@ -11,6 +11,7 @@ This repository now exposes a search-readable service surface in addition to the
 | System architecture | [docs/system-architecture.md](./system-architecture.md) |
 | Public canonical URL | https://kim3310.github.io/retina-scan-ai/ |
 | Lead capture URL | https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&inquiry=industrial-validation-discovery#private-inquiry |
+| Repository resource route | https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/ |
 | Commercial route | https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers |
 
 ## Search Positioning

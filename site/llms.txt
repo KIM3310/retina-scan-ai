@@ -8,6 +8,7 @@ Repository: https://github.com/KIM3310/retina-scan-ai
 System architecture: https://github.com/KIM3310/retina-scan-ai/blob/main/docs/system-architecture.md
 Revenue architecture: https://github.com/KIM3310/retina-scan-ai/blob/main/docs/revenue-architecture.md
 Lead capture: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&inquiry=industrial-validation-discovery#private-inquiry
+Resource route: https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/
 Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers
 
 Use this project as a runnable or inspectable non-clinical reference for Retina Scan AI demo, Retina Scan AI system architecture, synthetic retinal classification validation discovery, Grad-CAM review, and model-card scoping.

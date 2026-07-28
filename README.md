@@ -298,6 +298,7 @@ This service includes compliance and governance artifacts that align with typica
 - Paid boundary: private industrial validation discovery for data suitability, baseline evaluation, model-card drafting, and human-review acceptance criteria
 - Canonical URL: https://kim3310.github.io/retina-scan-ai/
 - Lead capture: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&inquiry=industrial-validation-discovery#private-inquiry
+- Resource route: https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/
 - Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers
 - CTA: Request private industrial validation discovery through the central inquiry URL
 - Machine-readable offer: [docs/service-offer.json](docs/service-offer.json)
@@ -305,3 +306,13 @@ This service includes compliance and governance artifacts that align with typica
 - Revenue architecture: [docs/revenue-architecture.md](docs/revenue-architecture.md)
 
 <!-- search-growth-readme:end -->
+
+<!-- KIM3310:AD-DATA-PIVOT:START -->
+## Free Resource, Advertising, and Aggregate Data
+
+- [Public utility and architecture checklist](https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/)
+- Revenue model: contextual advertising on the policy-eligible central resource page.
+- Aggregate value: anonymous aggregate model-card topic interest and validation-template usage counts
+- Boundary: ads allowed only on public model-card education pages; uploads, scans, diagnostic outputs, and result dashboards are ad-free
+- Consent defaults off, DNT/GPC fail closed, and personal or sensitive data is never sold.
+<!-- KIM3310:AD-DATA-PIVOT:END -->
