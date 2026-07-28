@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-- [Open the public GitHub Pages demo](https://kim3310.github.io/retina-scan-ai/)
+- [Open the public Cloudflare Pages demo](https://retina-scan-ai.pages.dev/)
 - Scope: credential-free, synthetic-data demo for industrial validation discovery and model-governance evaluators.
 
 Non-clinical retinal-image classification research sandbox using **ResNet18 transfer learning** with **Grad-CAM interpretability**. It classifies synthetic or explicitly approved fundus-style images into 5 demonstration categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
@@ -296,7 +296,7 @@ This service includes compliance and governance artifacts that align with typica
 
 - Public entry: free synthetic-data research demo with non-diagnostic framing
 - Paid boundary: private industrial validation discovery for data suitability, baseline evaluation, model-card drafting, and human-review acceptance criteria
-- Canonical URL: https://kim3310.github.io/retina-scan-ai/
+- Canonical URL: https://retina-scan-ai.pages.dev/
 - Lead capture: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai&inquiry=industrial-validation-discovery#private-inquiry
 - Resource route: https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/
 - Commercial route: https://kim3310-doeon-kim-portfolio.pages.dev/?offer=retina-scan-ai#service-offers

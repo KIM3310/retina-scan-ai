@@ -3,7 +3,7 @@
 Purpose: non-clinical synthetic-data retinal classification demo for industrial validation discovery, Grad-CAM review, and model-card scoping
 Free entry point: free synthetic-data research demo with non-diagnostic framing
 Paid boundary: private industrial validation discovery for data suitability, baseline evaluation, model-card draft, and human-review acceptance criteria
-Canonical URL: https://kim3310.github.io/retina-scan-ai/
+Canonical URL: https://retina-scan-ai.pages.dev/
 Repository: https://github.com/KIM3310/retina-scan-ai
 System architecture: https://github.com/KIM3310/retina-scan-ai/blob/main/docs/system-architecture.md
 Revenue architecture: https://github.com/KIM3310/retina-scan-ai/blob/main/docs/revenue-architecture.md

@@ -1,0 +1,8 @@
+{
+  "name": "retina-scan-ai-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy:cloudflare:pages": "npx --yes wrangler@4.114.0 pages deploy site --project-name retina-scan-ai"
+  }
+}

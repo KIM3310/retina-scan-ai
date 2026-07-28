@@ -6,7 +6,7 @@
   "audience": "AI validation reviewers and medical-imaging prototype teams",
   "public_resource": {
     "url": "https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/",
-    "live_demo": "https://kim3310.github.io/retina-scan-ai/",
+    "live_demo": "https://retina-scan-ai.pages.dev/",
     "readiness_checklist": [
       "Architecture Summary",
       "Runtime And Data Flow",

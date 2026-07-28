@@ -8,7 +8,7 @@ Free medical-imaging model-card template for explainability and validation bound
 
 - Audience: AI validation reviewers and medical-imaging prototype teams
 - Central resource: https://kim3310-doeon-kim-portfolio.pages.dev/resources/retina-scan-ai/
-- Live system: https://kim3310.github.io/retina-scan-ai/
+- Live system: https://retina-scan-ai.pages.dev/
 - Advertising boundary: ads allowed only on public model-card education pages; uploads, scans, diagnostic outputs, and result dashboards are ad-free
 - Current ad state: code-ready on the central resource; serving depends on Google AdSense site approval and consent policy.
 
