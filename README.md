@@ -16,7 +16,6 @@ A non-clinical vision validation workflow that demonstrates model-governance rev
 | Area | Details |
 |---|---|
 | Users | Industrial AI validation teams, ML governance teams, health-tech prototype teams, and model-governance evaluators. |
-| Technical path | Validate the demo, README, architecture notes, and quality gate before deeper workflow review. |
 | System scope | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
 | Operating boundary | Research prototype only, not diagnosis and not a medical device; clinical or production use would require formal validation, site review, and regulatory assessment. |
 | Evaluation path | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |
