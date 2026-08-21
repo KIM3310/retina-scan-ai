@@ -1,9 +1,11 @@
 # Retina Scan AI
 
+[![CI](https://github.com/KIM3310/retina-scan-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/KIM3310/retina-scan-ai/actions/workflows/ci.yml)
+
 ## Live Demo
 
 - [Open the public Cloudflare Pages demo](https://retina-scan-ai.pages.dev/)
-- Scope: credential-free, synthetic-data demo for industrial validation discovery and model-governance evaluators.
+- Scope: credential-free, synthetic retinal-image demo for non-clinical model validation and model-governance evaluators.
 
 Non-clinical retinal-image classification research sandbox using **ResNet18 transfer learning** with **Grad-CAM interpretability**. It classifies synthetic or explicitly approved fundus-style images into 5 demonstration categories: Normal, Diabetic Retinopathy, Glaucoma, Cataract, and Age-related Macular Degeneration (AMD).
 
@@ -15,7 +17,7 @@ A non-clinical vision validation workflow that demonstrates model-governance rev
 
 | Area | Details |
 |---|---|
-| Users | Industrial AI validation teams, ML governance teams, health-tech prototype teams, and model-governance evaluators. |
+| Users | Health-tech prototype teams, ML validation teams, and model-governance evaluators. |
 | System scope | ResNet18 classification, Grad-CAM, DICOM integration notes, HIPAA-aligned governance, RBAC/OIDC framing, and model card. |
 | Operating boundary | Research prototype only, not diagnosis and not a medical device; clinical or production use would require formal validation, site review, and regulatory assessment. |
 | Evaluation path | Inspect validation templates, model card, risk notes, Grad-CAM outputs, and test/evaluation scripts. |

@@ -4,7 +4,13 @@ Generates heatmaps showing which regions of retinal images the model focuses on
 for each prediction, providing clinical interpretability.
 """
 
+import os
 from pathlib import Path
+
+# Matplotlib validates MPLBACKEND while importing, so set the environment before
+# importing it. Explicitly force Agg afterward in case a caller already selected
+# another valid backend before importing this module.
+os.environ["MPLBACKEND"] = "Agg"
 
 import matplotlib
 

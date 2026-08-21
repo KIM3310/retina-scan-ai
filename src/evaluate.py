@@ -1,7 +1,13 @@
 """Model evaluation with confusion matrix, classification report, and ROC curves."""
 
 import json
+import os
 from pathlib import Path
+
+# Matplotlib validates MPLBACKEND while importing, so set the environment before
+# importing it. Explicitly force Agg afterward in case a caller already selected
+# another valid backend before importing this module.
+os.environ["MPLBACKEND"] = "Agg"
 
 import matplotlib
 
