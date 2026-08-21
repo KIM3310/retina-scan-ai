@@ -1,4 +1,4 @@
-.SHELLFLAGS := -eu -o pipefail -c
+.SHELLFLAGS := -eu -c
 PYTHON ?= python3
 VENV ?= .venv
 VENV_PYTHON := $(VENV)/bin/python
